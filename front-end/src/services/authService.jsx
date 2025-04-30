@@ -8,8 +8,14 @@ export const register = async (userData) => {
     },
     body: JSON.stringify(userData),
   });
+
   if (!res.ok) {
-    throw new Error("Register failed");
+    const errorData = await res.json();
+    const message =
+      errorData.username?.[0] ||
+      errorData.email?.[0] ||
+      "Register failed.";
+    throw new Error(message);
   }
   return res.json();
 };
