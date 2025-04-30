@@ -9,6 +9,8 @@ export default function ProfilePage() {
           onClick={() => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
+          sessionStorage.removeItem("accessToken");
+          sessionStorage.removeItem("refreshToken");
           window.location.href = "/";
         }}
         >
@@ -16,7 +18,5 @@ export default function ProfilePage() {
         </button>
 
       </div>
-
-  
     );
   }

@@ -27,9 +27,5 @@ export const login = async (userData) => {
     throw new Error("Login failed");
   }
 
-  const data = await res.json();
-  localStorage.setItem("accessToken", data.access);
-  localStorage.setItem("refreshToken", data.refresh);
-
-  return data;
+  return res.json();
 };

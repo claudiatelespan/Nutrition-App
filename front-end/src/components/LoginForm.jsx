@@ -8,6 +8,7 @@ export default function LoginForm() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -18,6 +19,11 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       const response = await login(formData);
+
+      const storage = rememberMe ? localStorage : sessionStorage;
+      storage.setItem("accessToken", response.access);
+      storage.setItem("refreshToken", response.refresh);
+
       console.log("Login successful", response);
       navigate("/profile");
       setError("");
@@ -73,7 +79,14 @@ export default function LoginForm() {
 
       <div className="block mt-4">
         <label htmlFor="remember_me" className="flex items-center">
-            <input type="checkbox" id="remember_me" name="remember" className = 'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500'/>
+            <input 
+              type="checkbox" 
+              id="remember_me" 
+              name="remember" 
+              className = 'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500'
+              checked = {rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <span className="ms-2 text-sm text-gray-600">Remember Me</span>
         </label>
       </div>
