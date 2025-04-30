@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { login } from '../services/authService';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ username: '', password: '' });
-  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
@@ -26,9 +26,8 @@ export default function LoginForm() {
 
       console.log("Login successful", response);
       navigate("/profile");
-      setError("");
     } catch (err) {
-      setError("Login failed. Check your credentials.");
+      toast.error(err.message);
     }
   };
 
@@ -74,8 +73,6 @@ export default function LoginForm() {
           )}
         </button>
       </div>
-
-      {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
       <div className="block mt-4">
         <label htmlFor="remember_me" className="flex items-center">

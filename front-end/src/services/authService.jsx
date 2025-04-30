@@ -30,7 +30,7 @@ export const login = async (userData) => {
   });
 
   if (!res.ok) {
-    throw new Error("Login failed");
+    throw new Error("Login failed. Check your credentials.");
   }
 
   return res.json();
