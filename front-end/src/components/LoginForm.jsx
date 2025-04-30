@@ -71,15 +71,15 @@ export default function LoginForm() {
 
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-      <div class="block mt-4">
-        <label for="remember_me" class="flex items-center">
-            <input type="checkbox" id="remember_me" name="remember" class = 'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500'/>
-            <span class="ms-2 text-sm text-gray-600">Remember Me</span>
+      <div className="block mt-4">
+        <label htmlFor="remember_me" className="flex items-center">
+            <input type="checkbox" id="remember_me" name="remember" className = 'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500'/>
+            <span className="ms-2 text-sm text-gray-600">Remember Me</span>
         </label>
       </div>
 
       <div className='flex items-center justify-end mt-4'>
-        <a class="hover:underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="">
+        <a className="hover:underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="">
           Forgot your password?
         </a>
 

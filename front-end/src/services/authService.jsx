@@ -22,8 +22,14 @@ export const login = async (userData) => {
     },
     body: JSON.stringify(userData),
   });
+
   if (!res.ok) {
     throw new Error("Login failed");
   }
-  return res.json();
+
+  const data = await res.json();
+  localStorage.setItem("accessToken", data.access);
+  localStorage.setItem("refreshToken", data.refresh);
+
+  return data;
 };

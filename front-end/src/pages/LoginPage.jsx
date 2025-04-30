@@ -8,7 +8,7 @@ export default function LoginPage() {
         
         <div>
             <a href="/">
-              <h2 class="font-bold text-3xl">Nutri<span class="bg-[#f84525] text-white px-2 rounded-md">App</span></h2>
+              <h2 className="font-bold text-3xl">Nutri<span className="bg-[#f84525] text-white px-2 rounded-md">App</span></h2>
             </a>
         </div>
         

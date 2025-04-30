@@ -42,9 +42,17 @@ INSTALLED_APPS = [
     'playground',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'users',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
