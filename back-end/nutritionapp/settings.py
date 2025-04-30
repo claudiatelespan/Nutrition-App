@@ -53,6 +53,9 @@ REST_FRAMEWORK = {
     )
 }
 
+SIMPLE_JWT = {
+    "UPDATE_LAST_LOGIN": True,
+}
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
