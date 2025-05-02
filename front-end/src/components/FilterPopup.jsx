@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { foodCategories } from "../assets/foodCategories";
 
-export default function FilterPopup({ selected, setSelected, onApply, onClear, onClose }) {
+export default function FilterPopup({ selected, setSelected, onApply, onClose }) {
   const [tempSelected, setTempSelected] = useState([]);
 
   useEffect(() => {
@@ -28,10 +28,10 @@ export default function FilterPopup({ selected, setSelected, onApply, onClear, o
             <button
               key={cat.id}
               onClick={() => toggleCategory(cat.id)}
-              className={`flex flex-col items-center justify-center gap-1 p-2 text-sm border rounded-full transition ${
+              className={`flex flex-col items-center justify-center gap-1 p-2 text-sm border border-yellow-600/20 rounded-full transition ${
                 tempSelected.includes(cat.id)
                   ? "bg-[#f84525] text-white"
-                  : "bg-white text-gray-800"
+                  : "bg-yellow-100 text-gray-800"
               }`}
             >
               <span className="text-xl">{cat.icon}</span>
@@ -43,17 +43,15 @@ export default function FilterPopup({ selected, setSelected, onApply, onClear, o
           <button
             onClick={() => {
               setTempSelected([]);
-              onClear();
-              onClose();
             }}
-            className="text-sm text-gray-600 underline"
+            className="text-sm text-gray-600 underline hover:text-gray-900"
           >
             Clear
           </button>
           <div className="flex gap-2">
             <button
               onClick={onClose}
-              className="text-sm px-3 py-1 border rounded hover:bg-gray-100"
+              className="text-sm px-3 py-1 border border-black/10 rounded hover:bg-gray-100"
             >
               Close
             </button>

@@ -15,7 +15,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full bg-white border-t border-black/10 inset-shadow-xs rounded-lg flex justify-around py-2">
+    <nav className="fixed bottom-0 w-full bg-white border-t border-black/10 inset-shadow-xs rounded-lg flex justify-around py-2.5">
       {links.map((link) => (
         <NavLink
           key={link.to}
