@@ -22,7 +22,7 @@ const mockRecipes = [
     instructions: "Rulează ingredientele în alge nori și taie în bucăți egale.",
   },
     {
-      id: 1,
+      id: 3,
       title: "Pasta Carbonara",
       image: "https://images.unsplash.com/photo-1633337474564-1d9478ca4e2e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       kcal: 550,
@@ -33,7 +33,7 @@ const mockRecipes = [
       instructions: "Fierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanul.",
     },
     {
-      id: 2,
+      id: 4,
       title: "Sushi Roll",
       image: "https://images.unsplash.com/photo-1628676825875-031ad212c31e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       kcal: 320,
@@ -44,7 +44,7 @@ const mockRecipes = [
       instructions: "Rulează ingredientele în alge nori și taie în bucăți egale.",
     },
     {
-      id: 1,
+      id: 5,
       title: "Pasta Carbonara",
       image: "https://images.unsplash.com/photo-1633337474564-1d9478ca4e2e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       kcal: 550,
@@ -55,7 +55,7 @@ const mockRecipes = [
       instructions: "Fierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanul.",
     },
     {
-      id: 2,
+      id: 6,
       title: "Sushi Roll",
       image: "https://images.unsplash.com/photo-1628676825875-031ad212c31e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       kcal: 320,
@@ -66,7 +66,7 @@ const mockRecipes = [
       instructions: "Rulează ingredientele în alge nori și taie în bucăți egale.",
     },
     {
-      id: 1,
+      id: 7,
       title: "Pasta Carbonara",
       image: "https://images.unsplash.com/photo-1633337474564-1d9478ca4e2e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       kcal: 550,
@@ -77,7 +77,7 @@ const mockRecipes = [
       instructions: "Fierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanul.",
     },
     {
-      id: 2,
+      id: 8,
       title: "Sushi Roll",
       image: "https://images.unsplash.com/photo-1628676825875-031ad212c31e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       kcal: 320,
