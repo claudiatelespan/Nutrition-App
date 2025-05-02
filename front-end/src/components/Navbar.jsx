@@ -10,12 +10,12 @@ export default function Navbar() {
   const links = [
     { to: "/profile", label: "My Profile", icon: <UserIcon className="h-6 w-6" /> },
     { to: "/recipes", label: "Recipes", icon: <BookOpenIcon className="h-6 w-6" /> },
-    { to: "/recommender", label: "Cook Helper", icon: <SparklesIcon className="h-6 w-6" /> },
+    { to: "/recommender", label: "Chef's Helper", icon: <SparklesIcon className="h-6 w-6" /> },
     { to: "/friends", label: "Friends", icon: <UsersIcon className="h-6 w-6" /> },
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full bg-white border-t shadow-md flex justify-around py-2">
+    <nav className="fixed bottom-0 w-full bg-white border-t border-black/10 inset-shadow-xs rounded-lg flex justify-around py-2">
       {links.map((link) => (
         <NavLink
           key={link.to}
