@@ -11,12 +11,15 @@ export default function RecipeCard({ recipe }) {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden"
-    onClick={() => navigate(`/recipes/${recipe.id}`)}>
+    <div className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01]"
+      onClick={() => navigate(`/recipes/${recipe.id}`)}
+    >
       <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover" />
+      
       <div className="p-4">
         <h3 className="text-lg font-semibold">{recipe.title}</h3>
         <p className="text-sm text-gray-500">{recipe.cuisine} · {recipe.prepTime}</p>
+
         <div className="mt-2 flex items-center justify-between">
           <span className="text-yellow-500 font-bold">{recipe.rating} ★</span>
           <button
