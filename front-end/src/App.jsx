@@ -5,6 +5,7 @@ import ProfilePage from './pages/ProfilePage';
 import RecipesPage from './pages/RecipesPage';
 import RecommenderPage from './pages/RecommenderPage';
 import FriendsPage from './pages/FriendsPage';
+import RecipeDetailPage from "./pages/RecipeDetailPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from './components/Navbar';
 
@@ -49,7 +50,14 @@ function Layout() {
                 <FriendsPage />
               </PrivateRoute>
             }
-          />                   
+          />     
+          <Route path="/recipes/:id"
+            element={
+              <PrivateRoute>
+                <RecipeDetailPage />
+              </PrivateRoute>
+            }
+          />              
         </Routes>
       </div>
 

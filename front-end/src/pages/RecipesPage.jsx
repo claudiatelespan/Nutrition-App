@@ -17,7 +17,7 @@ export default function RecipesPage() {
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
 
-  //searched recipes
+  //searched recipes and/or filtered recipes
   const filteredRecipes = mockRecipes.filter((recipe) => {
     const matchSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchCategory =
