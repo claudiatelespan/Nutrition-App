@@ -3,6 +3,7 @@ import mockRecipes from "../assets/mockRecipes";
 import { foodCategories } from "../assets/foodCategories";
 import RecipeCard from "../components/RecipeCard";
 import FilterPopup from "../components/FilterPopup";
+import Pagination from "../components/Pagination";
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function RecipesPage() {
@@ -12,7 +13,7 @@ export default function RecipesPage() {
   const [selectedCategories, setSelectedCategories] = useState([]); 
   
   const [currentPage, setCurrentPage] = useState(1); //pagination
-  const recipesPerPage = 7;
+  const recipesPerPage = 3;
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
 
@@ -27,7 +28,6 @@ export default function RecipesPage() {
   //recipes displayed on page, pages
   const currentRecipes = filteredRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
   const totalPages = Math.ceil(filteredRecipes.length / recipesPerPage);
-  const pageNumbers = [...Array(totalPages).keys()].map((n) => n + 1);
   
   const removeCategory = (id) => {
     setSelectedCategories((prev) => prev.filter((cat) => cat !== id));
@@ -110,35 +110,11 @@ export default function RecipesPage() {
         </div>
       )}
 
-      <div className="mt-8 flex justify-center items-center gap-2 flex-wrap">
-        <button
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-3 py-1 border rounded disabled:opacity-50"
-        >
-          ←
-        </button>
-
-        {pageNumbers.map((num) => (
-          <button
-            key={num}
-            onClick={() => goToPage(num)}
-            className={`px-3 py-1 rounded border ${
-              num === currentPage ? "bg-[#f84525] text-white" : "bg-gray-100"
-            }`}
-          >
-            {num}
-          </button>
-        ))}
-
-        <button
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 border rounded disabled:opacity-50"
-        >
-          →
-        </button>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={goToPage}
+      />
 
     </div>
   );
