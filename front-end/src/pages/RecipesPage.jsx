@@ -110,11 +110,14 @@ export default function RecipesPage() {
         </div>
       )}
 
-      <Pagination
+      {/* Paginator */}
+      {filteredRecipes.length !== 0 && (
+        <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={goToPage}
-      />
+        />
+      )}
 
     </div>
   );
