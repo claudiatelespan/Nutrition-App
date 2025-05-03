@@ -8,7 +8,7 @@ const mockRecipes = [
     prepTime: "25 min",
     rating: 4.6,
     ingredients: ["pasta", "eggs", "cheese", "bacon"],
-    instructions: "Fierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanul.",
+    instructions: "Fierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanul.Fierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanulFierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanulFierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanulFierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanulFierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanulFierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanulFierbe pastele, adaugă ouăle bătute, baconul prăjit și parmezanul",
   },
   {
     id: 2,

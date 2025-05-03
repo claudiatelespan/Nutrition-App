@@ -18,7 +18,7 @@ export default function RecipeDetailPage() {
     if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
     return (
-        <div className="min-h-screen bg-[#f8f4f3] py-10 px-4 flex justify-center items-center relative">
+        <div className="bg-[#f8f4f3] flex justify-center items-center py-8 px-4 overflow-auto">
             <button
                 onClick={() => navigate("/recipes")}
                 className="absolute top-6 left-6 flex items-center gap-1 text-sm text-[#f84525] hover:underline cursor-pointer group"
@@ -27,7 +27,7 @@ export default function RecipeDetailPage() {
                 Back
             </button>
         
-            <div className="max-w-5xl w-full bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row h-auto md:h-[500px]">
+            <div className="max-w-5xl w-full bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row h-auto md:h-[600px]">
                 <img
                 src={recipe.image}
                 alt={recipe.title}
