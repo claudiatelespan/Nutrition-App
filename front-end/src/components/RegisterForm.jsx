@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { useNavigate } from "react-router-dom";
-import { register } from '../services/authService';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../context/AuthContext';
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -16,12 +17,9 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await register(formData);
+      await register(formData);
       toast.success("Register successful!");
-      console.log("Register successful", response);
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+      setTimeout(() => navigate("/"), 1500);
     } catch (err) {
       toast.error(err.message);
     }

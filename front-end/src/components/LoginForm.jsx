@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { login } from '../services/authService';
+import { AuthContext } from '../context/AuthContext';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 
@@ -9,6 +9,7 @@ export default function LoginForm() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -18,13 +19,11 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await login(formData);
+      await login(formData, rememberMe);
 
-      const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem("accessToken", response.access);
-      storage.setItem("refreshToken", response.refresh);
+      toast.success("Login successful");
 
-      console.log("Login successful", response);
+      console.log("Login successful");
       navigate("/profile");
     } catch (err) {
       toast.error(err.message);
