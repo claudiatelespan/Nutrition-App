@@ -19,6 +19,7 @@ export default function RecipesPage() {
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
 
   const {recipes, loading} = useContext(ApiContext);
+  console.log(recipes);
 
   //searched recipes and/or filtered recipes
   const filteredRecipes = recipes.filter((recipe) => {
