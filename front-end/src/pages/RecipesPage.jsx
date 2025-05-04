@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import mockRecipes from "../assets/mockRecipes";
 import { foodCategories } from "../assets/foodCategories";
 import RecipeCard from "../components/RecipeCard";
 import FilterPopup from "../components/FilterPopup";
 import Pagination from "../components/Pagination";
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ApiContext } from "../context/ApiContext";
 
 export default function RecipesPage() {
   const [searchTerm, setSearchTerm] = useState(""); //searchbar
@@ -17,11 +18,13 @@ export default function RecipesPage() {
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
 
+  const {recipes, loading} = useContext(ApiContext);
+
   //searched recipes and/or filtered recipes
-  const filteredRecipes = mockRecipes.filter((recipe) => {
-    const matchSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredRecipes = recipes.filter((recipe) => {
+    const matchSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchCategory =
-      selectedCategories.length === 0 || selectedCategories.includes(recipe.cuisine.toLowerCase());
+      selectedCategories.length === 0 || selectedCategories.includes(recipe.cuisine_type.toLowerCase());
     return matchSearch && matchCategory;
   });
 
@@ -42,6 +45,8 @@ export default function RecipesPage() {
     setCurrentPage(1);
   }, [searchTerm, selectedCategories]);
   
+
+  // if (loading) return <p>Loading...</p>;
 
   return (
     <div className="p-6 bg-[#f8f4f3] min-h-screen relative">
