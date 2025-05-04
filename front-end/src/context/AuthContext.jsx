@@ -32,8 +32,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    const access = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
-    const refresh = localStorage.getItem("refreshToken") || sessionStorage.getItem("refreshToken");
+    const storage = localStorage.getItem("accessToken") ? localStorage : sessionStorage;
+    const access = storage.getItem("accessToken");
+    const refresh = storage.getItem("refreshToken");
   
     try {
       await fetch("http://localhost:8000/api/users/logout/", {
@@ -46,15 +47,15 @@ export const AuthProvider = ({ children }) => {
       });
     } catch (err) {
       console.warn("Logout request failed or token invalid.");
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("refreshToken");
+  
+      setAccessToken(null);
+      setIsAuthenticated(false);
     }
-  
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
-  
-    setAccessToken(null);
-    setIsAuthenticated(false);
   };
   
 

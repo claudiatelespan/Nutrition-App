@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
   const { logout } = useContext(AuthContext);
 
-  const handleLogout = () => {
-    logout();
-    window.location.href = "/"; 
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
   };
 
   return (
