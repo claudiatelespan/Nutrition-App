@@ -30,7 +30,7 @@ export default function RecipeCard({ recipe }) {
             className={`px-3 py-1 rounded-full text-xs transition ${
               isFavorite
                 ? "bg-gray-300 text-gray-800 hover:bg-gray-400"
-                : "bg-[#f84525] text-white hover:bg-red-700"
+                : "bg-mango text-white hover:bg-orange-500"
             }`}
           >
             {isFavorite ? "Remove" : "Add to Favorites"}

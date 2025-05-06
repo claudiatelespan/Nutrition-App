@@ -50,26 +50,26 @@ export default function RecipesPage() {
   // if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="p-6 bg-[#f8f4f3] min-h-screen relative">
+    <div className="p-6 bg-beige min-h-screen relative">
 
       <h1 className="text-2xl font-bold mb-4">Recipes</h1>
 
       {/* search bar div */}
       <div className="flex gap-2 items-center mb-4">
         <div className="relative w-full max-w-xl">
-          <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
           <input
             type="text"
             placeholder="Search recipes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 p-2 border border-gray-300 rounded-md outline-[#f84525]"
+            className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-[#FFA725]"
           />
         </div>
 
         <button
           onClick={() => setFilterOpen((prev) => !prev)}          
-          className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100 flex items-center gap-2"
+          className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-gray-300 flex items-center gap-2"
         >
           <FunnelIcon className="h-5 w-5" />
           Filter
@@ -80,9 +80,9 @@ export default function RecipesPage() {
           {selectedCategories.map((id) => {
             const cat = foodCategories.find((c) => c.id === id);
             return (
-              <div key={id} className="flex items-center gap-1 px-2 py-1 bg-gray-200 rounded-full text-sm">
+              <div key={id} className="flex items-center gap-1 px-2 py-1 bg-mint rounded-full text-sm">
                 <span>{cat.icon} {cat.name}</span>
-                <button onClick={() => removeCategory(id)} className="text-gray-600 hover:text-red-600">
+                <button onClick={() => removeCategory(id)} className="text-gray-600 hover:text-orange-500">
                   <XMarkIcon className="h-4 w-4" />
                 </button>
               </div>

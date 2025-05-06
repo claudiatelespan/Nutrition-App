@@ -7,7 +7,8 @@ import RecommenderPage from './pages/RecommenderPage';
 import FriendsPage from './pages/FriendsPage';
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import PrivateRoute from "./components/PrivateRoute";
-import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Header from "./components/Header";
 
 function Layout() {
   const location = useLocation();
@@ -15,8 +16,11 @@ function Layout() {
   const hideNavbarOn = ["/", "/register"];
   const shouldHideNavbar = hideNavbarOn.includes(location.pathname);
   return (
-    <>
-      <div className="min-h-screen pb-16">
+    <div className="flex">
+      <Sidebar />
+
+      <div className="flex-1 flex flex-col">
+      <Header />
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -60,9 +64,7 @@ function Layout() {
           />              
         </Routes>
       </div>
-
-      {!shouldHideNavbar && <Navbar />}
-    </>
+    </div>
   );
 }
 
