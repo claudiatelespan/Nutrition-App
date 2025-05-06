@@ -2,9 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { HomeIcon, UserIcon, BookOpenIcon, SparklesIcon, UsersIcon, Bars3Icon } from "@heroicons/react/24/outline";
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function Sidebar({ isOpen, toggleSidebar }) {
   const navItems = [
     { name: "Profile", icon: <UserIcon className="h-6 w-6" />, path: "/profile" },
     { name: "Recipes", icon: <BookOpenIcon className="h-6 w-6" />, path: "/recipes" },
@@ -13,9 +11,9 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className={`h-screen bg-vintage text-white transition-all duration-300 ${isOpen ? "w-56" : "w-16"} flex flex-col`}>
+    <div className={`fixed top-0 left-0 h-screen bg-vintage text-white transition-all duration-300 z-50 ${isOpen ? "w-56" : "w-16"} flex flex-col`}>
       <div className="p-4 flex items-center gap-2 justify-between">
-        <button onClick={() => setIsOpen(!isOpen)}>
+        <button onClick={toggleSidebar}>
           <Bars3Icon className="h-6 w-6 text-white cursor-pointer" />
         </button>
 
@@ -25,7 +23,6 @@ export default function Sidebar() {
           </h2>
         )}
       </div>
-
 
       <div className="flex-1">
         {navItems.map((item) => (
@@ -46,3 +43,4 @@ export default function Sidebar() {
     </div>
   );
 }
+
