@@ -20,10 +20,10 @@ export default function RecipeDetailPage() {
     if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
     return (
-        <div className="bg-[#f8f4f3] flex justify-center items-center py-8 px-4 overflow-auto">
+        <div className="bg-beige flex justify-center items-center py-8 px-4 overflow-auto">
             <button
                 onClick={() => navigate("/recipes")}
-                className="absolute top-6 left-6 flex items-center gap-1 text-sm text-[#f84525] hover:underline cursor-pointer group"
+                className="absolute top-20 left-20 flex items-center gap-1 text-lg text-mango hover:underline cursor-pointer group"
             >
                 <ArrowLeftIcon className="h-4 w-4 transform transition-transform group-hover:scale-120" />
                 Back
@@ -43,15 +43,15 @@ export default function RecipeDetailPage() {
                         onClick={handleFavoriteToggle}
                         className={`self-start text-sm px-3 py-1 rounded-full transition ${
                             isFavorite
-                            ? "bg-gray-300 text-gray-800 hover:bg-gray-400"
-                            : "bg-[#f84525] text-white hover:bg-red-700"
+                            ? "bg-mint text-gray-800 hover:bg-gray-400"
+                            : "bg-mango text-white hover:bg-red-700"
                         }`}
                         >
                         {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
                     </button>
 
                     <div>
-                        <h2 className="font-semibold text-lg mb-1 text-[#f84525]">Ingredients:</h2>
+                        <h2 className="font-semibold text-lg mb-1 text-mango">Ingredients:</h2>
                         <ul className="list-disc list-inside text-sm text-gray-700">
                         {recipe.ingredients.map((ingredient) => (
                             <li key={ingredient.ingredient.id}>{ingredient.quantity}{ingredient.ingredient.unit} {ingredient.ingredient.name}</li>
@@ -60,7 +60,7 @@ export default function RecipeDetailPage() {
                     </div>
 
                     <div>
-                        <h2 className="font-semibold text-lg mb-1 text-[#f84525]">Instructions:</h2>
+                        <h2 className="font-semibold text-lg mb-1 text-mango">Instructions:</h2>
                         <p className="text-sm text-gray-700">{recipe.description}</p>
                     </div>
                 </div>
