@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
@@ -100,6 +100,13 @@ export const AuthProvider = ({ children }) => {
   };
   
 
+  useEffect(() => {
+    const token = getInitialToken();
+    if (token) {
+      fetchUserInfo(token);
+    }
+  }, []);
+  
   return (
     <AuthContext.Provider value={{ accessToken, isAuthenticated, login, logout, register, userData }}>
       {children}
