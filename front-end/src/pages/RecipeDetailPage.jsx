@@ -20,20 +20,24 @@ export default function RecipeDetailPage() {
     if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
     return (
-        <div className="bg-beige flex justify-center items-center py-8 px-4 overflow-auto">
-            <button
-                onClick={() => navigate("/recipes")}
-                className="absolute top-20 left-20 flex items-center gap-1 text-lg text-mango hover:underline cursor-pointer group"
-            >
-                <ArrowLeftIcon className="h-4 w-4 transform transition-transform group-hover:scale-120" />
-                Back
-            </button>
+        <div className="bg-beige min-h-screen px-4 py-8 overflow-auto">
+            <div >
+                <button
+                    onClick={() => navigate("/recipes")}
+                    className="flex items-center gap-1 text-lg text-mango hover:underline cursor-pointer group"
+                >
+                    <ArrowLeftIcon className="h-4 w-4 transform transition-transform group-hover:scale-120" />
+                    Back
+                </button>
+            </div>
+
+
         
-            <div className="max-w-5xl w-full bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row h-auto md:h-[600px]">
+            <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md overflow-hidden flex flex-col md:flex-row h-auto md:h-[550px]">
                 <img
                 src={recipe.image}
                 alt={recipe.name}
-                className="w-full md:w-1/2 h-48 md:h-full object-cover"
+                className="w-full md:w-1/2 h-48 md:h-auto object-cover"
                 />
                 <div className="p-6 flex flex-col gap-4 overflow-y-auto">
                     <h1 className="text-2xl font-bold">{recipe.name}</h1>
