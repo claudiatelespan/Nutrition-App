@@ -6,7 +6,6 @@ export const ApiContext = createContext();
 export const ApiProvider = ({ children }) => {
   const { accessToken, logout } = useContext(AuthContext);
 
-  const [userData, setUserData] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -86,7 +85,7 @@ export const ApiProvider = ({ children }) => {
   }, [accessToken]);
 
   return (
-    <ApiContext.Provider value={{ userData, recipes, fetchWithAuth, loading }}>
+    <ApiContext.Provider value={{ recipes, fetchWithAuth, loading }}>
       {children}
     </ApiContext.Provider>
   );
