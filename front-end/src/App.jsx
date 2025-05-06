@@ -17,10 +17,11 @@ function Layout() {
   const shouldHideNavbar = hideNavbarOn.includes(location.pathname);
   return (
     <div className="flex">
-      <Sidebar />
+      
+      {!shouldHideNavbar && <Sidebar />}
 
       <div className="flex-1 flex flex-col">
-      <Header />
+      {!shouldHideNavbar && <Header />}
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
