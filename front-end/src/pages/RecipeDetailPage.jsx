@@ -45,10 +45,10 @@ export default function RecipeDetailPage() {
                     <p className="text-yellow-500 font-semibold">{recipe.rating} ★</p>
                     <button
                         onClick={handleFavoriteToggle}
-                        className={`self-start text-sm px-3 py-1 rounded-full transition ${
+                        className={`self-end text-sm px-3 py-1 rounded-full transition ${
                             isFavorite
                             ? "bg-mint text-gray-800 hover:bg-gray-400"
-                            : "bg-mango text-white hover:bg-red-700"
+                            : "bg-mango text-white hover:bg-orange-500"
                         }`}
                         >
                         {isFavorite ? "Remove from Favorites" : "Add to Favorites"}

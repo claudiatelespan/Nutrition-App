@@ -31,7 +31,7 @@ export default function RecipeCard({ recipe }) {
               isFavorite
                 ? "bg-mint text-gray-800 hover:bg-gray-400"
                 : "bg-mango text-white hover:bg-orange-500"
-            }`}
+            } ease-in-out duration-300`}
           >
             {isFavorite ? "Remove" : "Add to Favorites"}
           </button>

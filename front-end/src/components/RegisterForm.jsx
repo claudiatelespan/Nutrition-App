@@ -41,7 +41,7 @@ export default function RegisterForm() {
         value={formData.username}
         onChange={handleChange}
         required
-        className="block font-medium text-gray-700 w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#f84525]"
+        className="block font-medium text-gray-700 w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-mango"
       />
 
       <input
@@ -51,7 +51,7 @@ export default function RegisterForm() {
         value={formData.email}
         onChange={handleChange}
         required
-        className="mt-4 block font-medium text-gray-700 w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#f84525]"
+        className="mt-4 block font-medium text-gray-700 w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-mango"
       />
 
       <div className='mt-4 relative'>
@@ -62,7 +62,7 @@ export default function RegisterForm() {
           value={formData.password}
           onChange={handleChange}
           required
-          className="block font-medium text-gray-700 w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-[#f84525]"
+          className="block font-medium text-gray-700 w-full rounded-md py-2.5 px-4 border border-gray-300 text-sm outline-mango"
         />
         <button
           type="button"
@@ -79,7 +79,7 @@ export default function RegisterForm() {
       </div>
       
       <div className='flex items-center justify-center mt-4'>
-        <button type="submit" className="ms-4 inline-flex items-center px-4 py-2 bg-[#f84525] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-800 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+        <button type="submit" className="ms-4 inline-flex items-center px-4 py-2 bg-mango border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
           Register
         </button>
       </div>
