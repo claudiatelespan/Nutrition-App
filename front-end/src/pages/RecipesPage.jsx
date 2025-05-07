@@ -158,7 +158,7 @@ export default function RecipesPage() {
             return (
               <div key={id} className="flex items-center gap-1 px-2 py-1 bg-mint rounded-full text-sm">
                 <span>{cat?.icon || "🍽️"} {cat?.name || id}</span>
-                <button onClick={() => removeCategory(id)} className="text-gray-600 hover:text-orange-500">
+                <button onClick={() => removeCategory(id)} className="text-gray-600 hover:text-gray-800">
                   <XMarkIcon className="h-4 w-4" />
                 </button>
               </div>

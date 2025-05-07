@@ -1,28 +1,35 @@
-import { useState } from "react"; 
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RecipeCard({ recipe }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const handleFavoriteToggle = () => {
     setIsFavorite((prev) => !prev);
   };
 
-  const navigate = useNavigate();
-
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01]"
+    <div
+      className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01]"
       onClick={() => navigate(`/recipes/${recipe.id}`)}
     >
       <img src={recipe.image} alt={recipe.name} className="w-full h-48 object-cover" />
-      
+
       <div className="p-4">
         <h3 className="text-lg font-semibold">{recipe.name}</h3>
-        <p className="text-sm text-gray-500">{recipe.cuisine_type} · {recipe.prep_time} min · {recipe.difficulty}</p>
 
-        <div className="mt-2 flex items-center justify-between">
+        <div className="flex flex-wrap gap-2 mt-2 text-xs">
+          <span className="px-2 py-0.5 bg-mint text-gray-700 rounded-full">{recipe.cuisine_type}</span>
+          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">{recipe.meal_type}</span>
+          <span className="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full">{recipe.prep_time} min</span>
+          <span className="px-2 py-0.5 bg-pink-100 text-pink-700 rounded-full">{recipe.difficulty}</span>
+          <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>
+        </div>
+
+        <div className="mt-3 flex items-center justify-between">
           <span className="text-yellow-500 font-bold">{recipe.rating} ★</span>
-          <button
+          <button 
             onClick={(e) => {
               e.stopPropagation();
               handleFavoriteToggle();
@@ -40,4 +47,3 @@ export default function RecipeCard({ recipe }) {
     </div>
   );
 }
-  
