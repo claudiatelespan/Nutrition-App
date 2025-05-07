@@ -123,7 +123,7 @@ export default function RecipesPage() {
 
           <button
             onClick={() => setFilterOpen(prev => !prev)}
-            className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-gray-300 flex items-center gap-2"
+            className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-hover-beige flex items-center gap-2"
           >
             <FunnelIcon className="h-5 w-5" />
             Filter

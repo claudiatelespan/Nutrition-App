@@ -21,7 +21,7 @@ export default function RecipeDetailPage() {
     <div className="bg-beige min-h-screen px-4 py-8 overflow-auto">
       <button
         onClick={() => navigate("/recipes")}
-        className="flex items-center gap-1 text-lg text-mango hover:underline cursor-pointer group"
+        className="flex items-center gap-1 text-lg text-mango hover:underline hover:text-orange-500 cursor-pointer group"
       >
         <ArrowLeftIcon className="h-4 w-4 transform transition-transform group-hover:scale-120" />
         Back
