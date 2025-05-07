@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useMemo } from "react";
+import { useState, useEffect, useContext, useMemo, useRef } from "react";
 import { cuisineIcons } from "../assets/cuisineIcons";
 import RecipeCard from "../components/RecipeCard";
 import FilterPopup from "../components/FilterPopup";
@@ -19,6 +19,8 @@ export default function RecipesPage() {
   const recipesPerPage = 3;
 
   const { recipes, loading } = useContext(ApiContext);
+
+  const isFirstLoad = useRef(true);
 
   const availableCategories = useMemo(() => {
     const cuisines = new Set();
@@ -71,7 +73,7 @@ export default function RecipesPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Update URL when filters/search/page change
+
   useEffect(() => {
     const params = new URLSearchParams();
     if (searchTerm) params.set("search", searchTerm);
@@ -81,6 +83,14 @@ export default function RecipesPage() {
     if (currentPage > 1) params.set("page", String(currentPage));
     setSearchParams(params);
   }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, currentPage]);
+
+  useEffect(() => {
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false;
+      return;
+    }
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties]);
 
   return (
     <div className="p-6 bg-beige min-h-screen relative">
