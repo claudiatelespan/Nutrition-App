@@ -15,6 +15,8 @@ export default function RecipesPage() {
   const [selectedCategories, setSelectedCategories] = useState(searchParams.get("cuisine")?.split(",") || []);
   const [selectedMealTypes, setSelectedMealTypes] = useState(searchParams.get("meal")?.split(",") || []);
   const [selectedDifficulties, setSelectedDifficulties] = useState(searchParams.get("difficulty")?.split(",") || []);
+  const [sortField, setSortField] = useState(searchParams.get("sort") || "name");
+  const [sortOrder, setSortOrder] = useState(searchParams.get("order") || "asc");
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
   const recipesPerPage = 3;
 
@@ -49,6 +51,15 @@ export default function RecipesPage() {
     const matchDifficulty = selectedDifficulties.length === 0 ||
       selectedDifficulties.includes(recipe.difficulty);
     return matchSearch && matchCategory && matchMealType && matchDifficulty;
+  }).sort((a, b) => {
+    const aVal = a[sortField];
+    const bVal = b[sortField];
+    if (typeof aVal === 'string') {
+      return sortOrder === 'asc'
+        ? aVal.localeCompare(bVal)
+        : bVal.localeCompare(aVal);
+    }
+    return sortOrder === 'asc' ? aVal - bVal : bVal - aVal;
   });
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
@@ -73,16 +84,17 @@ export default function RecipesPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-
   useEffect(() => {
     const params = new URLSearchParams();
     if (searchTerm) params.set("search", searchTerm);
     if (selectedCategories.length > 0) params.set("cuisine", selectedCategories.join(","));
     if (selectedMealTypes.length > 0) params.set("meal", selectedMealTypes.join(","));
     if (selectedDifficulties.length > 0) params.set("difficulty", selectedDifficulties.join(","));
+    if (sortField) params.set("sort", sortField);
+    if (sortOrder) params.set("order", sortOrder);
     if (currentPage > 1) params.set("page", String(currentPage));
     setSearchParams(params);
-  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, currentPage]);
+  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, sortField, sortOrder, currentPage]);
 
   useEffect(() => {
     if (isFirstLoad.current) {
@@ -90,14 +102,14 @@ export default function RecipesPage() {
       return;
     }
     setCurrentPage(1);
-  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties]);
+  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, sortField, sortOrder]);
 
   return (
     <div className="p-6 bg-beige min-h-screen relative">
       <h1 className="text-2xl font-bold mb-4">Recipes</h1>
 
       <div className="flex flex-col gap-2 mb-4">
-        <div className="flex gap-2 items-center">
+        <div className="flex flex-wrap gap-2 items-center">
           <div className="relative w-full max-w-xl">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
             <input
@@ -116,6 +128,28 @@ export default function RecipesPage() {
             <FunnelIcon className="h-5 w-5" />
             Filter
           </button>
+
+          <div className="flex gap-2 items-center">
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value)}
+              className="text-sm px-2 py-1 border border-gray-400 rounded-md"
+            >
+              <option value="name">Name</option>
+              <option value="rating">Rating</option>
+              <option value="calories">Calories</option>
+              <option value="prep_time">Prep Time</option>
+            </select>
+
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="text-sm px-2 py-1 border border-gray-400 rounded-md"
+            >
+              <option value="asc">Asc</option>
+              <option value="desc">Desc</option>
+            </select>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2">
