@@ -5,14 +5,17 @@ import FilterPopup from "../components/FilterPopup";
 import Pagination from "../components/Pagination";
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
+import { useSearchParams } from "react-router-dom";
 
 export default function RecipesPage() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
   const [filterOpen, setFilterOpen] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedMealTypes, setSelectedMealTypes] = useState([]);
-  const [selectedDifficulties, setSelectedDifficulties] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategories, setSelectedCategories] = useState(searchParams.get("cuisine")?.split(",") || []);
+  const [selectedMealTypes, setSelectedMealTypes] = useState(searchParams.get("meal")?.split(",") || []);
+  const [selectedDifficulties, setSelectedDifficulties] = useState(searchParams.get("difficulty")?.split(",") || []);
+  const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
   const recipesPerPage = 3;
 
   const { recipes, loading } = useContext(ApiContext);
@@ -68,9 +71,16 @@ export default function RecipesPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Update URL when filters/search/page change
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties]);
+    const params = new URLSearchParams();
+    if (searchTerm) params.set("search", searchTerm);
+    if (selectedCategories.length > 0) params.set("cuisine", selectedCategories.join(","));
+    if (selectedMealTypes.length > 0) params.set("meal", selectedMealTypes.join(","));
+    if (selectedDifficulties.length > 0) params.set("difficulty", selectedDifficulties.join(","));
+    if (currentPage > 1) params.set("page", String(currentPage));
+    setSearchParams(params);
+  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, currentPage]);
 
   return (
     <div className="p-6 bg-beige min-h-screen relative">
