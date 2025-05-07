@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { foodCategories } from "../assets/foodCategories";
 
-export default function FilterPopup({ selected, setSelected, onApply, onClose }) {
+export default function FilterPopup({ selected, setSelected, onApply, onClose, options }) {
   const [tempSelected, setTempSelected] = useState([]);
 
   useEffect(() => {
@@ -21,12 +20,11 @@ export default function FilterPopup({ selected, setSelected, onApply, onClose })
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-20 flex items-center justify-center">
-      
       <div className="bg-almostwhite p-6 rounded-lg shadow-xl w-80 sm:w-[28rem]">
         <h2 className="text-lg font-semibold mb-4 text-center">Select categories</h2>
-        
+
         <div className="grid grid-cols-3 gap-4 mb-4">
-          {foodCategories.map((cat) => (
+          {options.map((cat) => (
             <button
               key={cat.id}
               onClick={() => toggleCategory(cat.id)}
@@ -41,7 +39,7 @@ export default function FilterPopup({ selected, setSelected, onApply, onClose })
             </button>
           ))}
         </div>
-        
+
         <div className="flex justify-between items-center mt-4">
           <button
             onClick={() => {
@@ -51,7 +49,7 @@ export default function FilterPopup({ selected, setSelected, onApply, onClose })
           >
             Clear
           </button>
-          
+
           <div className="flex gap-2">
             <button
               onClick={onClose}

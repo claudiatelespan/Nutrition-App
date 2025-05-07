@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import mockRecipes from "../assets/mockRecipes";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
 

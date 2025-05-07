@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import mockRecipes from "../assets/mockRecipes";
-import { foodCategories } from "../assets/foodCategories";
+import { useState, useEffect, useContext, useMemo } from "react";
+import { cuisineIcons } from "../assets/cuisineIcons";
 import RecipeCard from "../components/RecipeCard";
 import FilterPopup from "../components/FilterPopup";
 import Pagination from "../components/Pagination";
@@ -20,6 +19,19 @@ export default function RecipesPage() {
 
   const {recipes, loading} = useContext(ApiContext);
   console.log(recipes);
+
+  //get categories from db
+  const availableCategories = useMemo(() => {
+    const cuisines = new Set();
+    recipes.forEach(r => cuisines.add(r.cuisine_type.toLowerCase()));
+    return Array.from(cuisines).map(id => ({
+      id,
+      name: id.charAt(0).toUpperCase() + id.slice(1),
+      icon: cuisineIcons[id] || "🍽️"
+    }));
+  }, [recipes]);
+
+  console.log(availableCategories);
 
   //searched recipes and/or filtered recipes
   const filteredRecipes = recipes.filter((recipe) => {
@@ -63,7 +75,7 @@ export default function RecipesPage() {
             placeholder="Search recipes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-[#FFA725]"
+            className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-mango"
           />
         </div>
 
@@ -78,10 +90,10 @@ export default function RecipesPage() {
         {selectedCategories.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {selectedCategories.map((id) => {
-            const cat = foodCategories.find((c) => c.id === id);
+            const cat = availableCategories.find((c) => c.id === id);
             return (
               <div key={id} className="flex items-center gap-1 px-2 py-1 bg-mint rounded-full text-sm">
-                <span>{cat.icon} {cat.name}</span>
+                <span>{cat?.icon || "🍽️"} {cat?.name || id}</span>
                 <button onClick={() => removeCategory(id)} className="text-gray-600 hover:text-orange-500">
                   <XMarkIcon className="h-4 w-4" />
                 </button>
@@ -102,6 +114,7 @@ export default function RecipesPage() {
           setSelected={setSelectedCategories}
           onApply={() => setFilterOpen(false)}
           onClose={() => setFilterOpen(false)}
+          options={availableCategories}
         />
       )}
 
