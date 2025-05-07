@@ -7,20 +7,16 @@ import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from "@heroicons/react/24/
 import { ApiContext } from "../context/ApiContext";
 
 export default function RecipesPage() {
-  const [searchTerm, setSearchTerm] = useState(""); //searchbar
-  
-  const [filterOpen, setFilterOpen] = useState(false); //filter popup 
-  const [selectedCategories, setSelectedCategories] = useState([]); 
-  
-  const [currentPage, setCurrentPage] = useState(1); //pagination
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedMealTypes, setSelectedMealTypes] = useState([]);
+  const [selectedDifficulties, setSelectedDifficulties] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 3;
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
 
-  const {recipes, loading} = useContext(ApiContext);
-  console.log(recipes);
+  const { recipes, loading } = useContext(ApiContext);
 
-  //get categories from db
   const availableCategories = useMemo(() => {
     const cuisines = new Set();
     recipes.forEach(r => cuisines.add(r.cuisine_type.toLowerCase()));
@@ -31,63 +27,77 @@ export default function RecipesPage() {
     }));
   }, [recipes]);
 
-  console.log(availableCategories);
+  const availableMealTypes = useMemo(() => {
+    return Array.from(new Set(recipes.map(r => r.meal_type))).filter(Boolean);
+  }, [recipes]);
 
-  //searched recipes and/or filtered recipes
+  const availableDifficulties = useMemo(() => {
+    return Array.from(new Set(recipes.map(r => r.difficulty))).filter(Boolean);
+  }, [recipes]);
+
   const filteredRecipes = recipes.filter((recipe) => {
     const matchSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchCategory =
-      selectedCategories.length === 0 || selectedCategories.includes(recipe.cuisine_type.toLowerCase());
-    return matchSearch && matchCategory;
+    const matchCategory = selectedCategories.length === 0 ||
+      selectedCategories.includes(recipe.cuisine_type.toLowerCase());
+    const matchMealType = selectedMealTypes.length === 0 ||
+      selectedMealTypes.includes(recipe.meal_type);
+    const matchDifficulty = selectedDifficulties.length === 0 ||
+      selectedDifficulties.includes(recipe.difficulty);
+    return matchSearch && matchCategory && matchMealType && matchDifficulty;
   });
 
-  //recipes displayed on page, pages
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = filteredRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
   const totalPages = Math.ceil(filteredRecipes.length / recipesPerPage);
-  
+
   const removeCategory = (id) => {
-    setSelectedCategories((prev) => prev.filter((cat) => cat !== id));
+    setSelectedCategories(prev => prev.filter(cat => cat !== id));
+  };
+
+  const removeMealType = (type) => {
+    setSelectedMealTypes(prev => prev.filter(m => m !== type));
+  };
+
+  const removeDifficulty = (level) => {
+    setSelectedDifficulties(prev => prev.filter(d => d !== level));
   };
 
   const goToPage = (num) => {
     setCurrentPage(num);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };  
+  };
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategories]);
-  
-
-  // if (loading) return <p>Loading...</p>;
+  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties]);
 
   return (
     <div className="p-6 bg-beige min-h-screen relative">
-
       <h1 className="text-2xl font-bold mb-4">Recipes</h1>
 
-      {/* search bar div */}
-      <div className="flex gap-2 items-center mb-4">
-        <div className="relative w-full max-w-xl">
-          <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
-          <input
-            type="text"
-            placeholder="Search recipes..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-mango"
-          />
+      <div className="flex flex-col gap-2 mb-4">
+        <div className="flex gap-2 items-center">
+          <div className="relative w-full max-w-xl">
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
+            <input
+              type="text"
+              placeholder="Search recipes..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-[#FFA725]"
+            />
+          </div>
+
+          <button
+            onClick={() => setFilterOpen(prev => !prev)}
+            className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-gray-300 flex items-center gap-2"
+          >
+            <FunnelIcon className="h-5 w-5" />
+            Filter
+          </button>
         </div>
 
-        <button
-          onClick={() => setFilterOpen((prev) => !prev)}          
-          className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-gray-300 flex items-center gap-2"
-        >
-          <FunnelIcon className="h-5 w-5" />
-          Filter
-        </button>
-
-        {selectedCategories.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {selectedCategories.map((id) => {
             const cat = availableCategories.find((c) => c.id === id);
@@ -100,25 +110,43 @@ export default function RecipesPage() {
               </div>
             );
           })}
+
+          {selectedMealTypes.map((type) => (
+            <div key={type} className="flex items-center gap-1 px-2 py-1 bg-blue-200 rounded-full text-sm">
+              <span>{type}</span>
+              <button onClick={() => removeMealType(type)} className="text-gray-600 hover:text-blue-800">
+                <XMarkIcon className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+
+          {selectedDifficulties.map((level) => (
+            <div key={level} className="flex items-center gap-1 px-2 py-1 bg-pink-200 rounded-full text-sm">
+              <span>{level}</span>
+              <button onClick={() => removeDifficulty(level)} className="text-gray-600 hover:text-pink-800">
+                <XMarkIcon className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
         </div>
-        )}
-
       </div>
-      {/* search bar div END*/}
 
-
-      {/* filter popup */}
       {filterOpen && (
         <FilterPopup
           selected={selectedCategories}
           setSelected={setSelectedCategories}
+          mealTypeSelected={selectedMealTypes}
+          setMealTypeSelected={setSelectedMealTypes}
+          difficultySelected={selectedDifficulties}
+          setDifficultySelected={setSelectedDifficulties}
           onApply={() => setFilterOpen(false)}
           onClose={() => setFilterOpen(false)}
           options={availableCategories}
+          mealTypes={availableMealTypes}
+          difficulties={availableDifficulties}
         />
       )}
 
-      {/* recipes list */}
       {filteredRecipes.length === 0 ? (
         <p className="text-gray-500">No recipes found.</p>
       ) : (
@@ -129,15 +157,13 @@ export default function RecipesPage() {
         </div>
       )}
 
-      {/* Paginator */}
       {filteredRecipes.length !== 0 && (
         <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={goToPage}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={goToPage}
         />
       )}
-
     </div>
   );
 }
