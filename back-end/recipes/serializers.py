@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, Ingredient, RecipeIngredient
+from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,3 +24,9 @@ class RecipeSerializer(serializers.ModelSerializer):
     def get_ingredients(self, obj):
         ingredients_rel = RecipeIngredient.objects.filter(reteta=obj)
         return RecipeIngredientSerializer(ingredients_rel, many=True).data
+
+class FavoriteRecipeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FavoriteRecipe
+        fields = ['id', 'user', 'recipe', 'added_at']
+        read_only_fields = ['user', 'added_at']
