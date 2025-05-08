@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ApiContext } from "../context/ApiContext";
 
 export default function RecipeCard({ recipe }) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
+  const { favorites, addFavorite, removeFavorite } = useContext(ApiContext);
 
-  const handleFavoriteToggle = () => {
-    setIsFavorite((prev) => !prev);
+  const isFavorite = favorites.some((f) => f.recipe === recipe.id);
+
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    if (isFavorite) removeFavorite(recipe.id);
+    else addFavorite(recipe.id);
   };
 
   return (
@@ -29,11 +34,8 @@ export default function RecipeCard({ recipe }) {
 
         <div className="mt-3 flex items-center justify-between">
           <span className="text-yellow-500 font-bold">{recipe.rating} ★</span>
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              handleFavoriteToggle();
-            }}
+          <button
+            onClick={handleToggle}
             className={`px-3 py-1 rounded-full text-xs transition ${
               isFavorite
                 ? "bg-mint text-gray-800 hover:bg-gray-400"

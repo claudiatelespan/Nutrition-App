@@ -4,12 +4,12 @@ import { AuthContext } from "./AuthContext";
 export const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
-  const { accessToken, logout } = useContext(AuthContext);
+  const { accessToken, setAccessToken, logout } = useContext(AuthContext);
 
   const [recipes, setRecipes] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Functia fetchWithAuth
   const fetchWithAuth = async (url, options = {}) => {
     let token = accessToken;
     let headers = {
@@ -20,7 +20,6 @@ export const ApiProvider = ({ children }) => {
 
     let res = await fetch(url, { ...options, headers });
 
-    // Daca access token-ul a expirat, incearca refresh
     if (res.status === 401) {
       const refreshToken =
         localStorage.getItem("refreshToken") ||
@@ -41,9 +40,8 @@ export const ApiProvider = ({ children }) => {
         const data = await refreshRes.json();
         token = data.access;
         localStorage.setItem("accessToken", token);
+        setAccessToken(token);
         headers.Authorization = `Bearer ${token}`;
-
-        // retrimitem request-ul original
         res = await fetch(url, { ...options, headers });
       } else {
         logout();
@@ -51,24 +49,52 @@ export const ApiProvider = ({ children }) => {
       }
     }
 
-    if (!res.ok) {
-      throw new Error("Fetch failed");
-    }
-
+    if (res.status === 204) return null;
+    if (!res.ok) throw new Error("Fetch failed");
     return res.json();
   };
 
-  // Load initial data
+  const loadFavorites = async () => {
+    try {
+      const favRes = await fetchWithAuth("http://localhost:8000/api/favorites/");
+      setFavorites(favRes);
+    } catch (err) {
+      console.error("Failed to load favorites:", err);
+    }
+  };
+
+  const addFavorite = async (recipeId) => {
+    try {
+      const newFav = await fetchWithAuth("http://localhost:8000/api/favorites/", {
+        method: "POST",
+        body: JSON.stringify({ recipe: recipeId }),
+      });
+      setFavorites((prev) => [...prev, newFav]);
+    } catch (err) {
+      console.error("Add favorite error:", err);
+    }
+  };
+
+  const removeFavorite = async (recipeId) => {
+    const fav = favorites.find((f) => f.recipe === recipeId);
+    if (!fav) return;
+
+    try {
+      await fetchWithAuth(`http://localhost:8000/api/favorites/${fav.id}/`, {
+        method: "DELETE",
+      });
+      setFavorites((prev) => prev.filter((f) => f.id !== fav.id));
+    } catch (err) {
+      console.error("Remove favorite error:", err);
+    }
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [recipesRes] = await Promise.all([
-        //   fetchWithAuth("http://localhost:8000/api/users/me/"),
-          fetchWithAuth("http://localhost:8000/api/recipes/"),
-        ]);
-
-        // setUserData(userRes);
+        const recipesRes = await fetchWithAuth("http://localhost:8000/api/recipes/");
         setRecipes(recipesRes);
+        await loadFavorites();
       } catch (err) {
         console.error(err.message);
       } finally {
@@ -78,14 +104,23 @@ export const ApiProvider = ({ children }) => {
 
     if (accessToken) {
       loadData();
-      console.log("recipes");
+      console.log("data fetch");
     } else {
       setLoading(false);
     }
   }, [accessToken]);
 
   return (
-    <ApiContext.Provider value={{ recipes, fetchWithAuth, loading }}>
+    <ApiContext.Provider
+      value={{
+        recipes,
+        favorites,
+        fetchWithAuth,
+        loading,
+        addFavorite,
+        removeFavorite,
+      }}
+    >
       {children}
     </ApiContext.Provider>
   );
