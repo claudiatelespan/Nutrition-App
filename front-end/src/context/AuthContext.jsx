@@ -35,16 +35,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    const storage = localStorage.getItem("accessToken") ? localStorage : sessionStorage;
-    const access = storage.getItem("accessToken");
-    const refresh = storage.getItem("refreshToken");
+    const refresh =
+      localStorage.getItem("refreshToken") ||
+      sessionStorage.getItem("refreshToken");
   
     try {
       await fetch("http://localhost:8000/api/users/logout/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({ refresh }),
       });
@@ -60,6 +60,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
     }
   };
+  
   
 
   const register = async (userData) => {
