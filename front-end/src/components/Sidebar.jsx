@@ -68,7 +68,8 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 setShowExternalDropdown(!showExternalDropdown);
               }
             }}
-            className="flex items-center gap-3 p-4 w-full text-md hover:bg-hover focus:outline-none cursor-pointer"
+            className={`flex items-center gap-3 p-4 w-full text-md hover:bg-hover focus:outline-none cursor-pointer
+            ${!isOpen && showExternalDropdown ? "bg-hover" : ""}`}
           >
             <BookOpenIcon className="h-6 w-6" />
             {isOpen && <span className="flex-1 text-left">Recipes</span>}
@@ -104,13 +105,13 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           {!isOpen && showExternalDropdown && (
             <div
               ref={dropdownRef}
-              className="absolute left-16 top-[0.1rem] w-48 bg-vintage text-white rounded-lg shadow-sm z-50 p-2"
+              className="absolute left-15.5 top-[0.1px] w-48 bg-hover text-white shadow-sm rounded-sm z-50 p-2"
             >
               <NavLink
                 to="/recipes"
                 state={{ from: "/recipes" }}
                 onClick={() => setShowExternalDropdown(false)}
-                className={`block text-sm py-1 px-2 rounded hover:bg-hover ${isActiveRecipes ? "text-mango font-semibold" : ""}`}
+                className={`block text-sm py-1 px-2 rounded  ${isActiveRecipes ? "text-mango font-semibold" : "hover:text-mango"}`}
               >
                 Browse Recipes
               </NavLink>
@@ -118,7 +119,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 to="/favorites"
                 state={{ from: "/favorites" }}
                 onClick={() => setShowExternalDropdown(false)}
-                className={`block text-sm py-1 px-2 rounded hover:bg-hover ${isActiveFavorites ? "text-mango font-semibold" : ""}`}
+                className={`block text-sm py-1 px-2 rounded ${isActiveFavorites ? "text-mango font-semibold" : "hover:text-mango"}`}
               >
                 My Favorites
               </NavLink>
