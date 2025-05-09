@@ -105,7 +105,8 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           {!isOpen && showExternalDropdown && (
             <div
               ref={dropdownRef}
-              className="absolute left-15.5 top-[0.1px] w-48 bg-hover text-white shadow-sm rounded-sm z-50 p-2"
+              className="absolute left-15.5 top-[0.1px] w-48 bg-hover text-white rounded-sm z-50 p-2"
+              style={{ boxShadow: "4px 0px 6px rgba(0, 0, 0, 0.1)" }}
             >
               <NavLink
                 to="/recipes"

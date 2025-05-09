@@ -102,11 +102,11 @@ export const AuthProvider = ({ children }) => {
   
 
   useEffect(() => {
-    const token = getInitialToken();
-    if (token) {
-      fetchUserInfo(token);
+    if (accessToken) {
+      fetchUserInfo(accessToken);
     }
-  }, []);
+  }, [accessToken]);
+  
   
   return (
     <AuthContext.Provider value={{ accessToken, setAccessToken, isAuthenticated, login, logout, register, userData }}>
