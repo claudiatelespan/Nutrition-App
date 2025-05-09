@@ -13,9 +13,13 @@ export default function MyFavoritesPage() {
     <div className="p-6 bg-beige min-h-screen">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">My Favorite Recipes</h1>
-        <label className="flex items-center gap-2 text-sm">
+        <label className="flex items-center gap-3 text-sm cursor-pointer select-none">
           <span>Share with friends</span>
-          <input type="checkbox" className="toggle toggle-warning" />
+          <div className="relative">
+            <input type="checkbox" className="sr-only peer" />
+            <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-mango transition-all duration-300"></div>
+            <div className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-5"></div>
+          </div>
         </label>
       </div>
 
