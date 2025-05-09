@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
 
 export default function RecipeDetailPage() {
   const { recipes, favorites, addFavorite, removeFavorite } = useContext(ApiContext);
   const { id } = useParams();
+  const location = useLocation();
   const recipe = recipes.find((r) => r.id === parseInt(id));
   const navigate = useNavigate();
 
@@ -17,12 +18,17 @@ export default function RecipeDetailPage() {
     else addFavorite(recipe.id);
   };
 
+  const handleBack = () => {
+    const prev = location.state?.from || "/recipes";
+    navigate(prev);
+  };
+
   if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
   return (
     <div className="bg-beige min-h-screen px-4 py-8 overflow-auto">
       <button
-        onClick={() => navigate("/recipes")}
+        onClick={handleBack}
         className="flex items-center gap-1 text-lg text-mango hover:underline hover:text-orange-500 cursor-pointer group"
       >
         <ArrowLeftIcon className="h-4 w-4 transform transition-transform group-hover:scale-120" />

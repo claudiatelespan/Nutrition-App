@@ -17,7 +17,9 @@ export default function RecipeCard({ recipe }) {
   return (
     <div
       className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01]"
-      onClick={() => navigate(`/recipes/${recipe.id}`)}
+      onClick={() => navigate(`/recipes/${recipe.id}`, {
+        state: { from: location.pathname + location.search },
+      })}
     >
       <img src={recipe.image} alt={recipe.name} className="w-full h-48 object-cover" />
 
