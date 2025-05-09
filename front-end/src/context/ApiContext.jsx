@@ -39,7 +39,11 @@ export const ApiProvider = ({ children }) => {
       if (refreshRes.ok) {
         const data = await refreshRes.json();
         token = data.access;
-        localStorage.setItem("accessToken", token);
+        const storage =
+          localStorage.getItem("accessToken") ? localStorage :
+          sessionStorage.getItem("accessToken") ? sessionStorage :
+          localStorage;
+        storage.setItem("accessToken", token);
         setAccessToken(token);
         headers.Authorization = `Bearer ${token}`;
         res = await fetch(url, { ...options, headers });
