@@ -39,17 +39,39 @@ export const AuthProvider = ({ children }) => {
       localStorage.getItem("refreshToken") ||
       sessionStorage.getItem("refreshToken");
   
-    try {
-      await fetch("http://localhost:8000/api/users/logout/", {
+    let token = accessToken;
+  
+    const sendLogout = async () => {
+      return await fetch("http://localhost:8000/api/users/logout/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ refresh }),
       });
+    };
+  
+    try {
+      let res = await sendLogout();
+  
+      if (res.status === 401 && refresh) {
+        const refreshRes = await fetch("http://localhost:8000/api/users/login/refresh/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh }),
+        });
+  
+        if (refreshRes.ok) {
+          const data = await refreshRes.json();
+          token = data.access;
+          await sendLogout(); // retry logout
+        } else {
+          console.warn("Refresh token invalid during logout");
+        }
+      }
     } catch (err) {
-      console.warn("Logout request failed or token invalid.");
+      console.warn("Logout request failed:", err);
     } finally {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
@@ -61,8 +83,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
   
-  
-
   const register = async (userData) => {
     const res = await fetch("http://localhost:8000/api/users/register/", {
       method: "POST",
