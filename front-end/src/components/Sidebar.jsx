@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { HomeIcon, UserIcon, BookOpenIcon, SparklesIcon, UsersIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  UserIcon,
+  BookOpenIcon,
+  SparklesIcon,
+  UsersIcon,
+  Bars3Icon,
+  ChevronDownIcon,
+  ChevronUpIcon
+} from "@heroicons/react/24/outline";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
+  const [recipesOpen, setRecipesOpen] = useState(true);
+
   const navItems = [
     { name: "Profile", icon: <UserIcon className="h-6 w-6" />, path: "/profile" },
-    { name: "Recipes", icon: <BookOpenIcon className="h-6 w-6" />, path: "/recipes" },
     { name: "Chef’s Helper", icon: <SparklesIcon className="h-6 w-6" />, path: "/recommender" },
     { name: "Friends", icon: <UsersIcon className="h-6 w-6" />, path: "/friends" },
   ];
@@ -25,6 +35,39 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       </div>
 
       <div className="flex-1">
+        {/* Recipes dropdown */}
+        <div>
+          <button
+            onClick={() => setRecipesOpen(!recipesOpen)}
+            className="flex items-center gap-3 p-4 w-full text-md hover:bg-hover focus:outline-none cursor-pointer"
+          >
+            <BookOpenIcon className="h-6 w-6" />
+            {isOpen && <span className="flex-1 text-left">Recipes</span>}
+            {isOpen && (recipesOpen ? <ChevronUpIcon className="h-4 w-4" /> : <ChevronDownIcon className="h-4 w-4" />)}
+          </button>
+          {recipesOpen && (
+            <div className="pl-12 flex flex-col gap-1">
+              <NavLink
+                to="/recipes"
+                className={({ isActive }) =>
+                  `text-sm py-1 ${isActive ? "text-mango font-semibold" : "hover:text-white"}`
+                }
+              >
+                Browse Recipes
+              </NavLink>
+              <NavLink
+                to="/favorites"
+                className={({ isActive }) =>
+                  `text-sm py-1 ${isActive ? "text-mango font-semibold" : "hover:text-white"}`
+                }
+              >
+                My Favorites
+              </NavLink>
+            </div>
+          )}
+        </div>
+
+        {/* Other nav items */}
         {navItems.map((item) => (
           <NavLink
             key={item.name}
@@ -43,4 +86,3 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     </div>
   );
 }
-

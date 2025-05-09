@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation   } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -7,6 +7,7 @@ import RecipesPage from './pages/RecipesPage';
 import RecommenderPage from './pages/RecommenderPage';
 import FriendsPage from './pages/FriendsPage';
 import RecipeDetailPage from "./pages/RecipeDetailPage";
+import MyFavoritesPage from "./pages/MyFavoritesPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Sidebar from './components/Sidebar';
 import Header from "./components/Header";
@@ -34,7 +35,7 @@ function Layout() {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            
+
             <Route path="/profile"
               element={
                 <PrivateRoute>
@@ -49,7 +50,15 @@ function Layout() {
                   <RecipesPage />
                 </PrivateRoute>
               }
-            /> 
+            />
+
+            <Route path="/favorites"
+              element={
+                <PrivateRoute>
+                  <MyFavoritesPage />
+                </PrivateRoute>
+              }
+            />
 
             <Route path="/recommender"
               element={
@@ -57,21 +66,23 @@ function Layout() {
                   <RecommenderPage />
                 </PrivateRoute>
               }
-            />   
+            />
+
             <Route path="/friends"
               element={
                 <PrivateRoute>
                   <FriendsPage />
                 </PrivateRoute>
               }
-            />     
+            />
+
             <Route path="/recipes/:id"
               element={
                 <PrivateRoute>
                   <RecipeDetailPage />
                 </PrivateRoute>
               }
-            />              
+            />
           </Routes>
         </main>
       </div>
