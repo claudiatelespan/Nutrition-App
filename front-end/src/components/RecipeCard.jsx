@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ApiContext } from "../context/ApiContext";
 
 export default function RecipeCard({ recipe }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { favorites, addFavorite, removeFavorite } = useContext(ApiContext);
 
   const isFavorite = favorites.some((f) => f.recipe === recipe.id);

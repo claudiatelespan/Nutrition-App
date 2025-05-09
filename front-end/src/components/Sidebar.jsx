@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, matchPath } from "react-router-dom";
 import {
-  HomeIcon,
   UserIcon,
   BookOpenIcon,
   SparklesIcon,
@@ -13,6 +12,18 @@ import {
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
   const [recipesOpen, setRecipesOpen] = useState(true);
+  const location = useLocation();
+
+  const matchRecipeDetail = matchPath("/recipes/:id", location.pathname);
+  const fromPath = location.state?.from;
+
+  const isActiveRecipes =
+    location.pathname === "/recipes" ||
+    (matchRecipeDetail && fromPath?.startsWith("/recipes"));
+
+  const isActiveFavorites =
+    location.pathname === "/favorites" ||
+    (matchRecipeDetail && fromPath?.startsWith("/favorites"));
 
   const navItems = [
     { name: "Profile", icon: <UserIcon className="h-6 w-6" />, path: "/profile" },
@@ -49,17 +60,15 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             <div className="pl-12 flex flex-col gap-1">
               <NavLink
                 to="/recipes"
-                className={({ isActive }) =>
-                  `text-sm py-1 ${isActive ? "text-mango font-semibold" : "hover:text-white"}`
-                }
+                state={{ from: "/recipes" }}
+                className={`text-sm py-1 ${isActiveRecipes ? "text-mango font-semibold" : "hover:text-white"}`}
               >
                 Browse Recipes
               </NavLink>
               <NavLink
                 to="/favorites"
-                className={({ isActive }) =>
-                  `text-sm py-1 ${isActive ? "text-mango font-semibold" : "hover:text-white"}`
-                }
+                state={{ from: "/favorites" }}
+                className={`text-sm py-1 ${isActiveFavorites ? "text-mango font-semibold" : "hover:text-white"}`}
               >
                 My Favorites
               </NavLink>
