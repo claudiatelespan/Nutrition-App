@@ -1,19 +1,21 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
 
 export default function RecipeDetailPage() {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const { recipes } = useContext(ApiContext);
-
-  const handleFavoriteToggle = () => {
-    setIsFavorite((prev) => !prev);
-  };
-
+  const { recipes, favorites, addFavorite, removeFavorite } = useContext(ApiContext);
   const { id } = useParams();
   const recipe = recipes.find((r) => r.id === parseInt(id));
   const navigate = useNavigate();
+
+  const isFavorite = favorites.some((f) => f.recipe === recipe?.id);
+
+  const handleFavoriteToggle = () => {
+    if (!recipe) return;
+    if (isFavorite) removeFavorite(recipe.id);
+    else addFavorite(recipe.id);
+  };
 
   if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
@@ -54,7 +56,7 @@ export default function RecipeDetailPage() {
             <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">{recipe.meal_type}</span>
             <span className="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full">{recipe.prep_time} min</span>
             <span className="px-2 py-0.5 bg-pink-100 text-pink-700 rounded-full">{recipe.difficulty}</span>
-            <span className="px-2 py-0.5  bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>
+            <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>
           </div>
 
           <div className="text-yellow-500 font-semibold text-lg">{recipe.rating} ★</div>
