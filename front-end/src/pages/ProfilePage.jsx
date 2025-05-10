@@ -1,9 +1,10 @@
+import MealLog from "../components/MealLog"; // ajustează calea dacă e diferită
 
 export default function ProfilePage() {
-
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Your profile</h1>
+    <div className="p-6 bg-beige min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Your Profile</h1>
+      <MealLog />
     </div>
   );
 }

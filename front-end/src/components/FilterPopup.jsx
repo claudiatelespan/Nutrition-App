@@ -37,7 +37,7 @@ export default function FilterPopup({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-20 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center">
       <div className="bg-almostwhite p-6 rounded-lg shadow-xl w-[90%] max-w-5xl flex flex-col gap-6">
         <h2 className="text-lg font-semibold text-center">Filter Recipes</h2>
         <div className="flex gap-6 flex-col md:flex-row">
