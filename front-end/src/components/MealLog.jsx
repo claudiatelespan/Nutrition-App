@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
@@ -17,6 +17,7 @@ export default function MealLog() {
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
   const { logMeal, logSnack } = useContext(ApiContext);
+  const { mealLogs, snackLogs } = useContext(ApiContext);
 
   
   const filteredRecipes = recipes.map(r => r.name).filter((r) =>
@@ -98,6 +99,31 @@ export default function MealLog() {
   const getMealsFor = (type) => {
     return mealLog[formattedDate]?.[type] || [];
   };
+
+  useEffect(() => {
+    const grouped = {};
+  
+    mealLogs.forEach(log => {
+      const date = log.date;
+      if (!grouped[date]) {
+        grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
+      }
+      grouped[date][capitalize(log.meal_type)].push(log.recipe_name);
+    });
+    
+    snackLogs.forEach(log => {
+      const date = log.date;
+      if (!grouped[date]) {
+        grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
+      }
+      grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity})`);
+    });
+  
+    setMealLog(grouped);
+  }, [mealLogs, snackLogs]);
+  
+  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  
 
   return (
     <div className="p-6 bg-beige min-h-screen space-y-8 max-w-7xl mx-auto">

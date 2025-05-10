@@ -2,12 +2,16 @@ from rest_framework import serializers
 from .models import MealLog, SnackLog
 
 class MealLogSerializer(serializers.ModelSerializer):
+    recipe_name = serializers.CharField(source="recipe.name", read_only=True)
+
     class Meta:
         model = MealLog
-        fields = ["id", "user", "recipe", "meal_type", "date", "calories"]        
+        fields = "__all__"        
         read_only_fields = ["user"]
 
 class SnackLogSerializer(serializers.ModelSerializer):
+    snack_name = serializers.CharField(source="snack.name", read_only=True)
+
     class Meta:
         model = SnackLog
         fields = "__all__"

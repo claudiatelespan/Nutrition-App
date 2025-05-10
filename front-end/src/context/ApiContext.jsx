@@ -9,6 +9,8 @@ export const ApiProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
+  const [mealLogs, setMealLogs] = useState([]);
+  const [snackLogs, setSnackLogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchWithAuth = async (url, options = {}) => {
@@ -67,6 +69,25 @@ export const ApiProvider = ({ children }) => {
       console.error("Failed to load favorites:", err);
     }
   };
+
+  const loadMealLogs = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/tracking/meals/");
+      setMealLogs(res);
+    } catch (err) {
+      console.error("Failed to load meal logs:", err);
+    }
+  };
+  
+  const loadSnackLogs = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/tracking/snacks/");
+      setSnackLogs(res);
+    } catch (err) {
+      console.error("Failed to load snack logs:", err);
+    }
+  };
+  
 
   const addFavorite = async (recipeId) => {
     try {
@@ -132,6 +153,8 @@ export const ApiProvider = ({ children }) => {
         await loadFavorites();
         const snacksRes = await fetchWithAuth("http://localhost:8000/api/snacks/");
         setSnacks(snacksRes);
+        await loadMealLogs();
+        await loadSnackLogs();
       } catch (err) {
         console.error(err.message);
       } finally {
@@ -153,6 +176,8 @@ export const ApiProvider = ({ children }) => {
         recipes,
         favorites,
         snacks,
+        mealLogs,
+        snackLogs,
         fetchWithAuth,
         loading,
         addFavorite,
