@@ -196,7 +196,7 @@ export default function MealLog() {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-lg p-4 flex flex-col shadow h-[9rem]">
+                <div className="bg-white rounded-lg p-4 flex flex-col shadow h-[11rem]">
                     <h3 className="text-mango font-semibold mb-2">Snacks</h3>
                     {getMealsFor("Snack").length === 0 ? (
                         <button
