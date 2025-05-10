@@ -45,3 +45,11 @@ class FavoriteRecipe(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ❤️ {self.recipe.name}"
+
+class Snack(models.Model):
+    name = models.CharField(max_length=100)
+    unit = models.CharField(max_length=20)
+    calories_per_unit = models.FloatField()
+
+    def __str__(self):
+        return f"{self.name} ({self.unit})"
