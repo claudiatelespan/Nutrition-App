@@ -4,7 +4,7 @@ from .models import MealLog, SnackLog
 class MealLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = MealLog
-        fields = "__all__"
+        fields = ["id", "user", "recipe", "meal_type", "date", "calories"]        
         read_only_fields = ["user"]
 
 class SnackLogSerializer(serializers.ModelSerializer):

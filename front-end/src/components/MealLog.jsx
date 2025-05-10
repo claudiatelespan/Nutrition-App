@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import "react-day-picker/dist/style.css";
-import { useContext } from "react";
 import { ApiContext } from "../context/ApiContext";
 
 export default function MealLog() {
@@ -17,6 +16,7 @@ export default function MealLog() {
   const meals = ["Breakfast", "Lunch", "Dinner"];
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
+  const { logMeal, logSnack } = useContext(ApiContext);
 
   
   const filteredRecipes = recipes.map(r => r.name).filter((r) =>
@@ -32,36 +32,47 @@ export default function MealLog() {
   const handlePrevDay = () => setSelectedDate((d) => subDays(d, 1));
   const handleNextDay = () => setSelectedDate((d) => addDays(d, 1));
 
-  const handleSaveSelectedItem = () => {
+  const handleSaveSelectedItem = async () => {
     if (!selectedItem) return;
   
-    const itemToAdd =
-      mealType === "Snack"
-        ? `${selectedItem} (${snackQuantity || 1})`
-        : selectedItem;
+    try {
+      if (mealType === "Snack") {
+        await logSnack(selectedItem, snackQuantity || 1, formattedDate);
+      } else {
+        await logMeal(selectedItem, formattedDate, mealType);
+      }
   
-    setMealLog((prev) => {
-      const dayMeals = prev[formattedDate] || {
-        Breakfast: [],
-        Lunch: [],
-        Dinner: [],
-        Snack: [],
-      };
+      const itemToAdd =
+        mealType === "Snack"
+          ? `${selectedItem} (${snackQuantity || 1})`
+          : selectedItem;
   
-      return {
-        ...prev,
-        [formattedDate]: {
-          ...dayMeals,
-          [mealType]: [...dayMeals[mealType], itemToAdd],
-        },
-      };
-    });
+      setMealLog((prev) => {
+        const dayMeals = prev[formattedDate] || {
+          Breakfast: [],
+          Lunch: [],
+          Dinner: [],
+          Snack: [],
+        };
   
-    setSelectedItem("");
-    setSnackQuantity("");
-    setSearch("");
-    setShowRecipeModal(false);
+        return {
+          ...prev,
+          [formattedDate]: {
+            ...dayMeals,
+            [mealType]: [...dayMeals[mealType], itemToAdd],
+          },
+        };
+      });
+  
+      setSelectedItem("");
+      setSnackQuantity("");
+      setSearch("");
+      setShowRecipeModal(false);
+    } catch (err) {
+      console.error("Save error:", err);
+    }
   };
+  
   
   const handleCloseModal = () => {
     setShowRecipeModal(false);
@@ -176,7 +187,6 @@ export default function MealLog() {
                             onClick={() => {
                             setMealType("Snack");
                             setShowRecipeModal(true);
-                            setShowSnacks(true);
                             }}
                         >
                         + Add Snack

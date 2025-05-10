@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 router.register(r"meals", MealLogViewSet, basename="meal")
-router.register(r"snacks-log", SnackLogViewSet, basename="snacklog")
+router.register(r"snacks", SnackLogViewSet, basename="snacklog")
 
 urlpatterns = [
     path('', include(router.urls)),

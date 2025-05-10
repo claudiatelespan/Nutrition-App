@@ -94,6 +94,36 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const logMeal = async (recipeName, date, mealType) => {
+    const recipe = recipes.find((r) => r.name === recipeName);
+    if (!recipe) return console.error("Recipe not found:", recipeName);
+
+    await fetchWithAuth("http://localhost:8000/api/tracking/meals/", {
+      method: "POST",
+      body: JSON.stringify({
+        recipe: recipe.id,
+        calories: recipe.calories,
+        date,
+        meal_type: mealType.toLowerCase()
+      }),
+    });
+  };
+  
+  const logSnack = async (snackName, quantity, date) => {
+    const snack = snacks.find((s) => s.name === snackName);
+    if (!snack) return;
+  
+    await fetchWithAuth("http://localhost:8000/api/tracking/snacks/", {
+      method: "POST",
+      body: JSON.stringify({
+        snack: snack.id,
+        quantity: parseInt(quantity),
+        date,
+      }),
+    });
+  };
+  
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -127,6 +157,8 @@ export const ApiProvider = ({ children }) => {
         loading,
         addFavorite,
         removeFavorite,
+        logMeal,
+        logSnack,
       }}
     >
       {children}

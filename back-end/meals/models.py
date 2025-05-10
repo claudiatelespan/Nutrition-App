@@ -13,7 +13,7 @@ class MealLog(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     meal_type = models.CharField(max_length=20, choices=MEAL_CHOICES)
     date = models.DateField()
-    calories = models.PositiveIntegerField()
+    calories = models.FloatField()
 
     created_at = models.DateTimeField(auto_now_add=True)
 
