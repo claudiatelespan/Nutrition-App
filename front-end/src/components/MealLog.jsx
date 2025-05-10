@@ -15,7 +15,7 @@ export default function MealLog() {
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
   const { recipes, snacks, logMeal, logSnack, deleteMealLog, deleteSnackLog, mealLogs, snackLogs } = useContext(ApiContext);
-  
+
   const filteredRecipes = recipes.map(r => r.name).filter((r) =>
     r.toLowerCase().includes(search.toLowerCase())
   );
@@ -47,8 +47,6 @@ export default function MealLog() {
       console.error("Save error:", err);
     }
   };
-  
-  
   
   const handleCloseModal = () => {
     setShowRecipeModal(false);
@@ -106,10 +104,17 @@ export default function MealLog() {
         if (!grouped[date]) {
         grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
         }
-        grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity})`);
+        const unit = snacks.find(s => s.name === log.snack_name)?.unit || "";
+        grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity} ${unit})`);
     });
     return grouped;
    }, [mealLogs, snackLogs]);
+
+   const selectedSnack = mealType === "Snack"
+  ? snacks.find((s) => s.name === selectedItem)
+  : null;
+
+  console.log(mealLog);
 
   return (
     <div className="p-6 bg-beige min-h-screen space-y-8 max-w-7xl mx-auto">
@@ -274,7 +279,7 @@ export default function MealLog() {
                         <input
                             type="number"
                             min="1"
-                            placeholder="Quantity"
+                            placeholder={`Quantity (${selectedSnack?.unit || ""})`}
                             value={snackQuantity}
                             onChange={(e) => setSnackQuantity(e.target.value)}
                             className="w-full border p-2 rounded mt-4"
