@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import "react-day-picker/dist/style.css";
 
 const recipesList = [
@@ -164,13 +165,16 @@ export default function MealLog() {
               <h2 className="font-bold text-lg">Add Food to {mealType}</h2>
               <button onClick={() => setShowRecipeModal(false)}>✕</button>
             </div>
-            <input
-              type="text"
-              placeholder="Search recipes..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full border p-2 rounded mb-4"
-            />
+            <div className="relative w-full max-w-xl">
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-4 h-5 w-5 text-gray-600" />
+                <input
+                type="text"
+                placeholder="Search recipes..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full border pl-10 p-2 rounded mb-4 outline-mango"
+                />
+            </div>
             <div className="max-h-60 overflow-y-auto space-y-2">
               {filteredRecipes.map((recipe) => (
                 <div
