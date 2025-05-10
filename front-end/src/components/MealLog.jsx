@@ -17,6 +17,7 @@ export default function MealLog() {
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
   const { logMeal, logSnack } = useContext(ApiContext);
+  const { deleteMealLog, deleteSnackLog } = useContext(ApiContext);
   const { mealLogs, snackLogs } = useContext(ApiContext);
 
   
@@ -83,18 +84,34 @@ export default function MealLog() {
   };  
 
   const handleDeleteMeal = (type, index) => {
-    setMealLog((prev) => {
-      const updated = [...(prev[formattedDate]?.[type] || [])];
-      updated.splice(index, 1);
-      return {
-        ...prev,
-        [formattedDate]: {
-          ...prev[formattedDate],
-          [type]: updated,
-        },
-      };
-    });
+    const item = getMealsFor(type)[index];
+    const logId = findLogId(type, item);
+  
+    if (logId) {
+      if (type === "Snack") {
+        deleteSnackLog(logId);
+      } else {
+        deleteMealLog(logId);
+      }
+    }
   };
+
+  const findLogId = (type, item) => {
+    const logs = type === "Snack" ? snackLogs : mealLogs;
+    const date = formattedDate;
+  
+    if (type === "Snack") {
+      const [snackName, qty] = item.split(" (");
+      return logs.find(
+        (log) => log.date === date && log.snack_name === snackName.trim()
+      )?.id;
+    } else {
+      return logs.find(
+        (log) => log.date === date && capitalize(log.meal_type) === type && log.recipe_name === item
+      )?.id;
+    }
+  };
+  
 
   const getMealsFor = (type) => {
     return mealLog[formattedDate]?.[type] || [];

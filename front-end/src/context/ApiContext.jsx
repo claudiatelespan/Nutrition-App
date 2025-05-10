@@ -148,6 +148,21 @@ export const ApiProvider = ({ children }) => {
   
     setSnackLogs((prev) => [...prev, res]);
   };
+
+  const deleteMealLog = async (logId) => {
+    await fetchWithAuth(`http://localhost:8000/api/tracking/meals/${logId}/`, {
+      method: "DELETE",
+    });
+    setMealLogs((prev) => prev.filter((log) => log.id !== logId));
+  };
+  
+  const deleteSnackLog = async (logId) => {
+    await fetchWithAuth(`http://localhost:8000/api/tracking/snacks/${logId}/`, {
+      method: "DELETE",
+    });
+    setSnackLogs((prev) => prev.filter((log) => log.id !== logId));
+  };
+  
   
 
   useEffect(() => {
@@ -189,6 +204,8 @@ export const ApiProvider = ({ children }) => {
         removeFavorite,
         logMeal,
         logSnack,
+        deleteMealLog,
+        deleteSnackLog,
       }}
     >
       {children}
