@@ -119,22 +119,25 @@ export const ApiProvider = ({ children }) => {
     const recipe = recipes.find((r) => r.name === recipeName);
     if (!recipe) return console.error("Recipe not found:", recipeName);
 
-    await fetchWithAuth("http://localhost:8000/api/tracking/meals/", {
+    const res = await fetchWithAuth("http://localhost:8000/api/tracking/meals/", {
       method: "POST",
       body: JSON.stringify({
         recipe: recipe.id,
         calories: recipe.calories,
         date,
-        meal_type: mealType.toLowerCase()
+        meal_type: mealType.toLowerCase(),
       }),
     });
+  
+    setMealLogs((prev) => [...prev, res]);
   };
   
   const logSnack = async (snackName, quantity, date) => {
     const snack = snacks.find((s) => s.name === snackName);
     if (!snack) return;
   
-    await fetchWithAuth("http://localhost:8000/api/tracking/snacks/", {
+
+    const res = await fetchWithAuth("http://localhost:8000/api/tracking/snacks/", {
       method: "POST",
       body: JSON.stringify({
         snack: snack.id,
@@ -142,6 +145,8 @@ export const ApiProvider = ({ children }) => {
         date,
       }),
     });
+  
+    setSnackLogs((prev) => [...prev, res]);
   };
   
 
