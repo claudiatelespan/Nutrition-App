@@ -8,6 +8,7 @@ export const ApiProvider = ({ children }) => {
 
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [snacks, setSnacks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchWithAuth = async (url, options = {}) => {
@@ -99,6 +100,8 @@ export const ApiProvider = ({ children }) => {
         const recipesRes = await fetchWithAuth("http://localhost:8000/api/recipes/");
         setRecipes(recipesRes);
         await loadFavorites();
+        const snacksRes = await fetchWithAuth("http://localhost:8000/api/snacks/");
+        setSnacks(snacksRes);
       } catch (err) {
         console.error(err.message);
       } finally {
@@ -119,6 +122,7 @@ export const ApiProvider = ({ children }) => {
       value={{
         recipes,
         favorites,
+        snacks,
         fetchWithAuth,
         loading,
         addFavorite,

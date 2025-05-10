@@ -3,15 +3,8 @@ import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import "react-day-picker/dist/style.css";
-
-const recipesList = [
-  "Grilled Chicken Salad",
-  "Banana Pancakes",
-  "Oatmeal with Berries",
-  "Spaghetti Bolognese",
-  "Veggie Stir-fry",
-  "Protein Smoothie",
-];
+import { useContext } from "react";
+import { ApiContext } from "../context/ApiContext";
 
 export default function MealLog() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -19,13 +12,18 @@ export default function MealLog() {
   const [showRecipeModal, setShowRecipeModal] = useState(false);
   const [mealType, setMealType] = useState("");
   const [search, setSearch] = useState("");
-  const [showSnacks, setShowSnacks] = useState(false);
   const [mealLog, setMealLog] = useState({});
-
+  const { recipes, snacks } = useContext(ApiContext);
   const meals = ["Breakfast", "Lunch", "Dinner"];
-  const filteredRecipes = recipesList.filter((r) =>
+  
+  const filteredRecipes = recipes.map(r => r.name).filter((r) =>
     r.toLowerCase().includes(search.toLowerCase())
   );
+  
+  const filteredSnacks = snacks.map(r => r.name).filter((r) =>
+    r.toLowerCase().includes(search.toLowerCase())
+  );
+
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
 
   const handlePrevDay = () => setSelectedDate((d) => subDays(d, 1));
@@ -210,17 +208,17 @@ export default function MealLog() {
                     />
                 </div>
                 <div className="max-h-60 overflow-y-auto space-y-2">
-                    {filteredRecipes.map((recipe) => (
+                    {(mealType === "Snack" ? filteredSnacks : filteredRecipes).map((item) => (
                         <div
-                            key={recipe}
+                            key={item}
                             className="p-2 border border-gray-400 rounded hover:bg-mango hover:text-white cursor-pointer"
-                            onClick={() => handleAddRecipe(recipe)}
+                            onClick={() => handleAddRecipe(item)}
                         >
-                            {recipe}
+                            {item}
                         </div>
                     ))}
-                    {filteredRecipes.length === 0 && (
-                        <p className="text-sm text-gray-500">No recipes found.</p>
+                    {(mealType === "Snack" ? filteredSnacks : filteredRecipes).length === 0 && (
+                    <p className="text-sm text-gray-500">No items found.</p>
                     )}
                 </div>
             </div>
