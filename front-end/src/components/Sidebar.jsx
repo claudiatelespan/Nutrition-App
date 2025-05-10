@@ -47,7 +47,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     <div className={`fixed top-0 left-0 h-screen bg-vintage text-white transition-all duration-300 z-50 ${isOpen ? "w-56" : "w-16"} flex flex-col`}>
       <div className="p-4 flex items-center gap-2 justify-between">
         <button onClick={toggleSidebar}>
-          <Bars3Icon className="h-6 w-6 text-white cursor-pointer" />
+          <Bars3Icon className="h-6 w-6 text-white font-bold cursor-pointer hover:text-gray-300" />
         </button>
 
         {isOpen && (
@@ -68,16 +68,17 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 setShowExternalDropdown(!showExternalDropdown);
               }
             }}
-            className={`flex items-center gap-3 p-4 w-full text-md hover:bg-hover focus:outline-none cursor-pointer
-            ${!isOpen && showExternalDropdown ? "bg-hover" : ""}`}
+            className={`flex items-center gap-3 p-4 w-full font-semibold text-md hover:bg-hover focus:outline-none cursor-pointer
+            ${!isOpen && showExternalDropdown ? "bg-hover" : ""}
+            ${isActiveRecipes || isActiveFavorites ? "text-mango font-bold" : "text-white"}`}
           >
             <BookOpenIcon className="h-6 w-6" />
             {isOpen && <span className="flex-1 text-left">Recipes</span>}
             {isOpen &&
               (recipesOpen ? (
-                <ChevronUpIcon className="h-4 w-4" />
+                <ChevronUpIcon className="h-5 w-5" />
               ) : (
-                <ChevronDownIcon className="h-4 w-4" />
+                <ChevronDownIcon className="h-5 w-5" />
               ))}
           </button>
 
@@ -135,8 +136,8 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-3 p-4 text-md rounded-md transition ${
-                isActive ? "bg-hover" : "hover:bg-hover"
+              `flex items-center gap-3 p-4 text-md font-semibold rounded-md hover:bg-hover transition ${
+                isActive ? "text-mango font-bold" : "text-white"
               }`
             }
           >
