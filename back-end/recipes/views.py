@@ -1,7 +1,7 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
-from .models import Recipe, Ingredient, FavoriteRecipe
-from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer
+from .models import Recipe, Ingredient, FavoriteRecipe, Snack
+from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer
 
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Recipe.objects.all()
@@ -22,3 +22,8 @@ class FavoriteRecipeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class SnackViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Snack.objects.all()
+    serializer_class = SnackSerializer
+    permission_classes = [IsAuthenticated]
