@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useMemo, useState, useContext, useEffect } from "react";
 import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
@@ -11,15 +11,10 @@ export default function MealLog() {
   const [showRecipeModal, setShowRecipeModal] = useState(false);
   const [mealType, setMealType] = useState("");
   const [search, setSearch] = useState("");
-  const [mealLog, setMealLog] = useState({});
-  const { recipes, snacks } = useContext(ApiContext);
   const meals = ["Breakfast", "Lunch", "Dinner"];
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
-  const { logMeal, logSnack } = useContext(ApiContext);
-  const { deleteMealLog, deleteSnackLog } = useContext(ApiContext);
-  const { mealLogs, snackLogs } = useContext(ApiContext);
-
+  const { recipes, snacks, logMeal, logSnack, deleteMealLog, deleteSnackLog, mealLogs, snackLogs } = useContext(ApiContext);
   
   const filteredRecipes = recipes.map(r => r.name).filter((r) =>
     r.toLowerCase().includes(search.toLowerCase())
@@ -43,29 +38,7 @@ export default function MealLog() {
       } else {
         await logMeal(selectedItem, formattedDate, mealType);
       }
-  
-      const itemToAdd =
-        mealType === "Snack"
-          ? `${selectedItem} (${snackQuantity || 1})`
-          : selectedItem;
-  
-      setMealLog((prev) => {
-        const dayMeals = prev[formattedDate] || {
-          Breakfast: [],
-          Lunch: [],
-          Dinner: [],
-          Snack: [],
-        };
-  
-        return {
-          ...prev,
-          [formattedDate]: {
-            ...dayMeals,
-            [mealType]: [...dayMeals[mealType], itemToAdd],
-          },
-        };
-      });
-  
+    
       setSelectedItem("");
       setSnackQuantity("");
       setSearch("");
@@ -74,6 +47,7 @@ export default function MealLog() {
       console.error("Save error:", err);
     }
   };
+  
   
   
   const handleCloseModal = () => {
@@ -112,35 +86,30 @@ export default function MealLog() {
     }
   };
   
-
   const getMealsFor = (type) => {
     return mealLog[formattedDate]?.[type] || [];
   };
 
-  useEffect(() => {
-    const grouped = {};
-  
-    mealLogs.forEach(log => {
-      const date = log.date;
-      if (!grouped[date]) {
-        grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
-      }
-      grouped[date][capitalize(log.meal_type)].push(log.recipe_name);
-    });
-    
-    snackLogs.forEach(log => {
-      const date = log.date;
-      if (!grouped[date]) {
-        grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
-      }
-      grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity})`);
-    });
-  
-    setMealLog(grouped);
-  }, [mealLogs, snackLogs]);
-  
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-  
+
+  const mealLog = useMemo(() => {
+    const grouped = {};
+    mealLogs.forEach(log => {
+        const date = log.date;
+        if (!grouped[date]) {
+        grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
+        }
+        grouped[date][capitalize(log.meal_type)].push(log.recipe_name);
+    });
+    snackLogs.forEach(log => {
+        const date = log.date;
+        if (!grouped[date]) {
+        grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
+        }
+        grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity})`);
+    });
+    return grouped;
+   }, [mealLogs, snackLogs]);
 
   return (
     <div className="p-6 bg-beige min-h-screen space-y-8 max-w-7xl mx-auto">
