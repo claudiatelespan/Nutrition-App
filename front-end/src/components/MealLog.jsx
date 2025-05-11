@@ -1,12 +1,13 @@
 import { useMemo, useState, useContext } from "react";
 import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
-import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
+import { ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import "react-day-picker/dist/style.css";
 import { ApiContext } from "../context/ApiContext";
 import { DateContext } from "../context/DateContext";
 import  ActivityLog from "./ActivityLog";
 import MealCard from "./MealCard";
+import AddItemModal from "./AddItemModal";
 
 export default function MealLog() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -189,75 +190,36 @@ export default function MealLog() {
                     }}
                     onDeleteClick={(index) => handleDeleteMeal("Snack", index)}
                 />
-
             </div>
         </div>
 
         {/* Modal */}
         {showRecipeModal && (
-            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-                <div className="bg-white p-6 w-full max-w-md rounded shadow-lg">
-                    <div className="flex justify-between items-center mb-4">
-                        <h2 className="font-bold text-lg">Add Food to {mealType}</h2>
-                        <button className="cursor-pointer hover:text-hover" onClick={handleCloseModal}>✕</button>
-                    </div>
-                    <div className="relative w-full max-w-xl">
-                        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-4 h-5 w-5 text-gray-600" />
-                        <input
-                            type="text"
-                            placeholder="Search recipes..."
-                            value={search}  
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full border border-gray-400 pl-10 p-2 rounded mb-4 outline-mango"
-                        />
-                    </div>
-                    <div className="max-h-60 overflow-y-auto space-y-2">
-                        {(mealType === "Snack" ? filteredSnacks : filteredRecipes).map((item) => (
-                            <div
-                                key={item}
-                                className={`p-2 border border-gray-400 rounded cursor-pointer transition-colors ${
-                                selectedItem === item
-                                    ? "bg-mango text-white"
-                                    : "hover:bg-mango hover:text-white"
-                                }`}
-                                onClick={() => setSelectedItem(item)}
-                            >
-                                {item}
-                            </div>
-                        ))}
-
-                        {(mealType === "Snack" ? filteredSnacks : filteredRecipes).length === 0 && (
-                        <p className="text-sm text-gray-500">No items found.</p>
-                        )}
-                    </div>
-
-                    {mealType === "Snack" && selectedItem && (
-                        <input
-                            type="number"
-                            min="1"
-                            placeholder={`Quantity (${selectedSnack?.unit || ""})`}
-                            value={snackQuantity}
-                            onChange={(e) => setSnackQuantity(e.target.value)}
-                            className="w-full border p-2 rounded mt-4"
-                        />
-                    )}
-                    
-                    <div className="flex justify-end mt-4">
-                        <button
-                            onClick={handleSaveSelectedItem}
-                            disabled={!selectedItem}
-                            className={`mt-4 px-4 py-2 rounded cursor-pointer transition-all duration-200 ${
-                                selectedItem
-                                ? "bg-mango text-white hover:bg-orange-500"
-                                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                            }`}
-                        >
-                        Save
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <AddItemModal
+                title={`Add Food to ${mealType}`}
+                search={search}
+                onClose={handleCloseModal}
+                setSearch={setSearch}
+                items={mealType === "Snack" ? filteredSnacks : filteredRecipes}
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                onSave={handleSaveSelectedItem}
+                saveDisabled={!selectedItem || (mealType === "Snack" && !snackQuantity)}
+                renderExtras={() =>
+                mealType === "Snack" && (
+                    <input
+                    type="number"
+                    min="1"
+                    placeholder={`Quantity (${selectedSnack?.unit || ""})`}
+                    value={snackQuantity}
+                    onChange={(e) => setSnackQuantity(e.target.value)}
+                    className="w-full border p-2 rounded outline-mango"
+                    />
+                )
+                }
+            />
         )}
+
     </div>
   );
 }
