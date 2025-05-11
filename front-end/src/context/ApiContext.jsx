@@ -9,8 +9,10 @@ export const ApiProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
+  const [activities, setActivities] = useState([]);
   const [mealLogs, setMealLogs] = useState([]);
   const [snackLogs, setSnackLogs] = useState([]);
+  const [activityLogs, setActivityLogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchWithAuth = async (url, options = {}) => {
@@ -61,6 +63,24 @@ export const ApiProvider = ({ children }) => {
     return res.json();
   };
 
+  const loadRecipes = async () => {
+    try {
+      const recipesRes = await fetchWithAuth("http://localhost:8000/api/recipes/");
+      setRecipes(recipesRes);
+    } catch (err) {
+      console.error("Failed to load recipes:", err);
+    }
+  }
+
+  const loadSnacks = async () => {
+    try {
+      const snacksRes = await fetchWithAuth("http://localhost:8000/api/snacks/");
+      setSnacks(snacksRes);
+    } catch (err) {
+      console.error("Failed to load snacks:", err);
+    }
+  }
+
   const loadFavorites = async () => {
     try {
       const favRes = await fetchWithAuth("http://localhost:8000/api/favorites/");
@@ -69,6 +89,15 @@ export const ApiProvider = ({ children }) => {
       console.error("Failed to load favorites:", err);
     }
   };
+
+  const loadActivities = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/activities/");
+      setActivities(res);
+    } catch (err) {
+      console.error("Failed to load activities:", err);
+    }
+  }
 
   const loadMealLogs = async () => {
     try {
@@ -88,6 +117,14 @@ export const ApiProvider = ({ children }) => {
     }
   };
   
+  const loadActivityLogs = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/tracking/activities/");
+      setActivityLogs(res);
+    } catch (err) {
+      console.error("Failed to load activity logs:", err);
+    }
+  };
 
   const addFavorite = async (recipeId) => {
     try {
@@ -149,6 +186,23 @@ export const ApiProvider = ({ children }) => {
     setSnackLogs((prev) => [...prev, res]);
   };
 
+  const logActivity = async (activityName, date, intensity, duration_minutes) => {
+    const activity = activities.find((a) => a.name === activityName);
+    if (!activity) return console.error("Activity not found:", activityName);
+
+    const res = await fetchWithAuth("http://localhost:8000/api/tracking/activities/", {
+      method: "POST",
+      body: JSON.stringify({
+        activity: activity.id,
+        date,
+        intensity: intensity.toLowerCase(),
+        duration_minutes
+      }),
+    });
+  
+    setActivityLogs((prev) => [...prev, res]);
+  };
+
   const deleteMealLog = async (logId) => {
     await fetchWithAuth(`http://localhost:8000/api/tracking/meals/${logId}/`, {
       method: "DELETE",
@@ -163,18 +217,24 @@ export const ApiProvider = ({ children }) => {
     setSnackLogs((prev) => prev.filter((log) => log.id !== logId));
   };
   
+  const deleteActivityLog = async (logId) => {
+    await fetchWithAuth(`http://localhost:8000/api/tracking/activities/${logId}/`, {
+      method: "DELETE",
+    });
+    setActivityLogs((prev) => prev.filter((log) => log.id !== logId));
+  };
   
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const recipesRes = await fetchWithAuth("http://localhost:8000/api/recipes/");
-        setRecipes(recipesRes);
+        await loadRecipes();
         await loadFavorites();
-        const snacksRes = await fetchWithAuth("http://localhost:8000/api/snacks/");
-        setSnacks(snacksRes);
+        await loadSnacks();
+        await loadActivities();
         await loadMealLogs();
         await loadSnackLogs();
+        await loadActivityLogs();
       } catch (err) {
         console.error(err.message);
       } finally {
@@ -196,16 +256,20 @@ export const ApiProvider = ({ children }) => {
         recipes,
         favorites,
         snacks,
+        activities,
         mealLogs,
         snackLogs,
+        activityLogs,
         fetchWithAuth,
         loading,
         addFavorite,
         removeFavorite,
         logMeal,
         logSnack,
+        logActivity,
         deleteMealLog,
         deleteSnackLog,
+        deleteActivityLog,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useMemo, useState, useContext, useEffect } from "react";
+import { useMemo, useState, useContext } from "react";
 import { format, addDays, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
