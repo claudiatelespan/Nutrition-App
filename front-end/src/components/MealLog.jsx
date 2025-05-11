@@ -5,7 +5,8 @@ import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLe
 import "react-day-picker/dist/style.css";
 import { ApiContext } from "../context/ApiContext";
 import { DateContext } from "../context/DateContext";
-import  ActivityLog from "../components/ActivityLog";
+import  ActivityLog from "./ActivityLog";
+import MealCard from "./MealCard";
 
 export default function MealLog() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -124,46 +125,22 @@ export default function MealLog() {
 
         <div className="flex flex-col lg:flex-row gap-8">
         
-        {/* ZONA PRINCIPALĂ: Meals + Activity */}
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-min">
-                {meals.map((meal) => (
-                    <div key={meal} className="bg-white rounded-lg p-4 shadow flex flex-col justify-between gap-2 w-full h-[13rem]">
-                        <h3 className="text-mango font-semibold">{meal}</h3>
-                        {getMealsFor(meal).length === 0 ? (
-                            <button
-                            className="bg-gray-100 border border-dashed border-gray-400 rounded-lg h-28 flex items-center justify-center text-gray-500 transform transition-transform duration-200 hover:scale-103 cursor-pointer"
-                            onClick={() => {
-                                setMealType(meal);
-                                setShowRecipeModal(true);
-                            }}
-                            >
-                            + Add {meal}
-                            </button>
-                        ) : (
-                            <div className="flex flex-col justify-between h-full">
-                                <ul className="space-y-1 text-sm text-gray-800 overflow-y-auto max-h-30">
-                                {getMealsFor(meal).map((r, i) => (
-                                    <li key={i} className="flex justify-between items-center bg-gray-100 p-2 rounded">
-                                    {r}
-                                    <TrashIcon className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer" onClick={() => handleDeleteMeal(meal, i)} />
-                                    </li>
-                                ))}
-                                </ul>
-                                <button
-                                    className="text-sm font-semibold text-mango mt-2 underline transition ease-in-out hover:text-orange-500 cursor-pointer"
-                                    onClick={() => {
-                                    setMealType(meal);
-                                    setShowRecipeModal(true);
-                                    }}
-                                >
-                                    + Add more
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                ))}
+         {/* ZONA PRINCIPALĂ: Meals + Activity */}
+         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-min">
+            {meals.map((meal) => (
+                <MealCard
+                    key={meal}
+                    title={meal}
+                    items={getMealsFor(meal)}
+                    onAddClick={() => {
+                    setMealType(meal);
+                    setShowRecipeModal(true);
+                    }}
+                    onDeleteClick={(index) => handleDeleteMeal(meal, index)}
+                />
+            ))}
 
-                <div className="md:col-span-3 bg-white rounded-lg p-4 shadow flex flex-col">
+                <div className="md:col-span-3 bg-white rounded-lg shadow flex flex-col">
                     <ActivityLog />
                 </div>
             </div>
@@ -203,46 +180,16 @@ export default function MealLog() {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-lg p-4 flex flex-col justify-between shadow h-[13rem]">
-                    <h3 className="text-mango font-semibold mb-2">Snacks</h3>
-                    {getMealsFor("Snack").length === 0 ? (
-                        <button
-                            className="bg-gray-100 border border-dashed border-gray-400 rounded-lg h-20 flex items-center justify-center text-gray-500 w-full transform transition-transform duration-200 hover:scale-103 cursor-pointer"
-                            onClick={() => {
-                            setMealType("Snack");
-                            setShowRecipeModal(true);
-                            }}
-                        >
-                        + Add Snack
-                        </button>
-                    ) : (
-                        <div className="flex flex-col justify-between h-full">
-                            <ul className="space-y-1 text-sm text-gray-800 overflow-auto max-h-30">
-                                {getMealsFor("Snack").map((r, i) => (
-                                <li
-                                    key={i}
-                                    className="flex justify-between items-center bg-gray-100 p-2 rounded"
-                                >
-                                    {r}
-                                    <TrashIcon
-                                    className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer"
-                                    onClick={() => handleDeleteMeal("Snack", i)}
-                                    />                                
-                                </li>
-                                ))}
-                            </ul>
-                            <button
-                                className="text-sm font-semibold text-mango mt-2 underline transition ease-in-out hover:text-orange-500 cursor-pointer"
-                                onClick={() => {
-                                setMealType("Snack");
-                                setShowRecipeModal(true);
-                            }}
-                            >
-                                + Add more
-                            </button> 
-                        </div>                      
-                    )}
-                </div>
+                <MealCard
+                    title="Snacks"
+                    items={getMealsFor("Snack")}
+                    onAddClick={() => {
+                        setMealType("Snack");
+                        setShowRecipeModal(true);
+                    }}
+                    onDeleteClick={(index) => handleDeleteMeal("Snack", index)}
+                />
+
             </div>
         </div>
 

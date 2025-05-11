@@ -3,6 +3,7 @@ import { ApiContext } from "../context/ApiContext";
 import { TrashIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { DateContext } from "../context/DateContext";
 import { format } from "date-fns";
+import MealCard from "./MealCard";
 
 export default function ActivityLog() {
   const [showModal, setShowModal] = useState(false);
@@ -41,33 +42,13 @@ export default function ActivityLog() {
   };  
 
   return (
-    <div className="bg-white h-[11rem] max-w-[18rem] flex flex-col justify-between  gap-2">
-      <h3 className="text-mango font-semibold">Physical Activity</h3>
-
-      {logsForDate.length === 0 ? (
-        <button onClick={() => setShowModal(true)} 
-        className="flex items-center justify-center bg-gray-100 border border-dashed
-         border-gray-400 rounded-lg h-28 p-4 w-full text-gray-500
-          transform transition-transform duration-200 hover:scale-103 cursor-pointer">
-          + Add Activity
-        </button>
-      ) : (
-        <div className="flex flex-col justify-between h-full">
-          <ul className="space-y-1 text-sm text-gray-800 overflow-y-auto max-h-30 pr-1">
-            {logsForDate.map(log => (
-              <li key={log.id} className="flex justify-between bg-gray-100 p-2 rounded">
-                {log.activity_name} – {log.duration_minutes} min ({log.intensity}) – {log.calories} kcal
-                <TrashIcon className="h-4 w-4 text-orange-500 cursor-pointer transform transition-transform duration-200 hover:scale-110" onClick={() => deleteActivityLog(log.id)} />
-              </li>
-            ))}
-          </ul>
-          <button 
-            onClick={() => setShowModal(true)} 
-            className="mt-2 text-sm underline font-semibold text-mango transition ease-in-out hover:text-orange-500 cursor-pointer">
-            + Add more
-          </button>
-        </div>
-      )}
+    <div className="bg-white h-[13rem] max-w-[18rem] flex flex-col justify-between gap-2">
+      <MealCard
+        title="Physical Activity"
+        items={logsForDate.map(log => `${log.activity_name} – ${log.duration_minutes} min (${log.intensity})`)}
+        onAddClick={() => setShowModal(true)}
+        onDeleteClick={(index) => deleteActivityLog(logsForDate[index].id)}
+      />
 
       {showModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
