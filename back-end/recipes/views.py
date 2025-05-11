@@ -1,7 +1,7 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .models import Recipe, Ingredient, FavoriteRecipe, Snack
-from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer
+from .models import Recipe, Ingredient, FavoriteRecipe, Snack, PhysicalActivity
+from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer, PhysicalActivitySerializer
 
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Recipe.objects.all()
@@ -26,4 +26,9 @@ class FavoriteRecipeViewSet(viewsets.ModelViewSet):
 class SnackViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Snack.objects.all()
     serializer_class = SnackSerializer
+    permission_classes = [IsAuthenticated]
+
+class PhysicalActivityViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = PhysicalActivity.objects.all()
+    serializer_class = PhysicalActivitySerializer
     permission_classes = [IsAuthenticated]

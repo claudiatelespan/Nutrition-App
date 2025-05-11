@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack
+from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack, PhysicalActivity
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,3 +35,8 @@ class SnackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snack
         fields = ["id", "name", "unit", "calories_per_unit"]
+
+class PhysicalActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhysicalActivity
+        fields = "__all__"

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MealLog, SnackLog
+from .models import MealLog, SnackLog, PhysicalActivityLog
 
 class MealLogSerializer(serializers.ModelSerializer):
     recipe_name = serializers.CharField(source="recipe.name", read_only=True)
@@ -26,3 +26,16 @@ class SnackLogSerializer(serializers.ModelSerializer):
 
         attrs["calories"] = round(quantity * snack.calories_per_unit, 2)
         return attrs
+
+class PhysicalActivityLogSerializer(serializers.ModelSerializer):
+    activity_name = serializers.CharField(source="activity.name", read_only=True)
+    
+    class Meta:
+        model = PhysicalActivityLog
+        fields = "__all__"
+        read_only_fields = ["user", "calories_burned"]
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+        log = PhysicalActivityLog.objects.create(user=user, **validated_data)
+        return log

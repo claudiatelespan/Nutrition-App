@@ -53,3 +53,12 @@ class Snack(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.unit})"
+
+class PhysicalActivity(models.Model):
+    name = models.CharField(max_length=100)
+    met_low = models.FloatField()
+    met_moderate = models.FloatField()
+    met_high = models.FloatField()
+
+    def __str__(self):
+        return self.name
