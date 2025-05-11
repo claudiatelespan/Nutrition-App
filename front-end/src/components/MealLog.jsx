@@ -4,9 +4,10 @@ import { DayPicker } from "react-day-picker";
 import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import "react-day-picker/dist/style.css";
 import { ApiContext } from "../context/ApiContext";
+import { DateContext } from "../context/DateContext";
 
 export default function MealLog() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const { selectedDate, setSelectedDate } = useContext(DateContext);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showRecipeModal, setShowRecipeModal] = useState(false);
   const [mealType, setMealType] = useState("");
@@ -189,7 +190,6 @@ export default function MealLog() {
                             onSelect={(date) => {
                                 if (date) {
                                     setSelectedDate(date);
-                                    setShowCalendar(false);
                                 }
                             }}
                         />
