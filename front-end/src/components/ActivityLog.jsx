@@ -43,7 +43,7 @@ export default function ActivityLog() {
   };  
 
   return (
-    <div className="bg-white h-[13rem] max-w-[18rem] flex flex-col justify-between gap-2">
+    <div className="bg-white h-[13rem] max-w-[23rem] flex flex-col justify-between gap-2">
       <MealCard
         title="Physical Activity"
         items={logsForDate.map(log => `${log.activity_name} – ${log.duration_minutes} min (${log.intensity})`)}
