@@ -41,15 +41,18 @@ export default function ActivityLog() {
   };  
 
   return (
-    <div className="bg-white p-4 rounded shadow h-[13rem]">
-      <h3 className="text-mango font-semibold mb-2">Physical Activity</h3>
+    <div className="bg-white h-[11rem] max-w-[18rem] flex flex-col justify-between  gap-2">
+      <h3 className="text-mango font-semibold">Physical Activity</h3>
 
       {logsForDate.length === 0 ? (
-        <button onClick={() => setShowModal(true)} className="border border-dashed p-4 w-full text-gray-500">
+        <button onClick={() => setShowModal(true)} 
+        className="flex items-center justify-center bg-gray-100 border border-dashed
+         border-gray-400 rounded-lg h-28 p-4 w-full text-gray-500
+          transform transition-transform duration-200 hover:scale-103 cursor-pointer">
           + Add Activity
         </button>
       ) : (
-        <>
+        <div className="flex flex-col justify-between h-full">
           <ul className="space-y-1 text-sm text-gray-800 overflow-y-auto max-h-30 pr-1">
             {logsForDate.map(log => (
               <li key={log.id} className="flex justify-between bg-gray-100 p-2 rounded">
@@ -58,10 +61,12 @@ export default function ActivityLog() {
               </li>
             ))}
           </ul>
-          <button onClick={() => setShowModal(true)} className="mt-2 text-sm underline font-semibold text-mango transition ease-in-out hover:text-orange-500 cursor-pointer">
+          <button 
+            onClick={() => setShowModal(true)} 
+            className="mt-2 text-sm underline font-semibold text-mango transition ease-in-out hover:text-orange-500 cursor-pointer">
             + Add more
           </button>
-        </>
+        </div>
       )}
 
       {showModal && (
@@ -117,10 +122,10 @@ export default function ActivityLog() {
                     <label className="block text-sm font-medium mb-1">Duration (min)</label>
                     <div className="flex items-center gap-2">
                         <input
-                        required
                         type="number"
                         min="1"
                         value={duration}
+                        placeholder="Type duration..."
                         onChange={e => setDuration(e.target.value)}
                         className="w-full border border-gray-400 p-2 rounded outline-mango"
                         />
@@ -134,7 +139,7 @@ export default function ActivityLog() {
                 onClick={handleSave}
                 disabled={!selectedActivity || !duration}
                 className={`px-4 py-2 rounded ${
-                  selectedActivity ? "bg-mango text-white cursor-pointer hover:bg-orange-500" : "bg-gray-300 text-gray-500"
+                  selectedActivity && duration ? "bg-mango text-white cursor-pointer hover:bg-orange-500" : "bg-gray-300 text-gray-500"
                 }`}
               >
                 Save

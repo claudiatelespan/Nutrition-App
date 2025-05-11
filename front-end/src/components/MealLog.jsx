@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, ArrowLe
 import "react-day-picker/dist/style.css";
 import { ApiContext } from "../context/ApiContext";
 import { DateContext } from "../context/DateContext";
+import  ActivityLog from "../components/ActivityLog";
 
 export default function MealLog() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -118,15 +119,15 @@ export default function MealLog() {
   console.log(mealLog);
 
   return (
-    <div className="p-6 bg-beige min-h-screen space-y-8 max-w-7xl mx-auto">
+    <div className="p-6 bg-beige space-y-8 max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold text-mango">Track your meals, one bite at a time 🍽️</h2>
 
-        <div className="flex justify-between gap-8 flex-wrap">
+        <div className="flex flex-col lg:flex-row gap-8">
         
-            {/* Left: Meal Cards */}
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {/* ZONA PRINCIPALĂ: Meals + Activity */}
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-min">
                 {meals.map((meal) => (
-                    <div key={meal} className="bg-white rounded-lg p-4 shadow flex flex-col gap-2 w-full h-[13rem]">
+                    <div key={meal} className="bg-white rounded-lg p-4 shadow flex flex-col justify-between gap-2 w-full h-[13rem]">
                         <h3 className="text-mango font-semibold">{meal}</h3>
                         {getMealsFor(meal).length === 0 ? (
                             <button
@@ -139,30 +140,36 @@ export default function MealLog() {
                             + Add {meal}
                             </button>
                         ) : (
-                            <ul className="space-y-1 text-sm text-gray-800 overflow-auto">
-                            {getMealsFor(meal).map((r, i) => (
-                                <li key={i} className="flex justify-between items-center bg-gray-100 p-2 rounded">
-                                {r}
-                                <TrashIcon className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer" onClick={() => handleDeleteMeal(meal, i)} />
-                                </li>
-                            ))}
-                            <button
-                                className="text-sm font-semibold text-mango mt-2 underline transition ease-in-out hover:text-orange-500 cursor-pointer"
-                                onClick={() => {
-                                setMealType(meal);
-                                setShowRecipeModal(true);
-                                }}
-                            >
-                                + Add more
-                            </button>
-                            </ul>
+                            <div className="flex flex-col justify-between h-full">
+                                <ul className="space-y-1 text-sm text-gray-800 overflow-y-auto max-h-30">
+                                {getMealsFor(meal).map((r, i) => (
+                                    <li key={i} className="flex justify-between items-center bg-gray-100 p-2 rounded">
+                                    {r}
+                                    <TrashIcon className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer" onClick={() => handleDeleteMeal(meal, i)} />
+                                    </li>
+                                ))}
+                                </ul>
+                                <button
+                                    className="text-sm font-semibold text-mango mt-2 underline transition ease-in-out hover:text-orange-500 cursor-pointer"
+                                    onClick={() => {
+                                    setMealType(meal);
+                                    setShowRecipeModal(true);
+                                    }}
+                                >
+                                    + Add more
+                                </button>
+                            </div>
                         )}
                     </div>
                 ))}
+
+                <div className="md:col-span-3 bg-white rounded-lg p-4 shadow flex flex-col">
+                    <ActivityLog />
+                </div>
             </div>
 
-            {/* Right: Calendar + Snacks */}
-            <div className="w-full md:w-[20rem] flex flex-col gap-6">
+         {/* ZONA SECUNDARĂ: Calendar + Snacks */}
+            <div className="w-full lg:w-[20rem] flex flex-col gap-6">
                 <div className="bg-white rounded-lg p-4 shadow w-[330px]">
                     <div className="flex items-center justify-between">
                         <button onClick={handlePrevDay}><ArrowLeftIcon className="h-4 w-4 cursor-pointer    "/></button>
@@ -196,7 +203,7 @@ export default function MealLog() {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-lg p-4 flex flex-col shadow h-[11rem]">
+                <div className="bg-white rounded-lg p-4 flex flex-col justify-between shadow h-[13rem]">
                     <h3 className="text-mango font-semibold mb-2">Snacks</h3>
                     {getMealsFor("Snack").length === 0 ? (
                         <button
@@ -209,19 +216,21 @@ export default function MealLog() {
                         + Add Snack
                         </button>
                     ) : (
-                        <ul className="space-y-1 text-sm text-gray-800 overflow-auto">
-                            {getMealsFor("Snack").map((r, i) => (
-                            <li
-                                key={i}
-                                className="flex justify-between items-center bg-gray-100 p-2 rounded"
-                            >
-                                {r}
-                                <TrashIcon
-                                className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer"
-                                onClick={() => handleDeleteMeal("Snack", i)}
-                                />                                
-                            </li>
-                            ))}
+                        <div className="flex flex-col justify-between h-full">
+                            <ul className="space-y-1 text-sm text-gray-800 overflow-auto max-h-30">
+                                {getMealsFor("Snack").map((r, i) => (
+                                <li
+                                    key={i}
+                                    className="flex justify-between items-center bg-gray-100 p-2 rounded"
+                                >
+                                    {r}
+                                    <TrashIcon
+                                    className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer"
+                                    onClick={() => handleDeleteMeal("Snack", i)}
+                                    />                                
+                                </li>
+                                ))}
+                            </ul>
                             <button
                                 className="text-sm font-semibold text-mango mt-2 underline transition ease-in-out hover:text-orange-500 cursor-pointer"
                                 onClick={() => {
@@ -229,9 +238,9 @@ export default function MealLog() {
                                 setShowRecipeModal(true);
                             }}
                             >
-                            + Add more
-                            </button>
-                        </ul>
+                                + Add more
+                            </button> 
+                        </div>                      
                     )}
                 </div>
             </div>
