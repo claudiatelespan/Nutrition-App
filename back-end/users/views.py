@@ -1,6 +1,6 @@
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import RegisterSerializer, UserSerializer
+from .serializers import RegisterSerializer, UserSerializer, UserProfileSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -30,11 +30,10 @@ def get_user_info(request):
 
 @api_view(["PATCH"])
 @permission_classes([IsAuthenticated])
-def update_weight(request):
+def update_user_profile(request):
     profile = request.user.profile
-    weight = request.data.get("weight")
-    if weight is not None:
-        profile.weight = weight
-        profile.save()
-        return Response({"detail": "Weight updated."})
-    return Response({"error": "Weight not provided."}, status=400)
+    serializer = UserProfileSerializer(profile, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"detail": "Profile updated."})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

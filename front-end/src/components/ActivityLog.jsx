@@ -78,7 +78,7 @@ export default function ActivityLog() {
                   onChange={(e) => setIntensity(e.target.value)}
                   className="w-full border border-gray-400 p-2 rounded outline-mango"
                 >
-                  <option value="low">Light</option>
+                  <option value="low">Low</option>
                   <option value="moderate">Moderate</option>
                   <option value="high">High</option>
                 </select>
