@@ -24,7 +24,7 @@ class SnackLog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     snack = models.ForeignKey(Snack, on_delete=models.CASCADE)
     date = models.DateField()
-    quantity = models.PositiveIntegerField()
+    quantity = models.FloatField()
     calories = models.FloatField(editable=False)
 
     created_at = models.DateTimeField(auto_now_add=True)

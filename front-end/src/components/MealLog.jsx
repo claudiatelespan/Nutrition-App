@@ -8,6 +8,7 @@ import { DateContext } from "../context/DateContext";
 import  ActivityLog from "./ActivityLog";
 import MealCard from "./MealCard";
 import AddItemModal from "./AddItemModal";
+import toast from "react-hot-toast";
 
 export default function MealLog() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -36,6 +37,12 @@ export default function MealLog() {
   const handleSaveSelectedItem = async () => {
     if (!selectedItem) return;
   
+    if (mealType === "Snack" && (!snackQuantity || snackQuantity <= 0)) {
+      toast.error("Please enter a valid quantity greater than 0.");
+      setSnackQuantity("");
+      return;
+    } 
+
     try {
       if (mealType === "Snack") {
         await logSnack(selectedItem, snackQuantity || 1, formattedDate);

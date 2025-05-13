@@ -178,7 +178,7 @@ export const ApiProvider = ({ children }) => {
       method: "POST",
       body: JSON.stringify({
         snack: snack.id,
-        quantity: parseInt(quantity),
+        quantity,
         date,
       }),
     });
