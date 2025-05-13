@@ -5,6 +5,7 @@ import { DateContext } from "../context/DateContext";
 import { format } from "date-fns";
 import MealCard from "./MealCard";
 import AddItemModal from "./AddItemModal";
+import toast from "react-hot-toast";
 
 export default function ActivityLog() {
   const [showModal, setShowModal] = useState(false);
@@ -26,6 +27,11 @@ export default function ActivityLog() {
   }, [activityLogs, formattedDate]);
 
   const handleSave = async () => {
+    if(!duration || duration <= 0) {
+      toast.error("Please enter a valid duration greater than 0.");
+      setDuration("");
+      return;
+    }
     await logActivity(selectedActivity, formattedDate, intensity, parseInt(duration));
     setSelectedActivity("");
     setIntensity("moderate");
