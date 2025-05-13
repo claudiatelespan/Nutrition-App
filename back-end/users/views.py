@@ -27,3 +27,14 @@ def logout_view(request):
 def get_user_info(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
+
+@api_view(["PATCH"])
+@permission_classes([IsAuthenticated])
+def update_weight(request):
+    profile = request.user.profile
+    weight = request.data.get("weight")
+    if weight is not None:
+        profile.weight = weight
+        profile.save()
+        return Response({"detail": "Weight updated."})
+    return Response({"error": "Weight not provided."}, status=400)

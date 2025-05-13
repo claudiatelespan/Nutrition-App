@@ -1,5 +1,11 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import UserProfile
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['weight']
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,8 +30,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
 
-
 class UserSerializer(serializers.ModelSerializer):
+    profile = UserProfileSerializer()
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'profile']

@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from recipes.models import Recipe, Snack, PhysicalActivity
 
+DEFAULT_WEIGHT = 65
+
 class MealLog(models.Model):
     MEAL_CHOICES = [
         ('breakfast', 'Breakfast'),
@@ -52,7 +54,8 @@ class PhysicalActivityLog(models.Model):
 
     def save(self, *args, **kwargs):
         met = getattr(self.activity, f"met_{self.intensity}")
-        weight = 70  # TODO: replace with user.profile.weight if available
+        user_weight = getattr(self.user.profile, "weight", None)
+        weight = user_weight if user_weight else DEFAULT_WEIGHT
         self.calories_burned = round(met * weight * (self.duration_minutes / 60), 2)
         super().save(*args, **kwargs)
 
