@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import ProfilePage from './pages/ProfilePage';
+import ProfilePage from './pages/DashboardPage';
 import RecipesPage from './pages/RecipesPage';
 import RecommenderPage from './pages/RecommenderPage';
 import FriendsPage from './pages/FriendsPage';
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import MyFavoritesPage from "./pages/MyFavoritesPage";
+import DashboardPage from "./pages/DashboardPage";
+import PersonalDetailsPage from "./pages/PersonalDetailsPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Sidebar from './components/Sidebar';
 import Header from "./components/Header";
@@ -40,6 +42,22 @@ function Layout() {
               element={
                 <PrivateRoute>
                   <ProfilePage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route path="/details"
+              element={
+                <PrivateRoute>
+                  <PersonalDetailsPage />
                 </PrivateRoute>
               }
             />

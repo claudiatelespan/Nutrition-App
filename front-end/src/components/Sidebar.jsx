@@ -10,9 +10,11 @@ import {
   ChevronUpIcon
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
+import SidebarDropdown from "./SidebarDropdown";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
   const [recipesOpen, setRecipesOpen] = useState(true);
+  const [profileOpen, setProfileOpen] = useState(true);
   const [showExternalDropdown, setShowExternalDropdown] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef();
@@ -28,8 +30,10 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     location.pathname === "/favorites" ||
     (matchRecipeDetail && fromPath?.startsWith("/favorites"));
 
+  const isActiveDashboard = location.pathname === "/dashboard";
+  const isActiveDetails = location.pathname === "/details";
+
   const navItems = [
-    { name: "Profile", icon: <UserIcon className="h-6 w-6" />, path: "/profile" },
     { name: "Chef’s Helper", icon: <SparklesIcon className="h-6 w-6" />, path: "/recommender" },
     { name: "Friends", icon: <UsersIcon className="h-6 w-6" />, path: "/friends" },
   ];
@@ -50,7 +54,6 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         <button onClick={toggleSidebar}>
           <Bars3Icon className="h-6 w-6 text-white font-bold cursor-pointer hover:text-gray-300" />
         </button>
-
         {isOpen && (
           <h2 className="font-bold text-xl whitespace-nowrap">
             Nutri<span className="bg-mango text-white px-2 rounded-md">App</span>
@@ -59,88 +62,38 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       </div>
 
       <div className="flex-1 relative">
-        {/* recipes dropdown */}
-        <div>
-          <button
-            onClick={() => {
-              if (isOpen) {
-                setRecipesOpen(!recipesOpen);
-              } else {
-                setShowExternalDropdown(!showExternalDropdown);
-              }
-            }}
-            className={`flex items-center gap-3 p-4 w-full font-semibold text-md hover:bg-hover focus:outline-none cursor-pointer
-            ${!isOpen && showExternalDropdown ? "bg-hover" : ""}
-            ${isActiveRecipes || isActiveFavorites ? "text-mango font-bold" : "text-white"}`}
-          >
-            <BookOpenIcon className="h-6 w-6" />
-            {isOpen && <span className="flex-1 text-lg text-left">Recipes</span>}
-            {isOpen &&
-              (recipesOpen ? (
-                <ChevronUpIcon className="h-5 w-5" />
-              ) : (
-                <ChevronDownIcon className="h-5 w-5" />
-              ))}
-          </button>
 
-          {/* inline dropdown (when sidebar is open) */}
-          <AnimatePresence>
-            {isOpen && recipesOpen && (
-              <motion.div
-                key="dropdown"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="flex flex-col gap-1 overflow-hidden"
-              >
-                <NavLink
-                  to="/recipes"
-                  state={{ from: "/recipes" }}
-                  className={`text-md pl-12 py-1 hover:bg-hover ${isActiveRecipes ? "text-mango font-semibold" : "hover:text-white"}`}
-                >
-                  Browse Recipes
-                </NavLink>
-                <NavLink
-                  to="/favorites"
-                  state={{ from: "/favorites" }}
-                  className={`text-md pl-12 py-1 hover:bg-hover ${isActiveFavorites ? "text-mango font-semibold" : "hover:text-white"}`}
-                >
-                  My Favorites
-                </NavLink>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* My Profile dropdown */}
+        <SidebarDropdown
+          isOpen={isOpen}
+          title="My Profile"
+          icon={<UserIcon className="h-6 w-6" />}
+          isActive={isActiveDashboard || isActiveDetails}
+          open={profileOpen}
+          setOpen={setProfileOpen}
+          links={[
+            { to: "/dashboard", label: "Dashboard", active: isActiveDashboard },
+            { to: "/details", label: "Personal Details", active: isActiveDetails },
+          ]}
+        />
 
-          {/* external floating dropdown (when sidebar is closed) */}
-          {!isOpen && showExternalDropdown && (
-            <div
-              ref={dropdownRef}
-              className="absolute left-15.5 top-[0.1px] w-48 bg-hover text-white rounded-sm z-50 p-2"
-              style={{ boxShadow: "4px 0px 6px rgba(0, 0, 0, 0.1)" }}
-            >
-              <NavLink
-                to="/recipes"
-                state={{ from: "/recipes" }}
-                onClick={() => setShowExternalDropdown(false)}
-                className={`block text-sm py-1 px-2 rounded  ${isActiveRecipes ? "text-mango font-semibold" : "hover:text-mango"}`}
-              >
-                Browse Recipes
-              </NavLink>
-              <NavLink
-                to="/favorites"
-                state={{ from: "/favorites" }}
-                onClick={() => setShowExternalDropdown(false)}
-                className={`block text-sm py-1 px-2 rounded ${isActiveFavorites ? "text-mango font-semibold" : "hover:text-mango"}`}
-              >
-                My Favorites
-              </NavLink>
-            </div>
-          )}
 
-        </div>
+        {/* Recipes dropdown (same as before) */}
+        <SidebarDropdown
+          isOpen={isOpen}
+          title="Recipes"
+          icon={<BookOpenIcon className="h-6 w-6" />}
+          isActive={isActiveRecipes || isActiveFavorites}
+          open={recipesOpen}
+          setOpen={setRecipesOpen}
+          links={[
+            { to: "/recipes", label: "Browse Recipes", active: isActiveRecipes },
+            { to: "/favorites", label: "My Favorites", active: isActiveFavorites },
+          ]}
+        />
 
-        {/* other nav items */}
+
+        {/* static nav items */}
         {navItems.map((item) => (
           <NavLink
             key={item.name}
