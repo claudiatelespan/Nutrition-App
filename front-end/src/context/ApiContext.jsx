@@ -139,11 +139,15 @@ export const ApiProvider = ({ children }) => {
   };
 
   const updateUserProfile = async (updatedData) => {
-    const res = await fetchWithAuth("http://localhost:8000/api/users/me/update-profile/", {
-      method: "PATCH",
-      body: JSON.stringify(updatedData),
-    });
-    setUserProfile(res);
+    try{
+      const res = await fetchWithAuth("http://localhost:8000/api/users/me/update-profile/", {
+        method: "PATCH",
+        body: JSON.stringify(updatedData),
+      });
+      await loadUserProfile();
+    } catch (err) {
+      console.error("Failed to update user profile:", err);
+    }
   };
 
   const addFavorite = async (recipeId) => {
@@ -285,7 +289,7 @@ export const ApiProvider = ({ children }) => {
         activityLogs,
         fetchWithAuth,
         loading,
-        setUserProfile,
+        updateUserProfile,
         addFavorite,
         removeFavorite,
         logMeal,

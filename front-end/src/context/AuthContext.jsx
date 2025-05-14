@@ -29,8 +29,6 @@ export const AuthProvider = ({ children }) => {
 
     setAccessToken(data.access);
     setIsAuthenticated(true);
-    await fetchUserInfo(data.access);
-
   };
 
   const logout = async () => {

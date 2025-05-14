@@ -15,7 +15,7 @@ export default function Header() {
     navigate("/");
   };
 
-  console.log(userData);
+  console.log("User data", userData);
   return (
     <header className="fixed top-0 right-0 left-0 h-16 bg-[#C1D8C3] shadow-md px-6 flex justify-end items-center gap-4 z-40">
       <span className="text-gray-700 font-medium text-sm">Welcome</span>
