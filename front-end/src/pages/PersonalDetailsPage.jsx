@@ -39,12 +39,50 @@ export default function PersonalDetailsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    let hasError = false;
+      const newForm = { ...form };
+
+    const requiredFields = ["weight", "height", "sex", "birth_date"];
+    for (const field of requiredFields) {
+      if (!form[field]) {
+        toast.error(`Please complete the ${field.replace("_", " ")} field.`);
+        hasError = true;
+      }
+    }
+
+    if (form.weight && Number(form.weight) <= 0) {
+      toast.error("Weight must be a positive number.");
+      newForm.weight = "";
+      hasError = true;
+    }
+
+    if (form.height && Number(form.height) <= 0) {
+      toast.error("Height must be a positive number.");
+      newForm.height = "";
+      hasError = true;
+    }
+
+    if (form.birth_date) {
+      const today = new Date().toISOString().split("T")[0];
+      if (form.birth_date > today) {
+        toast.error("Birth date cannot be in the future.");
+        newForm.birth_date = "";
+        hasError = true;
+      }
+    }
+
+    if (hasError) {
+      setForm(newForm);
+      return;
+    }
+
     try {
       const filteredForm = Object.fromEntries(
         Object.entries(form).filter(([_, value]) => value !== "")
       );
 
-      await updateUserProfile(filteredForm); // profile va fi reîncărcat în context
+      await updateUserProfile(filteredForm);
       toast.success("Profile updated successfully.");
     } catch (err) {
       toast.error("Error updating profile.");
