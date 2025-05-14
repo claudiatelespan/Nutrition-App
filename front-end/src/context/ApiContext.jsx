@@ -5,7 +5,9 @@ export const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
   const { accessToken, setAccessToken, logout } = useContext(AuthContext);
-
+  
+  const [userData, setUserData] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
@@ -62,6 +64,16 @@ export const ApiProvider = ({ children }) => {
     if (!res.ok) throw new Error("Fetch failed");
     return res.json();
   };
+
+  const loadUserProfile = async () => {
+  try {
+    const res = await fetchWithAuth("http://localhost:8000/api/users/me/");
+    setUserData(res);
+    setUserProfile(res.profile);
+  } catch (err) {
+    console.error("Failed to load user profile:", err);
+  }
+};
 
   const loadRecipes = async () => {
     try {
@@ -124,6 +136,14 @@ export const ApiProvider = ({ children }) => {
     } catch (err) {
       console.error("Failed to load activity logs:", err);
     }
+  };
+
+  const updateUserProfile = async (updatedData) => {
+    const res = await fetchWithAuth("http://localhost:8000/api/users/me/update-profile/", {
+      method: "PATCH",
+      body: JSON.stringify(updatedData),
+    });
+    setUserProfile(res);
   };
 
   const addFavorite = async (recipeId) => {
@@ -228,6 +248,7 @@ export const ApiProvider = ({ children }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
+        await loadUserProfile();
         await loadRecipes();
         await loadFavorites();
         await loadSnacks();
@@ -253,6 +274,8 @@ export const ApiProvider = ({ children }) => {
   return (
     <ApiContext.Provider
       value={{
+        userProfile,
+        userData,
         recipes,
         favorites,
         snacks,
@@ -262,6 +285,7 @@ export const ApiProvider = ({ children }) => {
         activityLogs,
         fetchWithAuth,
         loading,
+        setUserProfile,
         addFavorite,
         removeFavorite,
         logMeal,

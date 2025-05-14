@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import { ApiContext } from "../context/ApiContext";
 import { AuthContext } from "../context/AuthContext";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-  const { userData, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+  const { userData } = useContext(ApiContext);
 
   const navigate = useNavigate();
 
@@ -13,8 +15,7 @@ export default function Header() {
     navigate("/");
   };
 
-  // console.log(userData);
-
+  console.log(userData);
   return (
     <header className="fixed top-0 right-0 left-0 h-16 bg-[#C1D8C3] shadow-md px-6 flex justify-end items-center gap-4 z-40">
       <span className="text-gray-700 font-medium text-sm">Welcome</span>

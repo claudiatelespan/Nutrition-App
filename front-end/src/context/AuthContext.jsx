@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
 
   const [accessToken, setAccessToken] = useState(getInitialToken);
   const [isAuthenticated, setIsAuthenticated] = useState(!!getInitialToken());
-  const [userData, setUserData] = useState(null);
 
   const login = async (userData, remember) => {
     const res = await fetch("http://localhost:8000/api/users/login/", {
@@ -104,32 +103,9 @@ export const AuthProvider = ({ children }) => {
     return res.json();
   };  
 
-  const fetchUserInfo = async (token) => {
-    try {
-      const res = await fetch("http://localhost:8000/api/users/me/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
-      if (!res.ok) throw new Error("Failed to fetch user info");
-      const data = await res.json();
-      setUserData(data);
-    } catch (err) {
-      console.error("User fetch error:", err);
-    }
-  };
-  
-
-  useEffect(() => {
-    if (accessToken) {
-      fetchUserInfo(accessToken);
-    }
-  }, [accessToken]);
-  
   
   return (
-    <AuthContext.Provider value={{ accessToken, setAccessToken, isAuthenticated, login, logout, register, userData }}>
+    <AuthContext.Provider value={{ accessToken, setAccessToken, isAuthenticated, login, logout, register}}>
       {children}
     </AuthContext.Provider>
   );
