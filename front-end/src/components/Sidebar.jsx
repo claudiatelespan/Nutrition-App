@@ -9,6 +9,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon
 } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
   const [recipesOpen, setRecipesOpen] = useState(true);
@@ -73,7 +74,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             ${isActiveRecipes || isActiveFavorites ? "text-mango font-bold" : "text-white"}`}
           >
             <BookOpenIcon className="h-6 w-6" />
-            {isOpen && <span className="flex-1 text-left">Recipes</span>}
+            {isOpen && <span className="flex-1 text-lg text-left">Recipes</span>}
             {isOpen &&
               (recipesOpen ? (
                 <ChevronUpIcon className="h-5 w-5" />
@@ -83,24 +84,33 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           </button>
 
           {/* inline dropdown (when sidebar is open) */}
-          {isOpen && recipesOpen && (
-            <div className=" flex flex-col gap-1">
-              <NavLink
-                to="/recipes"
-                state={{ from: "/recipes" }}
-                className={`text-sm pl-12 py-1 hover:bg-hover ${isActiveRecipes ? "text-mango font-semibold" : "hover:text-white"}`}
+          <AnimatePresence>
+            {isOpen && recipesOpen && (
+              <motion.div
+                key="dropdown"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex flex-col gap-1 overflow-hidden"
               >
-                Browse Recipes
-              </NavLink>
-              <NavLink
-                to="/favorites"
-                state={{ from: "/favorites" }}
-                className={`text-sm pl-12 py-1 hover:bg-hover ${isActiveFavorites ? "text-mango font-semibold" : "hover:text-white"}`}
-              >
-                My Favorites
-              </NavLink>
-            </div>
-          )}
+                <NavLink
+                  to="/recipes"
+                  state={{ from: "/recipes" }}
+                  className={`text-md pl-12 py-1 hover:bg-hover ${isActiveRecipes ? "text-mango font-semibold" : "hover:text-white"}`}
+                >
+                  Browse Recipes
+                </NavLink>
+                <NavLink
+                  to="/favorites"
+                  state={{ from: "/favorites" }}
+                  className={`text-md pl-12 py-1 hover:bg-hover ${isActiveFavorites ? "text-mango font-semibold" : "hover:text-white"}`}
+                >
+                  My Favorites
+                </NavLink>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* external floating dropdown (when sidebar is closed) */}
           {!isOpen && showExternalDropdown && (
@@ -136,7 +146,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-3 p-4 text-md font-semibold rounded-md hover:bg-hover transition ${
+              `flex items-center gap-3 p-4 text-lg font-semibold rounded-md hover:bg-hover transition ${
                 isActive ? "text-mango font-bold" : "text-white"
               }`
             }
