@@ -8,6 +8,8 @@ export const ApiProvider = ({ children }) => {
   
   const [userData, setUserData] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [friends, setFriends] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
@@ -66,14 +68,32 @@ export const ApiProvider = ({ children }) => {
   };
 
   const loadUserProfile = async () => {
-  try {
-    const res = await fetchWithAuth("http://localhost:8000/api/users/me/");
-    setUserData(res);
-    setUserProfile(res.profile);
-  } catch (err) {
-    console.error("Failed to load user profile:", err);
-  }
-};
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/users/me/");
+      setUserData(res);
+      setUserProfile(res.profile);
+    } catch (err) {
+      console.error("Failed to load user profile:", err);
+    }
+  };
+
+  const loadFriends = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/users/friends/");
+      setFriends(res);
+    } catch (err) {
+      console.error("Failed to load friends:", err);
+    }
+  };
+
+  const loadPendingRequests = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/users/friends/pending/");
+      setPendingRequests(res);
+    } catch (err) {
+      console.error("Failed to load pending requests:", err);
+    }
+  };
 
   const loadRecipes = async () => {
     try {
@@ -82,7 +102,7 @@ export const ApiProvider = ({ children }) => {
     } catch (err) {
       console.error("Failed to load recipes:", err);
     }
-  }
+  };
 
   const loadSnacks = async () => {
     try {
@@ -91,7 +111,7 @@ export const ApiProvider = ({ children }) => {
     } catch (err) {
       console.error("Failed to load snacks:", err);
     }
-  }
+  };
 
   const loadFavorites = async () => {
     try {
@@ -109,7 +129,7 @@ export const ApiProvider = ({ children }) => {
     } catch (err) {
       console.error("Failed to load activities:", err);
     }
-  }
+  };
 
   const loadMealLogs = async () => {
     try {
@@ -147,6 +167,31 @@ export const ApiProvider = ({ children }) => {
       await loadUserProfile();
     } catch (err) {
       console.error("Failed to update user profile:", err);
+    }
+  };
+
+  const sendFriendRequest = async (toUsername) => {
+    try {
+      await fetchWithAuth("http://localhost:8000/api/users/friends/request/", {
+        method: "POST",
+        body: JSON.stringify({ to_username: toUsername }),
+      });
+      await loadPendingRequests();
+    } catch (err) {
+      console.error("Send friend request error:", err);
+    }
+  };
+
+  const respondToFriendRequest = async (requestId, action) => {
+    try {
+      await fetchWithAuth("http://localhost:8000/api/users/friends/respond/", {
+        method: "POST",
+        body: JSON.stringify({ request_id: requestId, action }),
+      });
+      await loadPendingRequests();
+      await loadFriends();
+    } catch (err) {
+      console.error("Respond to friend request error:", err);
     }
   };
 
@@ -253,6 +298,8 @@ export const ApiProvider = ({ children }) => {
     const loadData = async () => {
       try {
         await loadUserProfile();
+        await loadFriends();
+        await loadPendingRequests();
         await loadRecipes();
         await loadFavorites();
         await loadSnacks();
@@ -280,6 +327,8 @@ export const ApiProvider = ({ children }) => {
       value={{
         userProfile,
         userData,
+        friends,
+        pendingRequests,
         recipes,
         favorites,
         snacks,
@@ -290,6 +339,8 @@ export const ApiProvider = ({ children }) => {
         fetchWithAuth,
         loading,
         updateUserProfile,
+        sendFriendRequest,
+        respondToFriendRequest,
         addFavorite,
         removeFavorite,
         logMeal,
