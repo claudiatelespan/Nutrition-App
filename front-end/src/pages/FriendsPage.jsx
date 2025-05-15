@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { ApiContext } from "../context/ApiContext";
 import toast from "react-hot-toast";
 import RecipeCard from "../components/RecipeCard";
@@ -18,6 +19,8 @@ export default function FriendsPage() {
   const [accessDenied, setAccessDenied] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [usernameInput, setUsernameInput] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const handleSendRequest = async () => {
     if (!usernameInput.trim()) return;
@@ -51,10 +54,16 @@ export default function FriendsPage() {
   };
 
   useEffect(() => {
-    if (selectedFriend) {
-      fetchFriendFavorites(selectedFriend.username);
-    }
-  }, [selectedFriend]);
+    const userParam = searchParams.get("user");
+    if (!userParam || friends.length === 0) return;
+
+    const friend = friends.find((f) => f.username === userParam);
+    if (!friend) return;
+
+    setSelectedFriend(friend);
+    fetchFriendFavorites(friend.username);
+  }, [friends, searchParams]);
+
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">
@@ -109,7 +118,10 @@ export default function FriendsPage() {
             friends.map((friend) => (
               <button
                 key={friend.id}
-                onClick={() => setSelectedFriend(friend)}
+                onClick={() => {
+                  setSelectedFriend(friend);
+                  setSearchParams({ user: friend.username });
+                }}
                 className={`block w-full text-left p-2 text-sm bg-white border border-gray-300 mb-2 rounded transition ${
                   selectedFriend?.id === friend.id
                     ? " font-semibold text-mango border-2 border-mango"
