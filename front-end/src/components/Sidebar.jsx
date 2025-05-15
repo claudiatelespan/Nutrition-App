@@ -29,12 +29,17 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     location.pathname === "/favorites" ||
     (matchRecipeDetail && fromPath?.startsWith("/favorites"));
 
+  const isActiveFriends =
+    location.pathname === "/friends" ||
+    (matchRecipeDetail && fromPath?.startsWith("/friends"));
+
+
   const isActiveDashboard = location.pathname === "/dashboard";
   const isActiveDetails = location.pathname === "/details";
 
   const navItems = [
     { name: "Chef’s Helper", icon: <SparklesIcon className="h-6 w-6" />, path: "/recommender" },
-    { name: "Friends", icon: <UsersIcon className="h-6 w-6" />, path: "/friends" },
+    { name: "Friends", icon: <UsersIcon className="h-6 w-6" />, path: "/friends", active: isActiveFriends },
   ];
 
   const ExternalDropdown = ({ icon, items, id, activeDropdown, setActiveDropdown }) => {
@@ -161,7 +166,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             to={item.path}
             className={({ isActive }) =>
               `flex items-center gap-3 p-4 text-lg font-semibold rounded-md hover:bg-hover transition ${
-                isActive ? "text-mango font-bold" : "text-white"
+                item.active || isActive ? "text-mango font-bold" : "text-white"
               }`
             }
           >

@@ -120,7 +120,7 @@ export default function FriendsPage() {
       </div>
 
       {/* Detail panel */}
-      <div className="flex-1 bg-white p-6 rounded-xl shadow">
+      <div className="flex-1 bg-beige p-6 rounded-xl shadow">
         {selectedFriend ? (
           <>
             <h2 className="text-xl font-semibold text-vintage mb-4">
@@ -131,7 +131,7 @@ export default function FriendsPage() {
             ) : friendFavorites.length === 0 ? (
               <p className="text-gray-500">Nu are favorite salvate.</p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-h-[500px] overflow-y-auto pr-2">
                 {friendFavorites.map((recipe) => (
                   <RecipeCard key={recipe.id} recipe={recipe} />
                 ))}
