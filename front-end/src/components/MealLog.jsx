@@ -125,8 +125,6 @@ export default function MealLog() {
   ? snacks.find((s) => s.name === selectedItem)
   : null;
 
-  console.log(mealLog);
-
   return (
     <div className="p-6 bg-beige space-y-8 max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold text-mango">Track your meals, one bite at a time 🍽️</h2>

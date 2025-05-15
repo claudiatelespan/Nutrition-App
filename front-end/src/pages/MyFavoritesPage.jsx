@@ -3,11 +3,15 @@ import { ApiContext } from "../context/ApiContext";
 import RecipeCard from "../components/RecipeCard";
 
 export default function MyFavoritesPage() {
-  const { favorites, recipes } = useContext(ApiContext);
+  const { favorites, recipes, userProfile, updateShareFavorites } = useContext(ApiContext);
 
   const favoriteRecipes = recipes.filter((r) =>
     favorites.some((f) => f.recipe === r.id)
   );
+
+  const handleToggleShare = () => {
+    updateShareFavorites(!userProfile.share_favorites);
+  };
 
   return (
     <div className="p-6 bg-beige min-h-screen">
@@ -16,7 +20,12 @@ export default function MyFavoritesPage() {
         <label className="flex items-center gap-3 text-sm cursor-pointer select-none">
           <span>Share with friends</span>
           <div className="relative">
-            <input type="checkbox" className="sr-only peer" />
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={userProfile?.share_favorites || false}
+              onChange={handleToggleShare}
+            />
             <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-mango transition-all duration-300"></div>
             <div className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-5"></div>
           </div>

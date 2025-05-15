@@ -233,6 +233,28 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const getFriendFavorites = async (friendId) => {
+    try {
+      const res = await fetchWithAuth(`http://localhost:8000/api/users/friends/${friendId}/favorites/`);
+      return res;
+    } catch (err) {
+      console.error("Failed to fetch friend's favorites:", err);
+      return [];
+    }
+  };
+
+  const updateShareFavorites = async (value) => {
+    try {
+      await fetchWithAuth("http://localhost:8000/api/users/me/update-profile/", {
+        method: "PATCH",
+        body: JSON.stringify({ share_favorites: value }),
+      });
+      await loadUserProfile();
+    } catch (err) {
+      console.error("Failed to update share_favorites:", err);
+    }
+  };
+
   const logMeal = async (recipeName, date, mealType) => {
     const recipe = recipes.find((r) => r.name === recipeName);
     if (!recipe) return console.error("Recipe not found:", recipeName);
@@ -355,6 +377,8 @@ export const ApiProvider = ({ children }) => {
         respondToFriendRequest,
         addFavorite,
         removeFavorite,
+        updateShareFavorites,
+        getFriendFavorites,
         logMeal,
         logSnack,
         logActivity,
