@@ -59,7 +59,7 @@ export default function FriendsPage() {
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">
       {/* Sidebar */}
-      <div className="md:w-1/3 w-full space-y-6">
+      <div className="md:w-1/4 w-full space-y-6">
         <div className="bg-beige p-4 rounded-xl shadow flex justify-center">
           <button
             onClick={() => setModalOpen(true)}
@@ -101,7 +101,7 @@ export default function FriendsPage() {
         </div>
 
         {/* Friends List */}
-        <div className="bg-white p-4 rounded-xl shadow">
+        <div className="bg-beige p-4 rounded-xl shadow">
           <h3 className="text-lg font-semibold text-vintage mb-2">Friends</h3>
           {friends.length === 0 ? (
             <p className="text-sm text-gray-500">No friends yet</p>
@@ -110,7 +110,11 @@ export default function FriendsPage() {
               <button
                 key={friend.id}
                 onClick={() => setSelectedFriend(friend)}
-                className="block w-full text-left p-2 text-sm text-gray-800 hover:bg-hover-beige rounded"
+                className={`block w-full text-left p-2 text-sm bg-white border border-gray-300 mb-2 rounded transition ${
+                  selectedFriend?.id === friend.id
+                    ? " font-semibold text-mango border-2 border-mango"
+                    : "text-gray-800 hover:bg-almostwhite"
+                }`}
               >
                 {friend.username}
               </button>
@@ -124,12 +128,12 @@ export default function FriendsPage() {
         {selectedFriend ? (
           <>
             <h2 className="text-xl font-semibold text-vintage mb-4">
-              Favoritele lui {selectedFriend.username}
+              {selectedFriend.username}'s favorite recipes
             </h2>
             {accessDenied ? (
-              <p className="text-gray-500">Acest utilizator nu partajează favoritele sale.</p>
+              <p className="text-gray-500">This user does not share his favorite recipes.</p>
             ) : friendFavorites.length === 0 ? (
-              <p className="text-gray-500">Nu are favorite salvate.</p>
+              <p className="text-gray-500">No favorite recipes yet.</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-h-[500px] overflow-y-auto pr-2">
                 {friendFavorites.map((recipe) => (
