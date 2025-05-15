@@ -233,15 +233,15 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
-  const getFriendFavorites = async (friendId) => {
+  const getFriendFavorites = async (friendUsername) => {
     try {
-      const res = await fetchWithAuth(`http://localhost:8000/api/users/friends/${friendId}/favorites/`);
-      return res;
+      return await fetchWithAuth(`http://localhost:8000/api/users/friends/${friendUsername}/shared-favorites/`);
     } catch (err) {
       console.error("Failed to fetch friend's favorites:", err);
-      return [];
+      throw err;
     }
   };
+
 
   const updateShareFavorites = async (value) => {
     try {

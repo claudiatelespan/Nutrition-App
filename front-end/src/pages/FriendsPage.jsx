@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ApiContext } from "../context/ApiContext";
 import toast from "react-hot-toast";
+import RecipeCard from "../components/RecipeCard";
 
 export default function FriendsPage() {
   const {
@@ -8,9 +9,13 @@ export default function FriendsPage() {
     pendingRequests,
     sendFriendRequest,
     respondToFriendRequest,
+    getFriendFavorites,
+    recipes,
   } = useContext(ApiContext);
 
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [friendFavorites, setFriendFavorites] = useState([]);
+  const [accessDenied, setAccessDenied] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [usernameInput, setUsernameInput] = useState("");
 
@@ -30,6 +35,26 @@ export default function FriendsPage() {
     await respondToFriendRequest(id, action);
     toast.success(`Request ${action}ed.`);
   };
+
+  const fetchFriendFavorites = async (friendUsername) => {
+    try {
+      const res = await getFriendFavorites(friendUsername);
+      const fullRecipes = res
+        .map((fav) => recipes.find((r) => r.id === fav.recipe))
+        .filter(Boolean);
+      setFriendFavorites(fullRecipes);
+      setAccessDenied(false);
+    } catch (err) {
+      setFriendFavorites([]);
+      setAccessDenied(true);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedFriend) {
+      fetchFriendFavorites(selectedFriend.username);
+    }
+  }, [selectedFriend]);
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">
@@ -59,15 +84,13 @@ export default function FriendsPage() {
                 <div className="space-x-2">
                   <button
                     onClick={() => handleRespond(req.id, "accept")}
-                    className="text-xs bg-green-400 text-white px-2 py-1 rounded hover:bg-green-600 cursor-pointer
-                    transform transition-transform duration-200 hover:scale-105"
+                    className="text-xs bg-green-400 text-white px-2 py-1 rounded hover:bg-green-600 cursor-pointer transform transition-transform duration-200 hover:scale-105"
                   >
                     Accept
                   </button>
                   <button
                     onClick={() => handleRespond(req.id, "reject")}
-                    className="text-xs bg-red-400 text-white px-2 py-1 rounded hover:bg-red-600 cursor-pointer
-                    transform transition-transform duration-200 hover:scale-105"
+                    className="text-xs bg-red-400 text-white px-2 py-1 rounded hover:bg-red-600 cursor-pointer transform transition-transform duration-200 hover:scale-105"
                   >
                     Reject
                   </button>
@@ -99,9 +122,22 @@ export default function FriendsPage() {
       {/* Detail panel */}
       <div className="flex-1 bg-white p-6 rounded-xl shadow">
         {selectedFriend ? (
-          <h2 className="text-xl font-semibold text-vintage">
-            Favoritele lui {selectedFriend.username}
-          </h2>
+          <>
+            <h2 className="text-xl font-semibold text-vintage mb-4">
+              Favoritele lui {selectedFriend.username}
+            </h2>
+            {accessDenied ? (
+              <p className="text-gray-500">Acest utilizator nu partajează favoritele sale.</p>
+            ) : friendFavorites.length === 0 ? (
+              <p className="text-gray-500">Nu are favorite salvate.</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {friendFavorites.map((recipe) => (
+                  <RecipeCard key={recipe.id} recipe={recipe} />
+                ))}
+              </div>
+            )}
+          </>
         ) : (
           <p className="text-gray-500">Select a friend to view favorites.</p>
         )}
@@ -121,7 +157,7 @@ export default function FriendsPage() {
             />
             <div className="flex justify-end gap-2">
               <button
-                onClick={() => {setModalOpen(false);setUsernameInput("");}}
+                onClick={() => { setModalOpen(false); setUsernameInput(""); }}
                 className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
               >
                 Cancel
