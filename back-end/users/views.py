@@ -1,6 +1,8 @@
 from rest_framework import generics, status
 from django.contrib.auth.models import User
 from .models import FriendRequest
+from recipes.models import FavoriteRecipe
+from recipes.serializers import FavoriteRecipeSerializer
 from .serializers import RegisterSerializer, UserSerializer, UserProfileSerializer, FriendRequestSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
@@ -102,3 +104,25 @@ class PendingFriendRequestsView(generics.ListAPIView):
 
     def get_queryset(self):
         return FriendRequest.objects.filter(to_user=self.request.user, status="pending")
+
+class SharedFavoritesView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, username):
+        try:
+            target = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({"detail": "User not found."}, status=404)
+
+        if not FriendRequest.objects.filter(
+            Q(from_user=request.user, to_user=target) | Q(from_user=target, to_user=request.user),
+            status="accepted"
+        ).exists():
+            return Response({"detail": "You are not friends."}, status=403)
+
+        if not hasattr(target, "profile") or not target.profile.share_favorites:
+            return Response({"detail": "Favorites are private."}, status=403)
+
+        favorites = FavoriteRecipe.objects.filter(user=target)
+        data = FavoriteRecipeSerializer(favorites, many=True).data
+        return Response(data)

@@ -7,7 +7,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = [
             'weight', 'height', 'sex', 'birth_date',
-            'activity_level', 'goal', 'diet'
+            'activity_level', 'goal', 'diet', 'share_favorites'
         ]
 
 class RegisterSerializer(serializers.ModelSerializer):

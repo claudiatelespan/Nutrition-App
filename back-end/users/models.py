@@ -39,6 +39,7 @@ class UserProfile(models.Model):
     activity_level = models.CharField(max_length=20, choices=ACTIVITY_LEVEL_CHOICES, null=True, blank=True)
     goal = models.CharField(max_length=20, choices=GOAL_CHOICES, null=True, blank=True)
     diet = models.CharField(max_length=20, choices=DIET_CHOICES, null=True, blank=True)
+    share_favorites = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} Profile"
