@@ -172,13 +172,17 @@ export const ApiProvider = ({ children }) => {
 
   const sendFriendRequest = async (toUsername) => {
     try {
-      await fetchWithAuth("http://localhost:8000/api/users/friends/request/", {
+      const res = await fetchWithAuth("http://localhost:8000/api/friends/request/", {
         method: "POST",
         body: JSON.stringify({ to_username: toUsername }),
       });
       await loadPendingRequests();
+      return res;
     } catch (err) {
-      console.error("Send friend request error:", err);
+      if (err.message.includes("404")) {
+        throw new Error("User not found.");
+      }
+      throw new Error("Request failed.");
     }
   };
 
