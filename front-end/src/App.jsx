@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import ProfilePage from './pages/DashboardPage';
 import RecipesPage from './pages/RecipesPage';
 import RecommenderPage from './pages/RecommenderPage';
 import FriendsPage from './pages/FriendsPage';
@@ -37,14 +36,6 @@ function Layout() {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-
-            <Route path="/profile"
-              element={
-                <PrivateRoute>
-                  <ProfilePage />
-                </PrivateRoute>
-              }
-            />
 
             <Route path="/dashboard"
               element={

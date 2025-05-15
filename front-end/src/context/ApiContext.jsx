@@ -64,10 +64,12 @@ export const ApiProvider = ({ children }) => {
 
     if (res.status === 204) return null;
     if (!res.ok) {
-      const err = new Error("Fetch failed");
+      const errorBody = await res.json().catch(() => ({}));
+      const err = new Error(errorBody.detail || "Fetch failed");
       err.status = res.status;
       throw err;
     }
+
     return res.json();
   };
 
@@ -183,13 +185,12 @@ export const ApiProvider = ({ children }) => {
       await loadPendingRequests();
       return res;
     } catch (err) {
-      if (err.status === 404) {
-        throw new Error("User not found.");
-      }
+      if (err.status === 404) throw new Error("User not found.");
       if (err.status === 400) {
-        throw new Error("Request already sent.");
+        if (err.message.includes("yourself")) throw new Error("You cannot friend yourself.");
+        if (err.message.includes("already sent")) throw new Error("Request already sent.");
       }
-      throw new Error("Request failed.");
+      throw new Error(err.message || "Failed to send request.");
     }
   };
 

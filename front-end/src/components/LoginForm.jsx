@@ -24,7 +24,7 @@ export default function LoginForm() {
       toast.success("Login successful");
 
       console.log("Login successful");
-      navigate("/profile");
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err.message);
     }

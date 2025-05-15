@@ -22,14 +22,7 @@ export default function FriendsPage() {
       setUsernameInput("");
       setModalOpen(false);
     } catch (err) {
-      console.log(err.message);
-      if (err.message === "User not found.") {
-        toast.error("Username doesn't exist.");
-      } else if (err.message === "Request already sent.") {
-        toast.error("You already sent a friend request to this user.");
-      } else {
-        toast.error("Failed to send request.");
-      }
+      toast.error(err.message);
     }
   };
 
