@@ -1,11 +1,13 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from django.contrib.auth.models import User
-from .serializers import RegisterSerializer, UserSerializer, UserProfileSerializer
+from .models import FriendRequest
+from .serializers import RegisterSerializer, UserSerializer, UserProfileSerializer, FriendRequestSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
+from rest_framework.views import APIView
+from django.db.models import Q
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -37,3 +39,66 @@ def update_user_profile(request):
         serializer.save()
         return Response({"detail": "Profile updated."})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SendFriendRequestView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        to_username = request.data.get("to_username")
+
+        if to_username == request.user.username:
+            return Response({"detail": "You cannot friend yourself."}, status=400)
+
+        try:
+            to_user = User.objects.get(username=to_username)
+        except User.DoesNotExist:
+            return Response({"detail": "User not found."}, status=404)
+
+        if FriendRequest.objects.filter(from_user=request.user, to_user=to_user).exists():
+            return Response({"detail": "Request already sent."}, status=400)
+
+        friend_request = FriendRequest.objects.create(from_user=request.user, to_user=to_user)
+        return Response(FriendRequestSerializer(friend_request).data, status=201)
+
+
+class RespondFriendRequestView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request_id = request.data.get("request_id")
+        action = request.data.get("action")  # 'accept' or 'reject'
+
+        try:
+            fr = FriendRequest.objects.get(id=request_id, to_user=request.user)
+        except FriendRequest.DoesNotExist:
+            return Response({"detail": "Request not found."}, status=404)
+
+        if action == "accept":
+            fr.accept()
+        elif action == "reject":
+            fr.reject()
+        else:
+            return Response({"detail": "Invalid action."}, status=400)
+
+        return Response({"status": fr.status})
+
+
+class FriendListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        friends = FriendRequest.objects.filter(
+            (Q(from_user=user) | Q(to_user=user)), status="accepted"
+        )
+        friend_users = [fr.to_user if fr.from_user == user else fr.from_user for fr in friends]
+        data = [{"id": u.id, "username": u.username} for u in friend_users]
+        return Response(data)
+
+
+class PendingFriendRequestsView(generics.ListAPIView):
+    serializer_class = FriendRequestSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return FriendRequest.objects.filter(to_user=self.request.user, status="pending")
