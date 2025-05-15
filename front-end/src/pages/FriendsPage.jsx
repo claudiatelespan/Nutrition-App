@@ -22,7 +22,14 @@ export default function FriendsPage() {
       setUsernameInput("");
       setModalOpen(false);
     } catch (err) {
-      toast.error("Failed to send request. Username is not correct.");
+      console.log(err.message);
+      if (err.message === "User not found.") {
+        toast.error("Username doesn't exist.");
+      } else if (err.message === "Request already sent.") {
+        toast.error("You already sent a friend request to this user.");
+      } else {
+        toast.error("Failed to send request.");
+      }
     }
   };
 
@@ -59,13 +66,15 @@ export default function FriendsPage() {
                 <div className="space-x-2">
                   <button
                     onClick={() => handleRespond(req.id, "accept")}
-                    className="text-xs bg-mint text-white px-2 py-1 rounded"
+                    className="text-xs bg-green-400 text-white px-2 py-1 rounded hover:bg-green-600 cursor-pointer
+                    transform transition-transform duration-200 hover:scale-105"
                   >
                     Accept
                   </button>
                   <button
                     onClick={() => handleRespond(req.id, "reject")}
-                    className="text-xs bg-red-400 text-white px-2 py-1 rounded"
+                    className="text-xs bg-red-400 text-white px-2 py-1 rounded hover:bg-red-600 cursor-pointer
+                    transform transition-transform duration-200 hover:scale-105"
                   >
                     Reject
                   </button>
@@ -85,7 +94,7 @@ export default function FriendsPage() {
               <button
                 key={friend.id}
                 onClick={() => setSelectedFriend(friend)}
-                className="block w-full text-left py-2 text-sm text-gray-800 hover:bg-hover-beige rounded"
+                className="block w-full text-left p-2 text-sm text-gray-800 hover:bg-hover-beige rounded"
               >
                 {friend.username}
               </button>

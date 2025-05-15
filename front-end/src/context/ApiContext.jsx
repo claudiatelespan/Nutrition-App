@@ -63,7 +63,11 @@ export const ApiProvider = ({ children }) => {
     }
 
     if (res.status === 204) return null;
-    if (!res.ok) throw new Error("Fetch failed");
+    if (!res.ok) {
+      const err = new Error("Fetch failed");
+      err.status = res.status;
+      throw err;
+    }
     return res.json();
   };
 
@@ -172,15 +176,18 @@ export const ApiProvider = ({ children }) => {
 
   const sendFriendRequest = async (toUsername) => {
     try {
-      const res = await fetchWithAuth("http://localhost:8000/api/friends/request/", {
+      const res = await fetchWithAuth("http://localhost:8000/api/users/friends/request/", {
         method: "POST",
         body: JSON.stringify({ to_username: toUsername }),
       });
       await loadPendingRequests();
       return res;
     } catch (err) {
-      if (err.message.includes("404")) {
+      if (err.status === 404) {
         throw new Error("User not found.");
+      }
+      if (err.status === 400) {
+        throw new Error("Request already sent.");
       }
       throw new Error("Request failed.");
     }
