@@ -14,7 +14,8 @@ export default function ShoppingListPage() {
 
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
-  const [selectedRecipes, setSelectedRecipes] = useState([]);
+  const [selectedRecipeNames, setSelectedRecipeNames] = useState([]);
+  const recipeNames = useMemo(() => recipes.map((r) => r.name), [recipes]);
 
   const filteredItems = useMemo(() => {
     if (!search) return shoppingListItems;
@@ -24,9 +25,9 @@ export default function ShoppingListPage() {
   }, [search, shoppingListItems]);
 
   const handleSaveRecipes = async () => {
-    const selectedIds = selectedRecipes
-      .map((name) => recipes.find((r) => r.name === name)?.id)
-      .filter(Boolean);
+    const selectedIds = recipes
+        .filter((r) => selectedRecipeNames.includes(r.name))
+        .map((r) => r.id);
 
     try {
       await generateShoppingList(selectedIds);
@@ -47,16 +48,6 @@ export default function ShoppingListPage() {
         >
           Generate List
         </button>
-      </div>
-
-      <div className="max-w-xl mb-4">
-        <input
-          type="text"
-          placeholder="Search ingredients..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full border border-gray-300 px-4 py-2 rounded"
-        />
       </div>
 
       {filteredItems.length === 0 ? (
@@ -97,12 +88,12 @@ export default function ShoppingListPage() {
           title="Select Recipes"
           search={search}
           setSearch={setSearch}
-          items={recipes.map((r) => r.name)}
-          selectedItem={selectedRecipes}
-          setSelectedItem={setSelectedRecipes}
+          items={recipeNames}
+          selectedItem={selectedRecipeNames}
+          setSelectedItem={setSelectedRecipeNames}
           onSave={handleSaveRecipes}
           onClose={() => setShowModal(false)}
-          saveDisabled={selectedRecipes.length === 0}
+          saveDisabled={selectedRecipeNames.length === 0}
           multiSelect
         />
       )}

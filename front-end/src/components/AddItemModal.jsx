@@ -33,29 +33,34 @@ export default function AddItemModal({
         </div>
 
         <div className="max-h-60 overflow-y-auto space-y-2 mb-4">
-          {items.length > 0 ? items.map((item) => (
-            <div
-              key={item}
-              className={`p-2 border border-gray-400 rounded cursor-pointer transition-colors ${
-                multiSelect ? selectedItem.includes(item) : selectedItem === item
-                  ? "bg-mango text-white"
-                  : "hover:bg-mango hover:text-white"
-              }`}
-              onClick={() => {
-                if (multiSelect) {
-                  setSelectedItem((prev) =>
-                    prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
-                  );
-                } else {
-                  setSelectedItem(item);
-                }
-              }}
-            >
-              {item}
-            </div>
-          )) : (
+          {items.length > 0 ? items.map((item) => {
+            const isSelected = multiSelect
+              ? selectedItem.includes(item)
+              : selectedItem === item;
+
+            return (
+              <div
+                key={item}
+                className={`p-2 border border-gray-400 rounded cursor-pointer transition-colors ${
+                  isSelected ? "bg-mango text-white" : "hover:bg-mango hover:text-white"
+                }`}
+                onClick={() => {
+                  if (multiSelect) {
+                    setSelectedItem((prev) =>
+                      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+                    );
+                  } else {
+                    setSelectedItem(item);
+                  }
+                }}
+              >
+                {item}
+              </div>
+            );
+          }) : (
             <p className="text-sm text-gray-500">No items found.</p>
           )}
+
         </div>
 
         {renderExtras && renderExtras()}
