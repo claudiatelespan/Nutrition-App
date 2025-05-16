@@ -10,6 +10,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.db.models import Q
+from datetime import timedelta
+from django.utils import timezone
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -55,9 +57,18 @@ class SendFriendRequestView(APIView):
             to_user = User.objects.get(username=to_username)
         except User.DoesNotExist:
             return Response({"detail": "User not found."}, status=404)
+        
+        #remove rejected requests older than 3 minutes
+        FriendRequest.objects.filter(
+            status="rejected",
+            responded_at__lt=timezone.now() - timedelta(minutes=3)
+        ).delete()
 
-        if FriendRequest.objects.filter(from_user=request.user, to_user=to_user).exists():
-            return Response({"detail": "Request already sent."}, status=400)
+        if FriendRequest.objects.filter(
+            Q(from_user=request.user, to_user=to_user) |
+            Q(from_user=to_user, to_user=request.user)
+        ).exists():
+            return Response({"detail": "There is already a friend request between these users."}, status=400)
 
         friend_request = FriendRequest.objects.create(from_user=request.user, to_user=to_user)
         return Response(FriendRequestSerializer(friend_request).data, status=201)
