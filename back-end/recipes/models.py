@@ -62,3 +62,19 @@ class PhysicalActivity(models.Model):
 
     def __str__(self):
         return self.name
+    
+class ShoppingList(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username}'s Shopping List"
+
+
+class ShoppingListItem(models.Model):
+    shopping_list = models.ForeignKey(ShoppingList, on_delete=models.CASCADE, related_name="items")
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=100)
+    is_checked = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ("shopping_list", "ingredient")
