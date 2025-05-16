@@ -126,3 +126,24 @@ class SharedFavoritesView(APIView):
         favorites = FavoriteRecipe.objects.filter(user=target)
         data = FavoriteRecipeSerializer(favorites, many=True).data
         return Response(data)
+
+class RemoveFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, username):
+        try:
+            target = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({"detail": "User not found."}, status=404)
+
+        friendship = FriendRequest.objects.filter(
+            Q(from_user=request.user, to_user=target) |
+            Q(from_user=target, to_user=request.user),
+            status="accepted"
+        ).first()
+
+        if not friendship:
+            return Response({"detail": "You are not friends."}, status=400)
+
+        friendship.delete()
+        return Response({"detail": "Friend removed successfully."}, status=204)
