@@ -13,6 +13,8 @@ export const ApiProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
+  const [shoppingList, setShoppingList] = useState(null);
+  const [shoppingListItems, setShoppingListItems] = useState([]);
   const [activities, setActivities] = useState([]);
   const [mealLogs, setMealLogs] = useState([]);
   const [snackLogs, setSnackLogs] = useState([]);
@@ -125,6 +127,24 @@ export const ApiProvider = ({ children }) => {
       setFavorites(favRes);
     } catch (err) {
       console.error("Failed to load favorites:", err);
+    }
+  };
+
+  const loadShoppingList = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/shopping-list/");
+      setShoppingList(res);
+    } catch (err) {
+      console.error("Failed to load shopping list:", err);
+    }
+  };
+
+  const loadShoppingListItems = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/shopping-list-items/");
+      setShoppingListItems(res);
+    } catch (err) {
+      console.error("Failed to load shopping list items:", err);
     }
   };
 
@@ -268,6 +288,46 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const generateShoppingList = async (recipeIds) => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/api/shopping-list/generate/", {
+        method: "POST",
+        body: JSON.stringify({ recipe_ids: recipeIds }),
+      });
+      setShoppingList(res);
+      await loadShoppingListItems();
+      return res;
+    } catch (err) {
+      console.error("Failed to generate shopping list:", err);
+      throw err;
+    }
+  };
+
+  const toggleShoppingListItem = async (itemId) => {
+    try {
+      const res = await fetchWithAuth(`http://localhost:8000/api/shopping-list-items/${itemId}/toggle/`, {
+        method: "PATCH",
+      });
+      await loadShoppingListItems();
+      return res;
+    } catch (err) {
+      console.error("Failed to toggle shopping list item:", err);
+      throw err;
+    }
+  };
+
+  const deleteShoppingListItem = async (itemId) => {
+    try {
+      await fetchWithAuth(`http://localhost:8000/api/shopping-list-items/${itemId}/`, {
+        method: "DELETE",
+      });
+      setShoppingListItems((prev) => prev.filter(item => item.id !== itemId));
+    } catch (err) {
+      console.error("Failed to delete shopping list item:", err);
+      throw err;
+    }
+  };
+
   const logMeal = async (recipeName, date, mealType) => {
     const recipe = recipes.find((r) => r.name === recipeName);
     if (!recipe) return console.error("Recipe not found:", recipeName);
@@ -350,6 +410,8 @@ export const ApiProvider = ({ children }) => {
         await loadRecipes();
         await loadFavorites();
         await loadSnacks();
+        await loadShoppingList();
+        await loadShoppingListItems();
         await loadActivities();
         await loadMealLogs();
         await loadSnackLogs();
@@ -379,12 +441,14 @@ export const ApiProvider = ({ children }) => {
         recipes,
         favorites,
         snacks,
+        shoppingList,
+        shoppingListItems,
         activities,
         mealLogs,
         snackLogs,
         activityLogs,
-        fetchWithAuth,
         loading,
+        fetchWithAuth,
         updateUserProfile,
         sendFriendRequest,
         respondToFriendRequest,
@@ -393,6 +457,9 @@ export const ApiProvider = ({ children }) => {
         removeFavorite,
         updateShareFavorites,
         getFriendFavorites,
+        generateShoppingList,
+        toggleShoppingListItem,
+        deleteShoppingListItem,
         logMeal,
         logSnack,
         logActivity,
