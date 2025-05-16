@@ -1,10 +1,9 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useState, useMemo } from "react";
 
 export default function AddItemModal({
   title,
-  search,
   onClose,
-  setSearch,
   items,
   selectedItem,
   setSelectedItem,
@@ -13,6 +12,13 @@ export default function AddItemModal({
   saveDisabled,
   multiSelect = false
 }) {
+  const [search, setSearch] = useState("");
+
+  const filteredItems = useMemo(() =>
+    items.filter(item =>
+      item.toLowerCase().includes(search.toLowerCase())
+    ), [search, items]);
+
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
       <div className="bg-white p-6 w-full max-w-md rounded shadow-lg">
@@ -33,7 +39,7 @@ export default function AddItemModal({
         </div>
 
         <div className="max-h-60 overflow-y-auto space-y-2 mb-4">
-          {items.length > 0 ? items.map((item) => {
+          {filteredItems.length > 0 ? filteredItems.map((item) => {
             const isSelected = multiSelect
               ? selectedItem.includes(item)
               : selectedItem === item;

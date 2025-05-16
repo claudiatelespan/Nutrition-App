@@ -13,16 +13,8 @@ export default function ShoppingListPage() {
   } = useContext(ApiContext);
 
   const [showModal, setShowModal] = useState(false);
-  const [search, setSearch] = useState("");
   const [selectedRecipeNames, setSelectedRecipeNames] = useState([]);
   const recipeNames = useMemo(() => recipes.map((r) => r.name), [recipes]);
-
-  const filteredItems = useMemo(() => {
-    if (!search) return shoppingListItems;
-    return shoppingListItems.filter((item) =>
-      item.ingredient.name.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [search, shoppingListItems]);
 
   const handleSaveRecipes = async () => {
     const selectedIds = recipes
@@ -32,7 +24,7 @@ export default function ShoppingListPage() {
     try {
       await generateShoppingList(selectedIds);
       setShowModal(false);
-      setSelectedRecipes([]);
+      setSelectedRecipeNames([]);
     } catch (err) {
       console.error("Failed to generate shopping list", err);
     }
@@ -50,11 +42,11 @@ export default function ShoppingListPage() {
         </button>
       </div>
 
-      {filteredItems.length === 0 ? (
+      {shoppingListItems.length === 0 ? (
         <p className="text-gray-500">No items found.</p>
       ) : (
         <ul className="space-y-3">
-          {filteredItems.map((item) => (
+          {shoppingListItems.map((item) => (
             <li
               key={item.id}
               className={`p-4 border rounded flex justify-between items-center transition-all ${
@@ -86,8 +78,6 @@ export default function ShoppingListPage() {
       {showModal && (
         <AddItemModal
           title="Select Recipes"
-          search={search}
-          setSearch={setSearch}
           items={recipeNames}
           selectedItem={selectedRecipeNames}
           setSelectedItem={setSelectedRecipeNames}
