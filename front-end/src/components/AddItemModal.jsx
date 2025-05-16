@@ -15,8 +15,10 @@ export default function AddItemModal({
   const [search, setSearch] = useState("");
 
   const filteredItems = useMemo(() =>
-    items.filter(item =>
-      item.toLowerCase().includes(search.toLowerCase())
+    items.filter((item) =>
+      (typeof item === "string" ? item : item.name)
+        .toLowerCase()
+        .includes(search.toLowerCase())
     ), [search, items]);
 
   return (
@@ -46,7 +48,7 @@ export default function AddItemModal({
 
             return (
               <div
-                key={item}
+                key={typeof item === "string" ? item : item.name}
                 className={`p-2 border border-gray-400 rounded cursor-pointer transition-colors ${
                   isSelected ? "bg-mango text-white" : "hover:bg-mango hover:text-white"
                 }`}
@@ -60,7 +62,7 @@ export default function AddItemModal({
                   }
                 }}
               >
-                {item}
+                {typeof item === "string" ? item : item.name}
               </div>
             );
           }) : (

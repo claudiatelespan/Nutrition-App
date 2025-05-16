@@ -15,19 +15,10 @@ export default function MealLog() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showRecipeModal, setShowRecipeModal] = useState(false);
   const [mealType, setMealType] = useState("");
-  const [search, setSearch] = useState("");
   const meals = ["Breakfast", "Lunch", "Dinner"];
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
   const { recipes, snacks, logMeal, logSnack, deleteMealLog, deleteSnackLog, mealLogs, snackLogs } = useContext(ApiContext);
-
-  const filteredRecipes = recipes.map(r => r.name).filter((r) =>
-    r.toLowerCase().includes(search.toLowerCase())
-  );
-  
-  const filteredSnacks = snacks.map(r => r.name).filter((r) =>
-    r.toLowerCase().includes(search.toLowerCase())
-  );
 
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
 
@@ -45,14 +36,12 @@ export default function MealLog() {
 
     try {
       if (mealType === "Snack") {
-        await logSnack(selectedItem, snackQuantity || 1, formattedDate);
+        await logSnack(selectedItem.name, snackQuantity || 1, formattedDate);
       } else {
-        await logMeal(selectedItem, formattedDate, mealType);
+        await logMeal(selectedItem.name, formattedDate, mealType);
       }
-    
       setSelectedItem("");
       setSnackQuantity("");
-      setSearch("");
       setShowRecipeModal(false);
     } catch (err) {
       console.error("Save error:", err);
@@ -63,7 +52,6 @@ export default function MealLog() {
     setShowRecipeModal(false);
     setSelectedItem(null);
     setSnackQuantity("");
-    setSearch("");
   };  
 
   const handleDeleteMeal = (type, index) => {
@@ -202,10 +190,8 @@ export default function MealLog() {
         {showRecipeModal && (
             <AddItemModal
                 title={`Add Food to ${mealType}`}
-                search={search}
                 onClose={handleCloseModal}
-                setSearch={setSearch}
-                items={mealType === "Snack" ? filteredSnacks : filteredRecipes}
+                items={mealType === "Snack" ? snacks : recipes}
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
                 onSave={handleSaveSelectedItem}

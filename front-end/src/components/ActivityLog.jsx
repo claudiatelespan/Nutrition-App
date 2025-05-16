@@ -12,15 +12,10 @@ export default function ActivityLog() {
   const [selectedActivity, setSelectedActivity] = useState("");
   const [intensity, setIntensity] = useState("moderate");
   const [duration, setDuration] = useState("");
-  const [search, setSearch] = useState("");
 
   const { selectedDate } = useContext(DateContext);
   const { activities, activityLogs, logActivity, deleteActivityLog } = useContext(ApiContext);
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
-
-  const filteredActivities = activities.map(a => a.name).filter(name =>
-    name.toLowerCase().includes(search.toLowerCase())
-  );
 
   const logsForDate = useMemo(() => {
     return activityLogs.filter(log => log.date === formattedDate);
@@ -32,11 +27,10 @@ export default function ActivityLog() {
       setDuration("");
       return;
     }
-    await logActivity(selectedActivity, formattedDate, intensity, parseInt(duration));
+    await logActivity(selectedActivity.name, formattedDate, intensity, parseInt(duration));
     setSelectedActivity("");
     setIntensity("moderate");
     setDuration("");
-    setSearch("");
     setShowModal(false);
   };
 
@@ -45,7 +39,6 @@ export default function ActivityLog() {
     setSelectedActivity(null);
     setDuration("");
     setIntensity("moderate");
-    setSearch("");
   };  
 
   return (
@@ -60,10 +53,8 @@ export default function ActivityLog() {
       {showModal && (
         <AddItemModal
           title="Add Physical Activity"
-          search={search}
           onClose={handleCloseModal}
-          setSearch={setSearch}
-          items={filteredActivities}
+          items={activities}
           selectedItem={selectedActivity}
           setSelectedItem={setSelectedActivity}
           onSave={handleSave}
