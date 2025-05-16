@@ -207,6 +207,19 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const removeFriend = async (username) => {
+    try {
+      await fetchWithAuth(`http://localhost:8000/api/users/friends/${username}/`, {
+        method: "DELETE",
+      });
+      await loadFriends();
+    } catch (err) {
+      console.error("Failed to remove friend:", err);
+      throw err;
+    }
+  };
+
+
   const addFavorite = async (recipeId) => {
     try {
       const newFav = await fetchWithAuth("http://localhost:8000/api/favorites/", {
@@ -375,6 +388,7 @@ export const ApiProvider = ({ children }) => {
         updateUserProfile,
         sendFriendRequest,
         respondToFriendRequest,
+        removeFriend,
         addFavorite,
         removeFavorite,
         updateShareFavorites,

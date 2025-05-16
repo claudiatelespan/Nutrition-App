@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { ApiContext } from "../context/ApiContext";
 import toast from "react-hot-toast";
 import RecipeCard from "../components/RecipeCard";
+import { UserMinusIcon } from "@heroicons/react/24/outline";
 
 export default function FriendsPage() {
   const {
@@ -11,6 +12,7 @@ export default function FriendsPage() {
     sendFriendRequest,
     respondToFriendRequest,
     getFriendFavorites,
+    removeFriend,
     recipes,
   } = useContext(ApiContext);
 
@@ -19,6 +21,7 @@ export default function FriendsPage() {
   const [accessDenied, setAccessDenied] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [usernameInput, setUsernameInput] = useState("");
+  const [unfriendUser, setUnfriendUser] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -37,6 +40,20 @@ export default function FriendsPage() {
   const handleRespond = async (id, action) => {
     await respondToFriendRequest(id, action);
     toast.success(`Request ${action}ed.`);
+  };
+
+  const handleUnfriend = async () => {
+    try {
+      await removeFriend(unfriendUser.username);
+      toast.success(`You are no longer friends with ${unfriendUser.username}.`);
+      if (selectedFriend?.username === unfriendUser.username) {
+        setSelectedFriend(null);
+        setFriendFavorites([]);
+      }
+      setUnfriendUser(null);
+    } catch (err) {
+      toast.error("Failed to remove friend.");
+    }
   };
 
   const fetchFriendFavorites = async (friendUsername) => {
@@ -116,20 +133,21 @@ export default function FriendsPage() {
             <p className="text-sm text-gray-500">No friends yet</p>
           ) : (
             friends.map((friend) => (
-              <button
-                key={friend.id}
-                onClick={() => {
-                  setSelectedFriend(friend);
-                  setSearchParams({ user: friend.username });
-                }}
-                className={`block w-full text-left p-2 text-sm bg-white border border-gray-300 mb-2 rounded transition ${
-                  selectedFriend?.id === friend.id
-                    ? " font-semibold text-mango border-2 border-mango"
-                    : "text-gray-800 hover:bg-almostwhite"
-                }`}
-              >
-                {friend.username}
-              </button>
+              <div key={friend.id} className="flex items-center justify-between bg-white border border-gray-300 hover:bg-almostwhite mb-2 rounded">
+                <button
+                  onClick={() => {
+                    setSelectedFriend(friend);
+                    setSearchParams({ user: friend.username });
+                  }}
+                  className={`text-left text-sm flex-1 rounded transition text-gray-800 p-2
+                    ${selectedFriend?.id === friend.id ? "font-semibold text-mango" : ""}`}
+                >
+                  {friend.username}
+                </button>
+                <button onClick={() => setUnfriendUser(friend)}>
+                  <UserMinusIcon className="h-5 w-5 mr-2 text-mango hover:text-orange-500 cursor-pointer transform transition-transform duration-200 hover:scale-105 " />
+                </button>
+              </div>
             ))
           )}
         </div>
@@ -183,6 +201,31 @@ export default function FriendsPage() {
                 className="px-4 py-2 bg-mango hover:bg-orange-500 cursor-pointer text-white rounded hover:bg-opacity-90"
               >
                 Send
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Unfriend Confirm Modal */}
+      {unfriendUser && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h3 className="text-lg font-semibold text-vintage mb-4">
+              Are you sure you want to remove <span className="text-mango">{unfriendUser.username}</span> from your friends?
+            </h3>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setUnfriendUser(null)}
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleUnfriend}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer"
+              >
+                Unfriend
               </button>
             </div>
           </div>
