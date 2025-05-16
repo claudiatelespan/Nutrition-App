@@ -73,7 +73,7 @@ class ShoppingList(models.Model):
 class ShoppingListItem(models.Model):
     shopping_list = models.ForeignKey(ShoppingList, on_delete=models.CASCADE, related_name="items")
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=100)
+    quantity = models.FloatField()
     is_checked = models.BooleanField(default=False)
 
     class Meta:

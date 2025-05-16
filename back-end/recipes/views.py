@@ -69,7 +69,7 @@ class ShoppingListViewSet(viewsets.ViewSet):
             ShoppingListItem.objects.create(
                 shopping_list=shopping_list,
                 ingredient=ing_data["ingredient"],
-                quantity=str(ing_data["quantity"]),
+                quantity=round(ing_data["quantity"], 2),
             )
 
         serializer = ShoppingListSerializer(shopping_list)
