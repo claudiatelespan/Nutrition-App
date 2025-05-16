@@ -1,7 +1,7 @@
 import { useContext, useState, useMemo } from "react";
 import { ApiContext } from "../context/ApiContext";
 import AddItemModal from "../components/AddItemModal";
-import { TrashIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function ShoppingListPage() {
   const {
@@ -18,8 +18,8 @@ export default function ShoppingListPage() {
 
   const handleSaveRecipes = async () => {
     const selectedIds = recipes
-        .filter((r) => selectedRecipeNames.includes(r.name))
-        .map((r) => r.id);
+      .filter((r) => selectedRecipeNames.includes(r.name))
+      .map((r) => r.id);
 
     try {
       await generateShoppingList(selectedIds);
@@ -30,8 +30,24 @@ export default function ShoppingListPage() {
     }
   };
 
+  const handleToggle = async (id) => {
+    try {
+      await toggleShoppingListItem(id);
+    } catch (err) {
+      console.error("Failed to toggle shopping list item", err);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteShoppingListItem(id);
+    } catch (err) {
+      console.error("Failed to delete shopping list item", err);
+    }
+  };
+
   return (
-    <div className="p-6 bg-beige min-h-screen">
+    <div className="p-6 bg-grid-paper min-h-screen">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Shopping List</h1>
         <button
@@ -45,26 +61,35 @@ export default function ShoppingListPage() {
       {shoppingListItems.length === 0 ? (
         <p className="text-gray-500">No items found.</p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {shoppingListItems.map((item) => (
             <li
               key={item.id}
-              className={`p-4 border rounded flex justify-between items-center transition-all ${
-                item.checked ? "bg-green-100" : "bg-white"
-              }`}
+              className={`p-4 bg-white border border-gray-300 rounded-xl shadow-sm transition-all relative whitespace-pre-wrap`}
             >
-              <span>
-                {item.ingredient.name} - {item.quantity} {item.ingredient.unit}
+              <span
+                className={`block mb-2 font-medium transition-all duration-300 ease-in-out ${
+                  item.is_checked ? "line-through text-gray-500" : "text-gray-900"
+                }`}
+              >
+                {item.ingredient.name} – {item.quantity} {item.ingredient.unit}
               </span>
-              <div className="space-x-2">
+              <div className="absolute top-2 right-2 flex gap-2">
                 <button
-                  onClick={() => toggleShoppingListItem(item.id)}
-                  className="text-green-600 hover:text-green-800"
+                  onClick={() => handleToggle(item.id)}
+                  className={`transition-transform transform hover:scale-110 ${
+                    item.is_checked ? "text-yellow-500" : "text-green-600"
+                  }`}
+                  title={item.is_checked ? "Uncheck" : "Check"}
                 >
-                  <CheckIcon className="w-5 h-5" />
+                  {item.is_checked ? (
+                    <XMarkIcon className="w-5 h-5" />
+                  ) : (
+                    <CheckIcon className="w-5 h-5" />
+                  )}
                 </button>
                 <button
-                  onClick={() => deleteShoppingListItem(item.id)}
+                  onClick={() => handleDelete(item.id)}
                   className="text-red-500 hover:text-red-700"
                 >
                   <TrashIcon className="w-5 h-5" />
