@@ -5,71 +5,75 @@ import { TrashIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 export default function ShoppingListPage() {
   const {
-    recipes,
     shoppingListItems,
+    recipes,
     generateShoppingList,
     toggleShoppingListItem,
     deleteShoppingListItem,
-    loadShoppingListItems,
   } = useContext(ApiContext);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [selectedRecipes, setSelectedRecipes] = useState([]);
 
-  const recipeOptions = useMemo(
-    () =>
-      recipes
-        .filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))
-        .map((r) => r.name),
-    [recipes, search]
-  );
+  const filteredItems = useMemo(() => {
+    if (!search) return shoppingListItems;
+    return shoppingListItems.filter((item) =>
+      item.ingredient.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, shoppingListItems]);
 
-  const handleGenerate = async () => {
-    const recipe = recipes.find((r) => r.name === selectedItem);
-    if (!recipe) return;
-    setLoading(true);
+  const handleSaveRecipes = async () => {
+    const selectedIds = selectedRecipes
+      .map((name) => recipes.find((r) => r.name === name)?.id)
+      .filter(Boolean);
+
     try {
-      await generateShoppingList([recipe.id]);
-      await loadShoppingListItems();
-      setModalOpen(false);
-      setSelectedItem(null);
-      setSearch("");
+      await generateShoppingList(selectedIds);
+      setShowModal(false);
+      setSelectedRecipes([]);
     } catch (err) {
       console.error("Failed to generate shopping list", err);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <div className="p-6 bg-beige min-h-screen">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Shopping List</h1>
         <button
-          onClick={() => setModalOpen(true)}
+          onClick={() => setShowModal(true)}
           className="bg-mango text-white px-4 py-2 rounded hover:bg-orange-500"
         >
-          Select Recipes
+          Generate List
         </button>
       </div>
 
-      {shoppingListItems.length === 0 ? (
-        <p className="text-gray-500">No items yet. Select recipes to generate your shopping list.</p>
+      <div className="max-w-xl mb-4">
+        <input
+          type="text"
+          placeholder="Search ingredients..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full border border-gray-300 px-4 py-2 rounded"
+        />
+      </div>
+
+      {filteredItems.length === 0 ? (
+        <p className="text-gray-500">No items found.</p>
       ) : (
         <ul className="space-y-3">
-          {shoppingListItems.map((item) => (
+          {filteredItems.map((item) => (
             <li
               key={item.id}
-              className={`flex justify-between items-center p-3 rounded border ${
-                item.checked ? "bg-green-100 line-through text-gray-500" : "bg-white"
+              className={`p-4 border rounded flex justify-between items-center transition-all ${
+                item.checked ? "bg-green-100" : "bg-white"
               }`}
             >
-              <div>
-                <span className="font-medium">{item.ingredient.name}</span> - {item.quantity} {item.ingredient.unit}
-              </div>
-              <div className="flex gap-2">
+              <span>
+                {item.ingredient.name} - {item.quantity} {item.ingredient.unit}
+              </span>
+              <div className="space-x-2">
                 <button
                   onClick={() => toggleShoppingListItem(item.id)}
                   className="text-green-600 hover:text-green-800"
@@ -78,7 +82,7 @@ export default function ShoppingListPage() {
                 </button>
                 <button
                   onClick={() => deleteShoppingListItem(item.id)}
-                  className="text-red-600 hover:text-red-800"
+                  className="text-red-500 hover:text-red-700"
                 >
                   <TrashIcon className="w-5 h-5" />
                 </button>
@@ -88,17 +92,18 @@ export default function ShoppingListPage() {
         </ul>
       )}
 
-      {modalOpen && (
+      {showModal && (
         <AddItemModal
           title="Select Recipes"
           search={search}
           setSearch={setSearch}
-          items={recipeOptions}
-          selectedItem={selectedItem}
-          setSelectedItem={setSelectedItem}
-          onClose={() => setModalOpen(false)}
-          onSave={handleGenerate}
-          saveDisabled={!selectedItem || loading}
+          items={recipes.map((r) => r.name)}
+          selectedItem={selectedRecipes}
+          setSelectedItem={setSelectedRecipes}
+          onSave={handleSaveRecipes}
+          onClose={() => setShowModal(false)}
+          saveDisabled={selectedRecipes.length === 0}
+          multiSelect
         />
       )}
     </div>

@@ -10,7 +10,8 @@ export default function AddItemModal({
   setSelectedItem,
   renderExtras,
   onSave,
-  saveDisabled
+  saveDisabled,
+  multiSelect = false
 }) {
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
@@ -36,11 +37,19 @@ export default function AddItemModal({
             <div
               key={item}
               className={`p-2 border border-gray-400 rounded cursor-pointer transition-colors ${
-                selectedItem === item
+                multiSelect ? selectedItem.includes(item) : selectedItem === item
                   ? "bg-mango text-white"
                   : "hover:bg-mango hover:text-white"
               }`}
-              onClick={() => setSelectedItem(item)}
+              onClick={() => {
+                if (multiSelect) {
+                  setSelectedItem((prev) =>
+                    prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+                  );
+                } else {
+                  setSelectedItem(item);
+                }
+              }}
             >
               {item}
             </div>
