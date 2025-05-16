@@ -6,8 +6,7 @@ import {
   SparklesIcon,
   UsersIcon,
   Bars3Icon,
-  ChevronDownIcon,
-  ChevronUpIcon
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarDropdown from "./SidebarDropdown";
@@ -40,6 +39,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
   const navItems = [
     { name: "Chef’s Helper", icon: <SparklesIcon className="h-6 w-6" />, path: "/recommender" },
     { name: "Friends", icon: <UsersIcon className="h-6 w-6" />, path: "/friends", active: isActiveFriends },
+    { name: "Shopping List", icon: <ShoppingCartIcon className="h-6 w-6"/>, path:"/shopping-list"},
   ];
 
   const ExternalDropdown = ({ icon, items, id, activeDropdown, setActiveDropdown }) => {

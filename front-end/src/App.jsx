@@ -9,6 +9,7 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 import MyFavoritesPage from "./pages/MyFavoritesPage";
 import DashboardPage from "./pages/DashboardPage";
 import PersonalDetailsPage from "./pages/PersonalDetailsPage";
+import ShoppingListPage from './pages/ShoppingListPage';
 import PrivateRoute from "./components/PrivateRoute";
 import Sidebar from './components/Sidebar';
 import Header from "./components/Header";
@@ -65,6 +66,14 @@ function Layout() {
               element={
                 <PrivateRoute>
                   <MyFavoritesPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route path="/shopping-list"
+              element={
+                <PrivateRoute>
+                  <ShoppingListPage />
                 </PrivateRoute>
               }
             />
