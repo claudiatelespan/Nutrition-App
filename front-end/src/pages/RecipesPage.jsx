@@ -105,7 +105,7 @@ export default function RecipesPage() {
   }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, sortField, sortOrder]);
 
   return (
-    <div className="p-6 bg-beige min-h-screen relative">
+    <div className="p-6 mt-16 bg-beige min-h-screen relative">
       <h1 className="text-2xl font-bold mb-4">Recipes</h1>
 
       <div className="flex flex-col gap-2 mb-4">

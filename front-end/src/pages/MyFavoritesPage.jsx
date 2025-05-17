@@ -14,10 +14,10 @@ export default function MyFavoritesPage() {
   };
 
   return (
-    <div className="p-6 bg-beige min-h-screen">
-      <div className="flex items-center justify-between mb-4">
+    <div className="p-6 bg-beige min-h-screen mt-16">
+      <div className="flex items-center justify-between mb-10 pr-20">
         <h1 className="text-2xl font-bold">My Favorite Recipes</h1>
-        <label className="flex items-center gap-3 text-sm cursor-pointer select-none">
+        <label className="flex items-center gap-3 text-md font-semibold cursor-pointer select-none">
           <span>Share with friends</span>
           <div className="relative">
             <input

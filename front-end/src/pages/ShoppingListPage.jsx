@@ -2,6 +2,7 @@ import { useContext, useState, useMemo } from "react";
 import { ApiContext } from "../context/ApiContext";
 import AddItemModal from "../components/AddItemModal";
 import { TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { exportShoppingListToExcel } from "../utils/exportToExcel";
 
 export default function ShoppingListPage() {
   const {
@@ -53,21 +54,29 @@ export default function ShoppingListPage() {
   }, [shoppingListItems]);
 
   return (
-    <div className="p-6 bg-grid-paper min-h-screen">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Shopping List</h1>
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-mango text-white px-4 py-2 rounded hover:bg-orange-500"
-        >
-          Generate List
-        </button>
+    <div className="p-6 bg-grid-paper mt-20">
+      <div className="flex justify-between items-center mb-4 ml-20 mr-20">
+        <h1 className="text-2xl font-bold text-vintage">Shopping List</h1>
+        <div className="flex gap-2">
+          <button
+            onClick={() => exportShoppingListToExcel(shoppingListItems)}
+            className="bg-vintage text-white px-4 py-2 rounded hover:bg-hover ml-2"
+          >
+            Export Excel
+          </button>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-mango text-white px-4 py-2 rounded hover:bg-orange-500"
+          >
+            Generate List
+          </button>
+        </div>
       </div>
 
       {sortedItems.length === 0 ? (
         <p className="text-gray-500">No items found.</p>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-10 ml-10 max-w-7xl">
+        <ul className="mt-10 p-10 ml-20 max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
           {sortedItems.map((item) => (
             <li
               key={item.id}

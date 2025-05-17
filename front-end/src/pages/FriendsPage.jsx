@@ -23,7 +23,6 @@ export default function FriendsPage() {
   const [usernameInput, setUsernameInput] = useState("");
   const [unfriendUser, setUnfriendUser] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   const handleSendRequest = async () => {
     if (!usernameInput.trim()) return;
@@ -83,7 +82,7 @@ export default function FriendsPage() {
 
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-6">
+    <div className="flex flex-col md:flex-row gap-6 p-6 mt-20">
       {/* Sidebar */}
       <div className="md:w-1/4 w-full space-y-6">
         <div className="bg-beige p-4 rounded-xl shadow flex justify-center">

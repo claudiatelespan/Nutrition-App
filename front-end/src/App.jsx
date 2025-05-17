@@ -33,7 +33,7 @@ function Layout() {
         }}
       >
         {!shouldHideNavbar && <Header />}
-        <main className={`bg-[#f8f4f3] min-h-screen ${!shouldHideNavbar ? "mt-16" : ""}`}>
+        <main className='bg-[#f8f4f3] min-h-screen'>
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
