@@ -46,6 +46,12 @@ export default function ShoppingListPage() {
     }
   };
 
+    const sortedItems = useMemo(() => {
+    const unchecked = shoppingListItems.filter((item) => !item.is_checked);
+    const checked = shoppingListItems.filter((item) => item.is_checked);
+    return [...unchecked, ...checked];
+  }, [shoppingListItems]);
+
   return (
     <div className="p-6 bg-grid-paper min-h-screen">
       <div className="flex justify-between items-center mb-4">
@@ -58,14 +64,19 @@ export default function ShoppingListPage() {
         </button>
       </div>
 
-      {shoppingListItems.length === 0 ? (
+      {sortedItems.length === 0 ? (
         <p className="text-gray-500">No items found.</p>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {shoppingListItems.map((item) => (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-10 ml-10 max-w-7xl">
+          {sortedItems.map((item) => (
             <li
               key={item.id}
-              className={`p-4 bg-white border border-gray-300 rounded-xl shadow-sm transition-all relative whitespace-pre-wrap`}
+              className={`p-4 rounded-xl shadow-md border border-almostwhite transition-all relative whitespace-pre-wrap bg-yellow-100 ${
+                item.is_checked ? "opacity-70" : "opacity-100"
+              }`}
+              style={{
+                backgroundColor: item.is_checked ? "beige" : "#fff9db",
+              }}
             >
               <span
                 className={`block mb-2 font-medium transition-all duration-300 ease-in-out ${
