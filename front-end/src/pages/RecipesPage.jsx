@@ -12,19 +12,19 @@ export default function RecipesPage() {
 
   const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
   const [filterOpen, setFilterOpen] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState(searchParams.get("cuisine")?.split(",") || []);
-  const [selectedMealTypes, setSelectedMealTypes] = useState(searchParams.get("meal")?.split(",") || []);
+  const [selectedCuisine, setSelectedCuisine] = useState(searchParams.get("cuisine")?.split(",") || []);
+  const [selectedCategories, setSelectedCategories] = useState(searchParams.get("meal")?.split(",") || []);
   const [selectedDifficulties, setSelectedDifficulties] = useState(searchParams.get("difficulty")?.split(",") || []);
   const [sortField, setSortField] = useState(searchParams.get("sort") || "name");
   const [sortOrder, setSortOrder] = useState(searchParams.get("order") || "asc");
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
-  const recipesPerPage = 3;
+  const recipesPerPage = 12;
 
   const { recipes, loading } = useContext(ApiContext);
 
   const isFirstLoad = useRef(true);
 
-  const availableCategories = useMemo(() => {
+  const availableCuisine = useMemo(() => {
     const cuisines = new Set();
     recipes.forEach(r => cuisines.add(r.cuisine_type.toLowerCase()));
     return Array.from(cuisines).map(id => ({
@@ -34,8 +34,8 @@ export default function RecipesPage() {
     }));
   }, [recipes]);
 
-  const availableMealTypes = useMemo(() => {
-    return Array.from(new Set(recipes.map(r => r.meal_type))).filter(Boolean);
+  const availableCategories = useMemo(() => {
+    return Array.from(new Set(recipes.map(r => r.category))).filter(Boolean);
   }, [recipes]);
 
   const availableDifficulties = useMemo(() => {
@@ -44,13 +44,13 @@ export default function RecipesPage() {
 
   const filteredRecipes = recipes.filter((recipe) => {
     const matchSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchCuisine = selectedCuisine.length === 0 ||
+      selectedCuisine.includes(recipe.cuisine_type.toLowerCase());
     const matchCategory = selectedCategories.length === 0 ||
-      selectedCategories.includes(recipe.cuisine_type.toLowerCase());
-    const matchMealType = selectedMealTypes.length === 0 ||
-      selectedMealTypes.includes(recipe.meal_type);
+      selectedCategories.includes(recipe.category);
     const matchDifficulty = selectedDifficulties.length === 0 ||
       selectedDifficulties.includes(recipe.difficulty);
-    return matchSearch && matchCategory && matchMealType && matchDifficulty;
+    return matchSearch && matchCuisine && matchCategory && matchDifficulty;
   }).sort((a, b) => {
     const aVal = a[sortField];
     const bVal = b[sortField];
@@ -67,12 +67,12 @@ export default function RecipesPage() {
   const currentRecipes = filteredRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
   const totalPages = Math.ceil(filteredRecipes.length / recipesPerPage);
 
-  const removeCategory = (id) => {
-    setSelectedCategories(prev => prev.filter(cat => cat !== id));
+  const removeCuisine = (id) => {
+    setSelectedCuisine(prev => prev.filter(c => c !== id));
   };
 
-  const removeMealType = (type) => {
-    setSelectedMealTypes(prev => prev.filter(m => m !== type));
+  const removeCategory = (type) => {
+    setSelectedCategories(prev => prev.filter(cat => cat !== type));
   };
 
   const removeDifficulty = (level) => {
@@ -87,14 +87,14 @@ export default function RecipesPage() {
   useEffect(() => {
     const params = new URLSearchParams();
     if (searchTerm) params.set("search", searchTerm);
-    if (selectedCategories.length > 0) params.set("cuisine", selectedCategories.join(","));
-    if (selectedMealTypes.length > 0) params.set("meal", selectedMealTypes.join(","));
+    if (selectedCuisine.length > 0) params.set("cuisine", selectedCuisine.join(","));
+    if (selectedCategories.length > 0) params.set("meal", selectedCategories.join(","));
     if (selectedDifficulties.length > 0) params.set("difficulty", selectedDifficulties.join(","));
     if (sortField) params.set("sort", sortField);
     if (sortOrder) params.set("order", sortOrder);
     if (currentPage > 1) params.set("page", String(currentPage));
     setSearchParams(params);
-  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, sortField, sortOrder, currentPage]);
+  }, [searchTerm, selectedCuisine, selectedCategories, selectedDifficulties, sortField, sortOrder, currentPage]);
 
   useEffect(() => {
     if (isFirstLoad.current) {
@@ -102,7 +102,7 @@ export default function RecipesPage() {
       return;
     }
     setCurrentPage(1);
-  }, [searchTerm, selectedCategories, selectedMealTypes, selectedDifficulties, sortField, sortOrder]);
+  }, [searchTerm, selectedCuisine, selectedCategories, selectedDifficulties, sortField, sortOrder]);
 
   return (
     <div className="p-6 mt-16 bg-beige min-h-screen relative">
@@ -153,22 +153,22 @@ export default function RecipesPage() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {selectedCategories.map((id) => {
-            const cat = availableCategories.find((c) => c.id === id);
+          {selectedCuisine.map((id) => {
+            const cuis = availableCuisine.find((c) => c.id === id);
             return (
               <div key={id} className="flex items-center gap-1 px-2 py-1 bg-mint rounded-full text-sm">
-                <span>{cat?.icon || "🍽️"} {cat?.name || id}</span>
-                <button onClick={() => removeCategory(id)} className="text-gray-600 hover:text-gray-800">
+                <span>{cuis?.icon || "🍽️"} {cuis?.name || id}</span>
+                <button onClick={() => removeCuisine(id)} className="text-gray-600 hover:text-gray-800">
                   <XMarkIcon className="h-4 w-4" />
                 </button>
               </div>
             );
           })}
 
-          {selectedMealTypes.map((type) => (
+          {selectedCategories.map((type) => (
             <div key={type} className="flex items-center gap-1 px-2 py-1 bg-blue-200 rounded-full text-sm">
               <span>{type}</span>
-              <button onClick={() => removeMealType(type)} className="text-gray-600 hover:text-blue-800">
+              <button onClick={() => removeCategory(type)} className="text-gray-600 hover:text-blue-800">
                 <XMarkIcon className="h-4 w-4" />
               </button>
             </div>
@@ -187,16 +187,16 @@ export default function RecipesPage() {
 
       {filterOpen && (
         <FilterPopup
-          selected={selectedCategories}
-          setSelected={setSelectedCategories}
-          mealTypeSelected={selectedMealTypes}
-          setMealTypeSelected={setSelectedMealTypes}
-          difficultySelected={selectedDifficulties}
-          setDifficultySelected={setSelectedDifficulties}
+          selectedCuisine={selectedCuisine}
+          setSelectedCuisine={setSelectedCuisine}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+          selectedDifficulties={selectedDifficulties}
+          setSelectedDifficulties={setSelectedDifficulties}
           onApply={() => setFilterOpen(false)}
           onClose={() => setFilterOpen(false)}
-          options={availableCategories}
-          mealTypes={availableMealTypes}
+          options={availableCuisine}
+          categories={availableCategories}
           difficulties={availableDifficulties}
         />
       )}

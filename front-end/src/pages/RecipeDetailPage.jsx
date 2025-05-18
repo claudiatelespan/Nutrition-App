@@ -59,7 +59,7 @@ export default function RecipeDetailPage() {
 
           <div className="flex flex-wrap gap-2 text-sm">
             <span className="px-2 py-0.5 bg-mint text-gray-700 rounded-full">{recipe.cuisine_type}</span>
-            <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">{recipe.meal_type}</span>
+            <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">{recipe.category}</span>
             <span className="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full">{recipe.prep_time} min</span>
             <span className="px-2 py-0.5 bg-pink-100 text-pink-700 rounded-full">{recipe.difficulty}</span>
             <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>
@@ -79,8 +79,25 @@ export default function RecipeDetailPage() {
           </div>
 
           <div>
-            <h2 className="font-semibold text-lg mb-1 text-mango">Instructions:</h2>
+            <h2 className="font-semibold text-lg mb-1 text-mango">Description:</h2>
             <p className="text-sm text-gray-700">{recipe.description}</p>
+          </div>
+
+          <div>
+            <h2 className="font-semibold text-lg mb-1 text-mango">Directions:</h2>
+            <p className="text-sm text-gray-700 whitespace-pre-line">{recipe.directions}</p>
+          </div>
+
+          <div className="mt-4 border-t pt-4">
+            <h2 className="font-semibold text-lg mb-2 text-mango">Nutritional Values (per serving):</h2>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm text-gray-700">
+              <li><strong>Calories:</strong> {recipe.calories} kcal</li>
+              <li><strong>Protein:</strong> {recipe.protein} g</li>
+              <li><strong>Carbohydrates:</strong> {recipe.carbohydrates} g</li>
+              <li><strong>Sugars:</strong> {recipe.sugars} g</li>
+              <li><strong>Fat:</strong> {recipe.fat} g</li>
+              <li><strong>Fiber:</strong> {recipe.fiber} g</li>
+            </ul>
           </div>
         </div>
       </div>

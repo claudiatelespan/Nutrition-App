@@ -29,7 +29,7 @@ export default function RecipeCard({ recipe }) {
 
         <div className="flex flex-wrap gap-2 mt-2 text-xs">
           <span className="px-2 py-0.5 bg-mint text-gray-700 rounded-full">{recipe.cuisine_type}</span>
-          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">{recipe.meal_type}</span>
+          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">{recipe.category}</span>
           <span className="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full">{recipe.prep_time} min</span>
           <span className="px-2 py-0.5 bg-pink-100 text-pink-700 rounded-full">{recipe.difficulty}</span>
           <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>

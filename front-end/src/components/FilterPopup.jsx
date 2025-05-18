@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
 
 export default function FilterPopup({
-  selected,
-  setSelected,
-  mealTypeSelected,
-  setMealTypeSelected,
-  difficultySelected,
-  setDifficultySelected,
+  selectedCuisine,
+  setSelectedCuisine,
+  selectedCategories,
+  setSelectedCategories,
+  selectedDifficulties,
+  setSelectedDifficulties,
   onApply,
   onClose,
   options,
-  mealTypes,
+  categories,
   difficulties
 }) {
-  const [tempSelected, setTempSelected] = useState([]);
-  const [tempMealTypes, setTempMealTypes] = useState([]);
+  const [tempCuisines, setTempCuisines] = useState([]);
+  const [tempCategories, setTempCategories] = useState([]);
   const [tempDifficulties, setTempDifficulties] = useState([]);
 
   useEffect(() => {
-    setTempSelected(selected);
-    setTempMealTypes(mealTypeSelected);
-    setTempDifficulties(difficultySelected);
-  }, [selected, mealTypeSelected, difficultySelected]);
+    setTempCuisines(selectedCuisine);
+    setTempCategories(selectedCategories);
+    setTempDifficulties(selectedDifficulties);
+  }, [selectedCuisine, selectedCategories, selectedDifficulties]);
 
   const toggle = (stateSetter, state, value) => {
     stateSetter((prev) =>
@@ -30,9 +30,9 @@ export default function FilterPopup({
   };
 
   const handleApply = () => {
-    setSelected(tempSelected);
-    setMealTypeSelected(tempMealTypes);
-    setDifficultySelected(tempDifficulties);
+    setSelectedCuisine(tempCuisines);
+    setSelectedCategories(tempCategories);
+    setSelectedDifficulties(tempDifficulties);
     onApply();
   };
 
@@ -45,39 +45,39 @@ export default function FilterPopup({
           <div className="flex-1">
             <h3 className="font-medium mb-2">Cuisine Type</h3>
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-              {options.map((cat) => (
+              {options.map((op) => (
                 <button
-                  key={cat.id}
-                  onClick={() => toggle(setTempSelected, tempSelected, cat.id)}
+                  key={op.id}
+                  onClick={() => toggle(setTempCuisines, tempCuisines, op.id)}
                   className={`flex flex-col items-center justify-center gap-1 p-2 text-sm border border-orange-600/20 rounded-full transition ${
-                    tempSelected.includes(cat.id)
+                    tempCuisines.includes(op.id)
                       ? "bg-mango text-white"
                       : "bg-beige text-gray-800"
                   }`}
                 >
-                  <span className="text-xl">{cat.icon}</span>
-                  <span>{cat.name}</span>
+                  <span className="text-xl">{op.icon}</span>
+                  <span>{op.name}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Right column: Meal type & difficulty */}
+          {/* Right column: Category & difficulty */}
           <div className="flex-1 space-y-4">
             <div>
-              <h3 className="font-medium mb-2">Meal Type</h3>
+              <h3 className="font-medium mb-2">Category</h3>
               <div className="flex flex-wrap gap-2">
-                {mealTypes.map((type) => (
+                {categories.map((cat) => (
                   <button
-                    key={type}
-                    onClick={() => toggle(setTempMealTypes, tempMealTypes, type)}
+                    key={cat}
+                    onClick={() => toggle(setTempCategories, tempCategories, cat)}
                     className={`px-3 py-1 border rounded-full text-sm transition ${
-                      tempMealTypes.includes(type)
+                      tempCategories.includes(cat)
                         ? "bg-mango text-white"
                         : "bg-beige text-gray-800 border-orange-600/20"
                     }`}
                   >
-                    {type}
+                    {cat}
                   </button>
                 ))}
               </div>
@@ -107,8 +107,8 @@ export default function FilterPopup({
         <div className="flex justify-between items-center mt-4">
           <button
             onClick={() => {
-              setTempSelected([]);
-              setTempMealTypes([]);
+              setTempCuisines([]);
+              setTempCategories([]);
               setTempDifficulties([]);
             }}
             className="text-sm text-gray-600 underline hover:text-black"
