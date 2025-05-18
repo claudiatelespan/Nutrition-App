@@ -26,7 +26,7 @@ export default function RecipeDetailPage() {
   if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
   return (
-    <div className="bg-beige min-h-screen px-4 py-8 overflow-auto">
+    <div className="bg-beige mt-16 min-h-screen px-4 py-8 overflow-auto">
       <button
         onClick={handleBack}
         className="flex items-center gap-1 text-lg text-mango hover:underline hover:text-orange-500 cursor-pointer group"
@@ -70,10 +70,9 @@ export default function RecipeDetailPage() {
           <div>
             <h2 className="font-semibold text-lg mb-1 text-mango">Ingredients:</h2>
             <ul className="list-disc list-inside text-sm text-gray-700">
-              {recipe.ingredients.map((ingredient) => (
-                <li key={ingredient.ingredient.id}>
-                  {ingredient.quantity}
-                  {ingredient.ingredient.unit} {ingredient.ingredient.name}
+              {recipe.ingredients.split(";").map((ingredient) => (
+                <li key={ingredient}>
+                  {ingredient}
                 </li>
               ))}
             </ul>

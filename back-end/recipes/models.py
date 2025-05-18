@@ -13,13 +13,27 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
-    calories = models.FloatField()
-    cuisine_type = models.CharField(max_length=100)
-    prep_time = models.IntegerField(help_text="Time in minutes")
-    difficulty = models.CharField(max_length=20, choices=[('easy', 'Easy'), ('medium', 'Medium'), ('hard', 'Hard')])
-    meal_type = models.CharField(max_length=50, choices=[('breakfast', 'Breakfast'), ('lunch', 'Lunch'), ('dinner', 'Dinner')])
-    rating = models.FloatField(default=0)
+    description = models.TextField(blank=True, null=True)
+    directions = models.TextField(blank=True, null=True)
+    ingredients = models.TextField(blank=True, null=True)
+
+    calories = models.FloatField(null=True, blank=True)
+    protein = models.FloatField(null=True, blank=True)
+    carbohydrates = models.FloatField(null=True, blank=True)
+    sugars = models.FloatField(null=True, blank=True)
+    fat = models.FloatField(null=True, blank=True)
+    fiber = models.FloatField(null=True, blank=True)
+
+    cuisine_type = models.CharField(max_length=256, blank=True, null=True)
+    prep_time = models.IntegerField(help_text="Time in minutes", null=True, blank=True)
+    difficulty = models.CharField(
+        max_length=20,
+        choices=[('easy', 'Easy'), ('medium', 'Medium'), ('hard', 'Hard')],
+        blank=True,
+        null=True
+    )
+    category = models.CharField(max_length=256, blank=True, null=True)
+    rating = models.FloatField(default=0, blank=True, null=True)
     image = models.ImageField(upload_to='recipe_images/', null=True, blank=True)
 
     def __str__(self):

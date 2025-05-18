@@ -14,16 +14,14 @@ class RecipeIngredientSerializer(serializers.ModelSerializer):
         fields = ['ingredient', 'quantity']
 
 class RecipeSerializer(serializers.ModelSerializer):
-    ingredients = serializers.SerializerMethodField()
 
     class Meta:
         model = Recipe
-        fields = ['id', 'name', 'description', 'calories', 'cuisine_type',
-                  'prep_time', 'difficulty', 'meal_type', 'rating', 'ingredients']
+        fields = "__all__"
 
-    def get_ingredients(self, obj):
-        ingredients_rel = RecipeIngredient.objects.filter(reteta=obj)
-        return RecipeIngredientSerializer(ingredients_rel, many=True).data
+    # def get_ingredients(self, obj):
+    #     ingredients_rel = RecipeIngredient.objects.filter(reteta=obj)
+    #     return RecipeIngredientSerializer(ingredients_rel, many=True).data
 
 class FavoriteRecipeSerializer(serializers.ModelSerializer):
     class Meta:
