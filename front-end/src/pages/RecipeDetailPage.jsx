@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
@@ -23,6 +23,10 @@ export default function RecipeDetailPage() {
     navigate(prev);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
   return (
@@ -42,7 +46,7 @@ export default function RecipeDetailPage() {
           className="w-full md:w-1/2 h-48 md:h-auto object-cover"
         />
 
-        <div className="p-6 flex flex-col gap-4 overflow-y-auto w-full">
+        <div className="p-10 flex flex-col gap-4 overflow-y-auto w-full">
           <div className="flex justify-between items-start">
             <h1 className="text-2xl font-bold">{recipe.name}</h1>
             <button
@@ -69,7 +73,7 @@ export default function RecipeDetailPage() {
 
           <div>
             <h2 className="font-semibold text-lg mb-1 text-mango">Ingredients:</h2>
-            <ul className="list-disc list-inside text-sm text-gray-700">
+            <ul className="list-disc list-inside text-sm text-gray-700 text-justify">
               {recipe.ingredients.split(";").map((ingredient) => (
                 <li key={ingredient}>
                   {ingredient}
@@ -80,12 +84,12 @@ export default function RecipeDetailPage() {
 
           <div>
             <h2 className="font-semibold text-lg mb-1 text-mango">Description:</h2>
-            <p className="text-sm text-gray-700">{recipe.description}</p>
+            <p className="text-sm text-gray-700 text-justify">{recipe.description}</p>
           </div>
 
           <div>
             <h2 className="font-semibold text-lg mb-1 text-mango">Directions:</h2>
-            <p className="text-sm text-gray-700 whitespace-pre-line">{recipe.directions}</p>
+            <p className="text-sm text-gray-700 whitespace-pre-line text-justify">{recipe.directions}</p>
           </div>
 
           <div className="mt-4 border-t pt-4">

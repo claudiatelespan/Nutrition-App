@@ -6,4 +6,8 @@ export const cuisineIcons = {
   french: "🥖",
   japanese: "🍣",
   american: "🍔",
+  mediterranean: "🥙",
+  british: "🍲",
+  greek: "🥗",
+  middle_eastern: "🥘"
 };

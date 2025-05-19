@@ -27,11 +27,15 @@ export default function RecipesPage() {
   const availableCuisine = useMemo(() => {
     const cuisines = new Set();
     recipes.forEach(r => cuisines.add(r.cuisine_type.toLowerCase()));
-    return Array.from(cuisines).map(id => ({
-      id,
-      name: id.charAt(0).toUpperCase() + id.slice(1),
-      icon: cuisineIcons[id] || "🍽️"
-    }));
+    const toTitleCase = s => s.replace(/\b\w/g, c => c.toUpperCase());
+    return Array.from(cuisines).map(id => {
+      const iconKey = id.replace(/\s+/g, "_"); //for middle_eastern
+      return {
+        id,
+        name: toTitleCase(id),                 
+        icon: cuisineIcons[iconKey] || "🍽️"
+      };
+    });
   }, [recipes]);
 
   const availableCategories = useMemo(() => {
@@ -108,28 +112,30 @@ export default function RecipesPage() {
     <div className="p-6 mt-16 bg-beige min-h-screen relative">
       <h1 className="text-2xl font-bold mb-4">Recipes</h1>
 
-      <div className="flex flex-col gap-2 mb-4">
-        <div className="flex flex-wrap gap-2 items-center">
-          <div className="relative w-full max-w-xl">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
-            <input
-              type="text"
-              placeholder="Search recipes..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-[#FFA725]"
-            />
+      <div className="flex flex-col gap-2 mb-4 p-2">
+        <div className="flex flex-wrap gap-2 items-center justify-between">
+          <div className="flex flex-row w-2xl gap-2">
+            <div className="relative w-full max-w-xl">
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-600" />
+              <input
+                type="text"
+                placeholder="Search recipes..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 p-2 border border-gray-400 rounded-md outline-[#FFA725]"
+              />
+            </div>
+
+            <button
+              onClick={() => setFilterOpen(prev => !prev)}
+              className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-hover-beige flex items-center gap-2"
+            >
+              <FunnelIcon className="h-5 w-5" />
+              Filter
+            </button>
           </div>
-
-          <button
-            onClick={() => setFilterOpen(prev => !prev)}
-            className="px-4 py-2 text-sm border border-gray-400 rounded-lg hover:bg-hover-beige flex items-center gap-2"
-          >
-            <FunnelIcon className="h-5 w-5" />
-            Filter
-          </button>
-
           <div className="flex gap-2 items-center">
+            <p>Sort by:</p>
             <select
               value={sortField}
               onChange={(e) => setSortField(e.target.value)}
@@ -204,10 +210,14 @@ export default function RecipesPage() {
       {filteredRecipes.length === 0 ? (
         <p className="text-gray-500">No recipes found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {currentRecipes.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} />
-          ))}
+        <div className="flex justify-center">
+          <div className="w-full max-w-7xl px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {currentRecipes.map((recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe} />
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
