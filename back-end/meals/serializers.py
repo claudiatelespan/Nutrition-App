@@ -15,7 +15,7 @@ class SnackLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = SnackLog
         fields = "__all__"
-        read_only_fields = ["user", "calories"]
+        read_only_fields = ["user", "calories", "protein", "carbohydrates", "sugar", "fiber", "fat"]
 
     def validate(self, attrs):
         snack = attrs.get("snack")
@@ -24,7 +24,6 @@ class SnackLogSerializer(serializers.ModelSerializer):
         if not snack or quantity is None:
             raise serializers.ValidationError("Snack and quantity are required.")
 
-        attrs["calories"] = round(quantity * snack.calories_per_unit, 2)
         return attrs
 
 class PhysicalActivityLogSerializer(serializers.ModelSerializer):

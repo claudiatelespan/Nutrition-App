@@ -27,16 +27,28 @@ class SnackLog(models.Model):
     snack = models.ForeignKey(Snack, on_delete=models.CASCADE)
     date = models.DateField()
     quantity = models.FloatField()
-    calories = models.FloatField(editable=False)
+
+    calories = models.FloatField(editable=False, null=True)
+    protein = models.FloatField(editable=False, null=True)
+    carbohydrates = models.FloatField(editable=False, null=True)
+    sugar = models.FloatField(editable=False, null=True)
+    fiber = models.FloatField(editable=False, null=True)
+    fat = models.FloatField(editable=False, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        self.calories = self.snack.calories_per_unit * self.quantity
+        factor = self.quantity / 100
+        self.calories = self.snack.calories_per_100g * factor
+        self.protein = self.snack.protein * factor
+        self.carbohydrates = self.snack.carbohydrates * factor
+        self.sugar = self.snack.sugar * factor
+        self.fiber = self.snack.fiber * factor
+        self.fat = self.snack.fat * factor
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.user.username} - {self.snack.name} x{self.quantity} - {self.date}"
+        return f"{self.user.username} - {self.snack.name} x{self.quantity} grams - {self.date}"
 
 class PhysicalActivityLog(models.Model):
     INTENSITY_CHOICES = [

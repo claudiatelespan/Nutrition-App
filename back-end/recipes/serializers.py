@@ -32,7 +32,7 @@ class FavoriteRecipeSerializer(serializers.ModelSerializer):
 class SnackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snack
-        fields = ["id", "name", "unit", "calories_per_unit"]
+        fields = "__all__"
 
 class PhysicalActivitySerializer(serializers.ModelSerializer):
     class Meta:

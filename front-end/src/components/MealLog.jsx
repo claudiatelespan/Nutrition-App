@@ -103,15 +103,10 @@ export default function MealLog() {
         if (!grouped[date]) {
         grouped[date] = { Breakfast: [], Lunch: [], Dinner: [], Snack: [] };
         }
-        const unit = snacks.find(s => s.name === log.snack_name)?.unit || "";
-        grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity} ${unit})`);
+        grouped[date]["Snack"].push(`${log.snack_name} (${log.quantity} grams)`);
     });
     return grouped;
    }, [mealLogs, snackLogs]);
-
-   const selectedSnack = mealType === "Snack"
-  ? snacks.find((s) => s.name === selectedItem)
-  : null;
 
   return (
     <div className="p-6 bg-beige space-y-8 max-w-7xl mx-auto">
@@ -201,7 +196,7 @@ export default function MealLog() {
                     <input
                     type="number"
                     min="1"
-                    placeholder={`Quantity (${selectedSnack?.unit || ""})`}
+                    placeholder="Quantity (grams)"
                     value={snackQuantity}
                     onChange={(e) => setSnackQuantity(e.target.value)}
                     className="w-full border p-2 rounded outline-mango"
