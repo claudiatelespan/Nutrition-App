@@ -1,0 +1,1056 @@
+[
+  {
+    "food":"asian pear",
+    "Caloric Value":51,
+    "Protein":0.6,
+    "Carbohydrates":13.0,
+    "Sugars":8.6,
+    "Dietary Fiber":4.4,
+    "Fat":0.3
+  },
+  {
+    "food":"rice drink",
+    "Caloric Value":113,
+    "Protein":0.7,
+    "Carbohydrates":22.0,
+    "Sugars":12.7,
+    "Dietary Fiber":0.7,
+    "Fat":2.3
+  },
+  {
+    "food":"pummelo",
+    "Caloric Value":48,
+    "Protein":1.0,
+    "Carbohydrates":12.0,
+    "Sugars":0.0,
+    "Dietary Fiber":1.3,
+    "Fat":0.06
+  },
+  {
+    "food":"loganberries",
+    "Caloric Value":81,
+    "Protein":2.2,
+    "Carbohydrates":19.1,
+    "Sugars":11.3,
+    "Dietary Fiber":7.8,
+    "Fat":0.5
+  },
+  {
+    "food":"gooseberries canned",
+    "Caloric Value":184,
+    "Protein":1.6,
+    "Carbohydrates":47.3,
+    "Sugars":0.0,
+    "Dietary Fiber":6.0,
+    "Fat":0.5
+  },
+  {
+    "food":"white grapefruit",
+    "Caloric Value":78,
+    "Protein":1.6,
+    "Carbohydrates":19.8,
+    "Sugars":17.3,
+    "Dietary Fiber":2.6,
+    "Fat":0.2
+  },
+  {
+    "food":"black tea",
+    "Caloric Value":2,
+    "Protein":0.0,
+    "Carbohydrates":0.7,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"fruit salad canned",
+    "Caloric Value":125,
+    "Protein":1.3,
+    "Carbohydrates":32.5,
+    "Sugars":0.0,
+    "Dietary Fiber":2.5,
+    "Fat":0.008
+  },
+  {
+    "food":"fruit flavored water",
+    "Caloric Value":52,
+    "Protein":0.0,
+    "Carbohydrates":13.0,
+    "Sugars":13.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"kumquat",
+    "Caloric Value":13,
+    "Protein":0.4,
+    "Carbohydrates":3.0,
+    "Sugars":1.8,
+    "Dietary Fiber":1.2,
+    "Fat":0.2
+  },
+  {
+    "food":"corn pudding",
+    "Caloric Value":328,
+    "Protein":11.1,
+    "Carbohydrates":42.4,
+    "Sugars":16.5,
+    "Dietary Fiber":3.0,
+    "Fat":12.6
+  },
+  {
+    "food":"surinam cherry pitanga",
+    "Caloric Value":2,
+    "Protein":0.045,
+    "Carbohydrates":0.5,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.059
+  },
+  {
+    "food":"plum",
+    "Caloric Value":30,
+    "Protein":0.5,
+    "Carbohydrates":7.5,
+    "Sugars":6.5,
+    "Dietary Fiber":0.9,
+    "Fat":0.2
+  },
+  {
+    "food":"guanabana nectar",
+    "Caloric Value":148,
+    "Protein":0.3,
+    "Carbohydrates":37.5,
+    "Sugars":32.8,
+    "Dietary Fiber":0.3,
+    "Fat":0.4
+  },
+  {
+    "food":"lemon lime soda",
+    "Caloric Value":151,
+    "Protein":0.3,
+    "Carbohydrates":38.4,
+    "Sugars":37.6,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"cantaloupe melon",
+    "Caloric Value":60,
+    "Protein":1.5,
+    "Carbohydrates":14.4,
+    "Sugars":13.9,
+    "Dietary Fiber":1.6,
+    "Fat":0.3
+  },
+  {
+    "food":"coconut milk",
+    "Caloric Value":35,
+    "Protein":0.3,
+    "Carbohydrates":0.8,
+    "Sugars":0.5,
+    "Dietary Fiber":0.3,
+    "Fat":3.6
+  },
+  {
+    "food":"lemon pudding",
+    "Caloric Value":173,
+    "Protein":4.1,
+    "Carbohydrates":30.2,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":4.4
+  },
+  {
+    "food":"coffee",
+    "Caloric Value":2,
+    "Protein":0.3,
+    "Carbohydrates":0.0,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.069
+  },
+  {
+    "food":"japanese persimmon",
+    "Caloric Value":118,
+    "Protein":1.0,
+    "Carbohydrates":31.2,
+    "Sugars":21.1,
+    "Dietary Fiber":6.0,
+    "Fat":0.3
+  },
+  {
+    "food":"powerade zero ion4 coca cola",
+    "Caloric Value":0,
+    "Protein":0.0,
+    "Carbohydrates":0.0,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"yogurt parfait",
+    "Caloric Value":125,
+    "Protein":5.0,
+    "Carbohydrates":23.6,
+    "Sugars":17.4,
+    "Dietary Fiber":1.6,
+    "Fat":1.5
+  },
+  {
+    "food":"chocolate frozen yogurt",
+    "Caloric Value":221,
+    "Protein":5.2,
+    "Carbohydrates":37.6,
+    "Sugars":33.5,
+    "Dietary Fiber":4.0,
+    "Fat":6.3
+  },
+  {
+    "food":"chocolate pudding fat free",
+    "Caloric Value":105,
+    "Protein":2.2,
+    "Carbohydrates":23.6,
+    "Sugars":17.8,
+    "Dietary Fiber":0.3,
+    "Fat":0.3
+  },
+  {
+    "food":"smoothie high protein creamy chocolate slimfast",
+    "Caloric Value":110,
+    "Protein":12.0,
+    "Carbohydrates":2.1,
+    "Sugars":1.0,
+    "Dietary Fiber":0.0,
+    "Fat":3.5
+  },
+  {
+    "food":"tonic water",
+    "Caloric Value":114,
+    "Protein":0.0,
+    "Carbohydrates":29.6,
+    "Sugars":29.6,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"carrot juice",
+    "Caloric Value":80,
+    "Protein":1.9,
+    "Carbohydrates":18.6,
+    "Sugars":7.8,
+    "Dietary Fiber":1.6,
+    "Fat":0.3
+  },
+  {
+    "food":"peanut topping mcdonalds",
+    "Caloric Value":181,
+    "Protein":7.9,
+    "Carbohydrates":4.6,
+    "Sugars":1.2,
+    "Dietary Fiber":0.0,
+    "Fat":15.0
+  },
+  {
+    "food":"groundcherries",
+    "Caloric Value":74,
+    "Protein":2.7,
+    "Carbohydrates":15.7,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":1.0
+  },
+  {
+    "food":"muesli with fruit nuts",
+    "Caloric Value":231,
+    "Protein":4.3,
+    "Carbohydrates":45.7,
+    "Sugars":14.2,
+    "Dietary Fiber":5.8,
+    "Fat":3.4
+  },
+  {
+    "food":"muscadine grapes",
+    "Caloric Value":3,
+    "Protein":0.014,
+    "Carbohydrates":0.8,
+    "Sugars":0.0,
+    "Dietary Fiber":0.2,
+    "Fat":0.056
+  },
+  {
+    "food":"plantain chips",
+    "Caloric Value":150,
+    "Protein":0.6,
+    "Carbohydrates":18.1,
+    "Sugars":0.3,
+    "Dietary Fiber":1.0,
+    "Fat":8.4
+  },
+  {
+    "food":"apricot juice",
+    "Caloric Value":117,
+    "Protein":1.5,
+    "Carbohydrates":30.1,
+    "Sugars":26.2,
+    "Dietary Fiber":3.9,
+    "Fat":0.07
+  },
+  {
+    "food":"triple zero greek yogurt dannon oikos",
+    "Caloric Value":120,
+    "Protein":0.038,
+    "Carbohydrates":22.5,
+    "Sugars":6.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"fruit yogurt",
+    "Caloric Value":149,
+    "Protein":6.0,
+    "Carbohydrates":28.0,
+    "Sugars":28.0,
+    "Dietary Fiber":0.0,
+    "Fat":1.7
+  },
+  {
+    "food":"waxgourd cooked",
+    "Caloric Value":19,
+    "Protein":0.7,
+    "Carbohydrates":4.3,
+    "Sugars":2.1,
+    "Dietary Fiber":1.8,
+    "Fat":0.4
+  },
+  {
+    "food":"mango nectar",
+    "Caloric Value":128,
+    "Protein":0.3,
+    "Carbohydrates":32.9,
+    "Sugars":31.2,
+    "Dietary Fiber":0.8,
+    "Fat":0.2
+  },
+  {
+    "food":"mangosteen canned",
+    "Caloric Value":143,
+    "Protein":0.8,
+    "Carbohydrates":35.1,
+    "Sugars":0.0,
+    "Dietary Fiber":3.5,
+    "Fat":1.1
+  },
+  {
+    "food":"mango",
+    "Caloric Value":202,
+    "Protein":2.8,
+    "Carbohydrates":50.3,
+    "Sugars":45.9,
+    "Dietary Fiber":5.4,
+    "Fat":1.3
+  },
+  {
+    "food":"amp energy sugar free pepsi",
+    "Caloric Value":5,
+    "Protein":0.0,
+    "Carbohydrates":2.5,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"grapefruit juice",
+    "Caloric Value":96,
+    "Protein":1.2,
+    "Carbohydrates":22.7,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.2
+  },
+  {
+    "food":"cashew nuts raw",
+    "Caloric Value":156,
+    "Protein":5.2,
+    "Carbohydrates":8.5,
+    "Sugars":1.7,
+    "Dietary Fiber":0.9,
+    "Fat":12.4
+  },
+  {
+    "food":"instant cappuccino powder",
+    "Caloric Value":53,
+    "Protein":0.4,
+    "Carbohydrates":11.2,
+    "Sugars":9.0,
+    "Dietary Fiber":0.2,
+    "Fat":0.7
+  },
+  {
+    "food":"instant coffee with water decaffeinated",
+    "Caloric Value":4,
+    "Protein":0.2,
+    "Carbohydrates":0.8,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"orange grapefruit juice",
+    "Caloric Value":106,
+    "Protein":1.5,
+    "Carbohydrates":25.4,
+    "Sugars":25.1,
+    "Dietary Fiber":0.2,
+    "Fat":0.2
+  },
+  {
+    "food":"gushers fruit gushers",
+    "Caloric Value":360,
+    "Protein":0.0,
+    "Carbohydrates":0.2,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":6.0
+  },
+  {
+    "food":"acerola cherry juice",
+    "Caloric Value":56,
+    "Protein":1.0,
+    "Carbohydrates":11.6,
+    "Sugars":10.9,
+    "Dietary Fiber":0.7,
+    "Fat":0.7
+  },
+  {
+    "food":"peach",
+    "Caloric Value":59,
+    "Protein":1.4,
+    "Carbohydrates":14.3,
+    "Sugars":12.6,
+    "Dietary Fiber":2.3,
+    "Fat":0.4
+  },
+  {
+    "food":"raspberries canned",
+    "Caloric Value":233,
+    "Protein":2.1,
+    "Carbohydrates":59.8,
+    "Sugars":51.4,
+    "Dietary Fiber":8.4,
+    "Fat":0.3
+  },
+  {
+    "food":"figs dried",
+    "Caloric Value":21,
+    "Protein":0.3,
+    "Carbohydrates":5.4,
+    "Sugars":4.0,
+    "Dietary Fiber":0.8,
+    "Fat":0.008
+  },
+  {
+    "food":"virginia peanuts raw",
+    "Caloric Value":822,
+    "Protein":36.8,
+    "Carbohydrates":24.1,
+    "Sugars":5.8,
+    "Dietary Fiber":12.4,
+    "Fat":71.2
+  },
+  {
+    "food":"cranberries dried",
+    "Caloric Value":370,
+    "Protein":0.053,
+    "Carbohydrates":98.8,
+    "Sugars":78.0,
+    "Dietary Fiber":6.8,
+    "Fat":1.6
+  },
+  {
+    "food":"fenugreek seeds",
+    "Caloric Value":36,
+    "Protein":2.6,
+    "Carbohydrates":6.5,
+    "Sugars":0.0,
+    "Dietary Fiber":2.7,
+    "Fat":0.7
+  },
+  {
+    "food":"pistachio nuts roasted",
+    "Caloric Value":172,
+    "Protein":6.3,
+    "Carbohydrates":8.5,
+    "Sugars":2.3,
+    "Dietary Fiber":3.1,
+    "Fat":13.7
+  },
+  {
+    "food":"prune juice",
+    "Caloric Value":182,
+    "Protein":1.6,
+    "Carbohydrates":44.7,
+    "Sugars":42.1,
+    "Dietary Fiber":2.6,
+    "Fat":0.006
+  },
+  {
+    "food":"prune plums canned",
+    "Caloric Value":27,
+    "Protein":0.2,
+    "Carbohydrates":7.0,
+    "Sugars":6.5,
+    "Dietary Fiber":0.4,
+    "Fat":0.075
+  },
+  {
+    "food":"passion fruit",
+    "Caloric Value":17,
+    "Protein":0.4,
+    "Carbohydrates":4.2,
+    "Sugars":2.0,
+    "Dietary Fiber":1.9,
+    "Fat":0.1
+  },
+  {
+    "food":"spanish peanuts",
+    "Caloric Value":832,
+    "Protein":38.2,
+    "Carbohydrates":23.1,
+    "Sugars":0.0,
+    "Dietary Fiber":13.9,
+    "Fat":72.4
+  },
+  {
+    "food":"mixed nuts roasted",
+    "Caloric Value":178,
+    "Protein":5.2,
+    "Carbohydrates":7.6,
+    "Sugars":1.4,
+    "Dietary Fiber":2.7,
+    "Fat":15.4
+  },
+  {
+    "food":"bran flakes",
+    "Caloric Value":131,
+    "Protein":4.0,
+    "Carbohydrates":32.2,
+    "Sugars":7.4,
+    "Dietary Fiber":7.3,
+    "Fat":0.8
+  },
+  {
+    "food":"limeade",
+    "Caloric Value":128,
+    "Protein":0.0,
+    "Carbohydrates":34.1,
+    "Sugars":32.8,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"apricot dried",
+    "Caloric Value":17,
+    "Protein":0.2,
+    "Carbohydrates":4.4,
+    "Sugars":3.7,
+    "Dietary Fiber":0.5,
+    "Fat":0.015
+  },
+  {
+    "food":"lupins cooked",
+    "Caloric Value":193,
+    "Protein":25.8,
+    "Carbohydrates":15.4,
+    "Sugars":0.0,
+    "Dietary Fiber":4.6,
+    "Fat":4.8
+  },
+  {
+    "food":"lime juice",
+    "Caloric Value":61,
+    "Protein":1.0,
+    "Carbohydrates":20.4,
+    "Sugars":4.1,
+    "Dietary Fiber":1.0,
+    "Fat":0.2
+  },
+  {
+    "food":"coffee decaffeinated",
+    "Caloric Value":0,
+    "Protein":0.2,
+    "Carbohydrates":0.0,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"glucerna abbott",
+    "Caloric Value":1010,
+    "Protein":0.0,
+    "Carbohydrates":120.9,
+    "Sugars":49.8,
+    "Dietary Fiber":12.8,
+    "Fat":35.6
+  },
+  {
+    "food":"chayote raw",
+    "Caloric Value":25,
+    "Protein":1.1,
+    "Carbohydrates":6.0,
+    "Sugars":2.2,
+    "Dietary Fiber":2.2,
+    "Fat":0.2
+  },
+  {
+    "food":"blackberries frozen",
+    "Caloric Value":97,
+    "Protein":1.8,
+    "Carbohydrates":23.7,
+    "Sugars":16.1,
+    "Dietary Fiber":7.6,
+    "Fat":0.6
+  },
+  {
+    "food":"herb tea",
+    "Caloric Value":2,
+    "Protein":0.0,
+    "Carbohydrates":0.4,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"cherimoya",
+    "Caloric Value":176,
+    "Protein":3.7,
+    "Carbohydrates":41.6,
+    "Sugars":30.2,
+    "Dietary Fiber":7.1,
+    "Fat":1.6
+  },
+  {
+    "food":"melon balls",
+    "Caloric Value":57,
+    "Protein":1.5,
+    "Carbohydrates":13.7,
+    "Sugars":0.0,
+    "Dietary Fiber":1.2,
+    "Fat":0.4
+  },
+  {
+    "food":"virginia peanuts roasted",
+    "Caloric Value":173,
+    "Protein":7.8,
+    "Carbohydrates":6.0,
+    "Sugars":0.0,
+    "Dietary Fiber":2.7,
+    "Fat":14.6
+  },
+  {
+    "food":"papaya canned",
+    "Caloric Value":80,
+    "Protein":0.001,
+    "Carbohydrates":21.8,
+    "Sugars":20.4,
+    "Dietary Fiber":0.6,
+    "Fat":0.2
+  },
+  {
+    "food":"papaya nectar",
+    "Caloric Value":143,
+    "Protein":0.4,
+    "Carbohydrates":36.3,
+    "Sugars":34.8,
+    "Dietary Fiber":1.5,
+    "Fat":0.4
+  },
+  {
+    "food":"chamomile tea",
+    "Caloric Value":2,
+    "Protein":0.0,
+    "Carbohydrates":0.4,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"espresso",
+    "Caloric Value":3,
+    "Protein":0.021,
+    "Carbohydrates":0.5,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.086
+  },
+  {
+    "food":"espresso decaffeinated",
+    "Caloric Value":3,
+    "Protein":0.065,
+    "Carbohydrates":0.5,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.011
+  },
+  {
+    "food":"tapioca pudding fat free",
+    "Caloric Value":105,
+    "Protein":1.6,
+    "Carbohydrates":23.9,
+    "Sugars":15.9,
+    "Dietary Fiber":0.0,
+    "Fat":0.4
+  },
+  {
+    "food":"orange with peel",
+    "Caloric Value":100,
+    "Protein":2.1,
+    "Carbohydrates":24.6,
+    "Sugars":0.0,
+    "Dietary Fiber":7.2,
+    "Fat":0.5
+  },
+  {
+    "food":"banana",
+    "Caloric Value":134,
+    "Protein":1.6,
+    "Carbohydrates":34.3,
+    "Sugars":18.3,
+    "Dietary Fiber":3.9,
+    "Fat":0.5
+  },
+  {
+    "food":"tea with milk and sugar yorkshire",
+    "Caloric Value":15,
+    "Protein":0.0,
+    "Carbohydrates":0.4,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.5
+  },
+  {
+    "food":"pesca tea santal",
+    "Caloric Value":116,
+    "Protein":0.0,
+    "Carbohydrates":0.0,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"lemon peel",
+    "Caloric Value":1,
+    "Protein":0.032,
+    "Carbohydrates":0.3,
+    "Sugars":0.054,
+    "Dietary Fiber":0.2,
+    "Fat":0.002
+  },
+  {
+    "food":"walnut",
+    "Caloric Value":33,
+    "Protein":0.8,
+    "Carbohydrates":0.7,
+    "Sugars":0.1,
+    "Dietary Fiber":0.3,
+    "Fat":3.3
+  },
+  {
+    "food":"pistachio nuts raw",
+    "Caloric Value":691,
+    "Protein":24.9,
+    "Carbohydrates":33.8,
+    "Sugars":9.4,
+    "Dietary Fiber":12.7,
+    "Fat":55.8
+  },
+  {
+    "food":"pinyon pine nuts dried",
+    "Caloric Value":1,
+    "Protein":0.083,
+    "Carbohydrates":0.01,
+    "Sugars":0.0,
+    "Dietary Fiber":0.005,
+    "Fat":0.073
+  },
+  {
+    "food":"sapodilla",
+    "Caloric Value":141,
+    "Protein":0.7,
+    "Carbohydrates":33.9,
+    "Sugars":0.0,
+    "Dietary Fiber":9.0,
+    "Fat":1.9
+  },
+  {
+    "food":"acorn dried",
+    "Caloric Value":144,
+    "Protein":2.3,
+    "Carbohydrates":15.2,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":8.9
+  },
+  {
+    "food":"apple",
+    "Caloric Value":95,
+    "Protein":0.5,
+    "Carbohydrates":25.1,
+    "Sugars":18.9,
+    "Dietary Fiber":4.4,
+    "Fat":0.3
+  },
+  {
+    "food":"mammy apple mamey",
+    "Caloric Value":431,
+    "Protein":4.2,
+    "Carbohydrates":105.8,
+    "Sugars":0.0,
+    "Dietary Fiber":25.4,
+    "Fat":4.2
+  },
+  {
+    "food":"fruit punch",
+    "Caloric Value":98,
+    "Protein":0.2,
+    "Carbohydrates":24.4,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.4
+  },
+  {
+    "food":"cottage cheese nonfat",
+    "Caloric Value":104,
+    "Protein":15.0,
+    "Carbohydrates":9.7,
+    "Sugars":2.7,
+    "Dietary Fiber":0.0,
+    "Fat":0.4
+  },
+  {
+    "food":"full throttle coca cola",
+    "Caloric Value":110,
+    "Protein":0.6,
+    "Carbohydrates":29.0,
+    "Sugars":29.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.2
+  },
+  {
+    "food":"kiwifruit gold",
+    "Caloric Value":51,
+    "Protein":0.8,
+    "Carbohydrates":12.8,
+    "Sugars":10.0,
+    "Dietary Fiber":1.1,
+    "Fat":0.2
+  },
+  {
+    "food":"prickly pear",
+    "Caloric Value":42,
+    "Protein":0.8,
+    "Carbohydrates":9.9,
+    "Sugars":0.0,
+    "Dietary Fiber":3.7,
+    "Fat":0.5
+  },
+
+  {
+    "food":"pear",
+    "Caloric Value":101,
+    "Protein":0.6,
+    "Carbohydrates":27.1,
+    "Sugars":17.4,
+    "Dietary Fiber":5.5,
+    "Fat":0.2
+  },
+  {
+    "food":"corn flakes",
+    "Caloric Value":108,
+    "Protein":1.7,
+    "Carbohydrates":24.6,
+    "Sugars":2.2,
+    "Dietary Fiber":0.8,
+    "Fat":0.3
+  },
+  {
+    "food":"fruchtcocktail granini",
+    "Caloric Value":102,
+    "Protein":0.0,
+    "Carbohydrates":1.0,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.4
+  },
+  {
+    "food":"pomegranate juice",
+    "Caloric Value":134,
+    "Protein":0.4,
+    "Carbohydrates":32.7,
+    "Sugars":31.5,
+    "Dietary Fiber":0.2,
+    "Fat":0.7
+  },
+  {
+    "food":"prickly pear raw",
+    "Caloric Value":8,
+    "Protein":0.001,
+    "Carbohydrates":1.9,
+    "Sugars":0.2,
+    "Dietary Fiber":1.0,
+    "Fat":0.072
+  },
+  {
+    "food":"grapefruit",
+    "Caloric Value":53,
+    "Protein":1.0,
+    "Carbohydrates":13.3,
+    "Sugars":8.6,
+    "Dietary Fiber":2.0,
+    "Fat":0.2
+  },
+  {
+    "food":"butternuts dried",
+    "Caloric Value":734,
+    "Protein":29.9,
+    "Carbohydrates":14.5,
+    "Sugars":0.0,
+    "Dietary Fiber":5.6,
+    "Fat":68.4
+  },
+  {
+    "food":"sprite coca cola",
+    "Caloric Value":80,
+    "Protein":0.1,
+    "Carbohydrates":20.3,
+    "Sugars":18.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.063
+  },
+  {
+    "food":"safflower seed kernels dried",
+    "Caloric Value":146,
+    "Protein":4.6,
+    "Carbohydrates":9.7,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":10.9
+  },
+  {
+    "food":"maraschino cherries",
+    "Caloric Value":8,
+    "Protein":0.06,
+    "Carbohydrates":2.1,
+    "Sugars":1.9,
+    "Dietary Fiber":0.2,
+    "Fat":0.083
+  },
+  {
+    "food":"nectarine",
+    "Caloric Value":66,
+    "Protein":1.6,
+    "Carbohydrates":15.8,
+    "Sugars":11.8,
+    "Dietary Fiber":2.6,
+    "Fat":0.5
+  },
+  {
+    "food":"guava nectar",
+    "Caloric Value":158,
+    "Protein":0.2,
+    "Carbohydrates":40.8,
+    "Sugars":32.5,
+    "Dietary Fiber":2.5,
+    "Fat":0.2
+  },
+  {
+    "food":"pumpkin squash seeds roasted",
+    "Caloric Value":46,
+    "Protein":2.4,
+    "Carbohydrates":1.2,
+    "Sugars":0.1,
+    "Dietary Fiber":0.5,
+    "Fat":3.9
+  },
+  {
+    "food":"honeydew melon",
+    "Caloric Value":64,
+    "Protein":1.0,
+    "Carbohydrates":16.1,
+    "Sugars":14.4,
+    "Dietary Fiber":1.4,
+    "Fat":0.2
+  },
+  {
+    "food":"studentenfutter alnatura",
+    "Caloric Value":139,
+    "Protein":3.1,
+    "Carbohydrates":13.2,
+    "Sugars":11.7,
+    "Dietary Fiber":0.031,
+    "Fat":7.8
+  },
+  {
+    "food":"apple dried",
+    "Caloric Value":145,
+    "Protein":0.6,
+    "Carbohydrates":39.1,
+    "Sugars":34.0,
+    "Dietary Fiber":5.1,
+    "Fat":0.2
+  },
+  {
+    "food":"hazelnuts blanched",
+    "Caloric Value":178,
+    "Protein":3.9,
+    "Carbohydrates":4.8,
+    "Sugars":1.0,
+    "Dietary Fiber":3.1,
+    "Fat":17.3
+  },
+  {
+    "food":"pineapple juice",
+    "Caloric Value":133,
+    "Protein":0.9,
+    "Carbohydrates":32.2,
+    "Sugars":25.0,
+    "Dietary Fiber":0.5,
+    "Fat":0.3
+  },
+  {
+    "food":"lemonade low calorie",
+    "Caloric Value":7,
+    "Protein":0.092,
+    "Carbohydrates":1.6,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"ice tea lemon flavor nestle",
+    "Caloric Value":88,
+    "Protein":0.0,
+    "Carbohydrates":22.3,
+    "Sugars":22.3,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  },
+  {
+    "food":"chinese chestnuts roasted",
+    "Caloric Value":68,
+    "Protein":1.3,
+    "Carbohydrates":14.8,
+    "Sugars":0.0,
+    "Dietary Fiber":0.0,
+    "Fat":0.3
+  },
+  {
+    "food":"energy drink red bull",
+    "Caloric Value":111,
+    "Protein":1.2,
+    "Carbohydrates":26.4,
+    "Sugars":26.4,
+    "Dietary Fiber":0.0,
+    "Fat":0.0
+  }
+]

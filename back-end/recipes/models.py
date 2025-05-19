@@ -62,11 +62,15 @@ class FavoriteRecipe(models.Model):
 
 class Snack(models.Model):
     name = models.CharField(max_length=100)
-    unit = models.CharField(max_length=20)
-    calories_per_unit = models.FloatField()
+    calories_per_100g = models.FloatField(null=True, blank=True)
+    protein = models.FloatField(null=True, blank=True)
+    carbohydrates = models.FloatField(null=True, blank=True)
+    sugar = models.FloatField(null=True, blank=True)
+    fiber = models.FloatField(null=True, blank=True)
+    fat = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} ({self.unit})"
+        return f"{self.name} (grams)"
 
 class PhysicalActivity(models.Model):
     name = models.CharField(max_length=100)

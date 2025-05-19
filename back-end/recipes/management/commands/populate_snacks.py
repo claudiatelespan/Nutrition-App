@@ -1,30 +1,25 @@
 from django.core.management.base import BaseCommand
 from recipes.models import Snack
-
-snack_list = [
-    ("Măr", "buc", 95),
-    ("Banana", "buc", 105),
-    ("Baton proteic", "buc", 200),
-    ("Iaurt grecesc", "g", 59),
-    ("Nuci", "g", 6.5),
-    ("Chipsuri", "g", 5.4),
-    ("Biscuiți", "buc", 60),
-    ("Ciocolată neagră", "g", 5.9),
-    ("Popcorn", "g", 3.7),
-    ("Suc natural", "ml", 0.5),
-]
+import json
 
 class Command(BaseCommand):
-    help = "Populează baza de date cu snack-uri predefinite"
+    help = 'Populate the Snack table with data from snacks_100.json'
+    
+    Snack.objects.all().delete()
 
     def handle(self, *args, **kwargs):
-        Snack.objects.all().delete()
+        with open('./recipes/management/data/snacks_100.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
 
-        for name, unit, calories in snack_list:
+        for item in data:
             Snack.objects.create(
-                name=name,
-                unit=unit,
-                calories_per_unit=calories
+                name=str(item['food']).title(),
+                calories_per_100g=item['Caloric Value'],
+                protein=item['Protein'],
+                carbohydrates=item['Carbohydrates'],
+                sugar=item['Sugars'],
+                fiber=item['Dietary Fiber'],
+                fat=item['Fat'],
             )
 
         self.stdout.write(self.style.SUCCESS("✔️ Tabela Snack a fost populată cu succes!"))
