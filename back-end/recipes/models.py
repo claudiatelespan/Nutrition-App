@@ -93,6 +93,7 @@ class ShoppingListItem(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.FloatField()
     is_checked = models.BooleanField(default=False)
+    unit = models.CharField(max_length=25)
 
     class Meta:
         unique_together = ("shopping_list", "ingredient")

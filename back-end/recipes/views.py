@@ -5,6 +5,9 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack, PhysicalActivity, ShoppingListItem, ShoppingList
 from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer, PhysicalActivitySerializer, ShoppingListSerializer, ShoppingListItemSerializer
 
+UNIT_IS_GRAMS = ["Grains", "Vegetables", "Meat", "Seafood", "Nuts", "Baking", "Legumes", "Fruits"]
+DAIRY_NOT_GRAMS = ["Half And Half", "Heavy Cream", "Heavy Whipping Cream", "Whipping Cream"]
+
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
@@ -57,19 +60,34 @@ class ShoppingListViewSet(viewsets.ViewSet):
 
         for ri in ingredients:
             ing = ri.ingredient
+            category = ing.category
+            if category == "Dairy":
+                if ing.name in DAIRY_NOT_GRAMS or "Milk" in ing.name or "Soup" in ing.name:
+                    unit = "ml"
+                else:
+                    unit = "g"
+            elif category in UNIT_IS_GRAMS:
+                unit = "g"
+            else:
+                unit = "ml"
+
             if ing.id in item_map:
                 item_map[ing.id]["quantity"] += ri.quantity
             else:
                 item_map[ing.id] = {
                     "ingredient": ing,
                     "quantity": ri.quantity,
+                    "unit": unit,
                 }
+            
+            print(item_map)
 
         for ing_data in item_map.values():
             ShoppingListItem.objects.create(
                 shopping_list=shopping_list,
                 ingredient=ing_data["ingredient"],
                 quantity=round(ing_data["quantity"], 2),
+                unit=ing_data["unit"]
             )
 
         serializer = ShoppingListSerializer(shopping_list)

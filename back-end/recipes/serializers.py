@@ -44,7 +44,7 @@ class ShoppingListItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShoppingListItem
-        fields = ['id', 'ingredient', 'quantity', 'is_checked']
+        fields = ['id', 'ingredient', 'quantity', 'is_checked', 'unit']
 
 class ShoppingListSerializer(serializers.ModelSerializer):
     items = ShoppingListItemSerializer(many=True)
@@ -52,4 +52,4 @@ class ShoppingListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShoppingList
-        fields = ['id', 'user', 'items']
+        fields = ['id', 'user', 'items',]

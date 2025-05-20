@@ -13,6 +13,7 @@ export default function ShoppingListPage() {
     deleteShoppingListItem,
   } = useContext(ApiContext);
 
+  const ingredientCategoryNoUnit = ["Condiments", "Herbs & Spices"]
   const [showModal, setShowModal] = useState(false);
   const [selectedRecipeNames, setSelectedRecipeNames] = useState([]);
   const recipeNames = useMemo(() => recipes.map((r) => r.name), [recipes]);
@@ -92,7 +93,7 @@ export default function ShoppingListPage() {
                   item.is_checked ? "line-through text-gray-500" : "text-gray-900"
                 }`}
               >
-                {item.ingredient.name} – {item.quantity} {item.ingredient.unit}
+                {item.ingredient.name} {!ingredientCategoryNoUnit.includes(item.ingredient.category) ? ( <> – {item.quantity} {item.unit} </> ) : (<div></div>)}
               </span>
               <div className="absolute top-2 right-2 flex gap-2">
                 <button

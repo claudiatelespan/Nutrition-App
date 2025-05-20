@@ -24,7 +24,7 @@
     "category": "Vegetables"
   },
   {
-    "name": "Arugula",
+    "name": "Arugula Leaves",
     "category": "Vegetables"
   },
   {
@@ -501,7 +501,7 @@
   },
   {
     "name": "Garlic",
-    "category": "Herbs & Spices"
+    "category": "Vegetables"
   },
   {
     "name": "Garlic Powder",
@@ -669,7 +669,7 @@
   },
   {
     "name": "Lemon Juice",
-    "category": "Fruits"
+    "category": "Beverages"
   },
   {
     "name": "Lentil",
@@ -809,7 +809,7 @@
   },
   {
     "name": "Orange Juice",
-    "category": "Fruits"
+    "category": "Beverages"
   },
   {
     "name": "Orange Liqueur",
