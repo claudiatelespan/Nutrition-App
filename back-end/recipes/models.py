@@ -3,8 +3,6 @@ from django.conf import settings
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
-    unit = models.CharField(max_length=50)
-    calories_per_unit = models.FloatField()
     category = models.CharField(max_length=100)
 
     def __str__(self):
