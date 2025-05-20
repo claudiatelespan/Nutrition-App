@@ -23,7 +23,7 @@ export default function AddItemModal({
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-white p-6 w-full max-w-md rounded shadow-lg">
+      <div className="bg-white p-10 w-full max-w-md rounded shadow-lg">
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-bold text-lg">{title}</h2>
           <button className="cursor-pointer hover:text-hover" onClick={onClose}>✕</button>
@@ -40,7 +40,7 @@ export default function AddItemModal({
           />
         </div>
 
-        <div className="max-h-60 overflow-y-auto space-y-2 mb-4">
+        <div className="max-h-50 overflow-y-auto space-y-2 mb-4">
           {filteredItems.length > 0 ? filteredItems.map((item) => {
             const isSelected = multiSelect
               ? selectedItem.includes(item)

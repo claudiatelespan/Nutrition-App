@@ -16,6 +16,8 @@ export default function ActivityLog() {
   const { selectedDate } = useContext(DateContext);
   const { activities, activityLogs, logActivity, deleteActivityLog } = useContext(ApiContext);
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
+  const infoText = selectedActivity?.information || "";
+  const infoPhrases = infoText.split(";").map(s => s.trim()).filter(Boolean);
 
   const logsForDate = useMemo(() => {
     return activityLogs.filter(log => log.date === formattedDate);
@@ -61,31 +63,44 @@ export default function ActivityLog() {
           saveDisabled={!selectedActivity || !duration}
           renderExtras={() => (
             <div className="flex flex-col gap-4">
+              {/* Info */}
+              {selectedActivity && selectedActivity.information && (
+                <div className="mb-2 text-justify">
+                  <label className="block text-sm font-semibold mb-1 text-mango">How to choose intensity:</label>
+                  <ul className="list-disc pl-5 text-xs text-gray-700">
+                    {selectedActivity.information.split(";").map((phrase, idx) => (
+                      <li key={idx}>{phrase.trim()};</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {/* effort level */}
-              <div>
-                <label className="block text-sm font-medium mb-1">Effort Level</label>
-                <select
-                  value={intensity}
-                  onChange={(e) => setIntensity(e.target.value)}
-                  className="w-full border border-gray-400 p-2 rounded outline-mango"
-                >
-                  <option value="low">Low</option>
-                  <option value="moderate">Moderate</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
+              <div className="flex flex-row justify-between">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Effort Level</label>
+                  <select
+                    value={intensity}
+                    onChange={(e) => setIntensity(e.target.value)}
+                    className="w-40 border border-gray-400 p-2 rounded outline-mango"
+                  >
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
 
-              {/* duration */}
-              <div>
-                <label className="block text-sm font-medium mb-1">Duration (min)</label>
-                <input
-                  type="number"
-                  min="1"
-                  value={duration}
-                  placeholder="Type duration..."
-                  onChange={(e) => setDuration(e.target.value)}
-                  className="w-full border border-gray-400 p-2 rounded outline-mango"
-                />
+                {/* duration */}
+                <div>
+                  <label className="block text-sm font-medium mb-1">Duration (min)</label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={duration}
+                    placeholder="Type duration..."
+                    onChange={(e) => setDuration(e.target.value)}
+                    className="w-full border border-gray-400 p-2 rounded outline-mango"
+                  />
+                </div>
               </div>
             </div>
           )}
