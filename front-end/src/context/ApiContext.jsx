@@ -294,6 +294,7 @@ export const ApiProvider = ({ children }) => {
         method: "POST",
         body: JSON.stringify({ recipe_ids: recipeIds }),
       });
+      console.log(res)
       setShoppingList(res);
       await loadShoppingListItems();
       return res;
