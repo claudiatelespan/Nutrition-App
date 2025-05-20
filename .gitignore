@@ -13,6 +13,9 @@
 # production
 /build
 
+# env
+/back-end/nutritionapp/.env
+
 # misc
 .DS_Store
 .env.local

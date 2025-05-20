@@ -8,7 +8,7 @@ class Command(BaseCommand):
     PhysicalActivity.objects.all().delete()
 
     def handle(self, *args, **kwargs):
-        with open('./recipes/management/data/met_activities_final.json', encoding='utf-8') as f:
+        with open('./recipes/management/data/activities/met_activities_final.json', encoding='utf-8') as f:
             data = json.load(f)
         
         for item in data:

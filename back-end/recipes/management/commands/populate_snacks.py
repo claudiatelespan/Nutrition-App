@@ -8,7 +8,7 @@ class Command(BaseCommand):
     Snack.objects.all().delete()
 
     def handle(self, *args, **kwargs):
-        with open('./recipes/management/data/snacks_100.json', 'r', encoding='utf-8') as f:
+        with open('./recipes/management/data/snacks/snacks_100.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
 
         for item in data:
