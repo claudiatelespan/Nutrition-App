@@ -1,0 +1,483 @@
+[
+  {
+    "Activity": "Bicycling",
+    "Code": 1010,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 12.0,
+    "Description": "Low: <10 mph, leisure, to work or for pleasure; Moderate: 12-14 mph, leisure, moderate effort; High: 16-19 mph, racing/not drafting or >19 mph drafting, very fast, racing general"
+  },
+  {
+    "Activity": "Aerobic",
+    "Code": 2000,
+    "MET_LOW": 4.8,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 10.0,
+    "Description": "Low: Aerobic dance, low impact, moderate effort; Moderate: Aerobic dance, high impact, vigorous effort; High: Aerobic dance wearing 10-15 lb weights"
+  },
+  {
+    "Activity": "Calisthenics",
+    "Code": 2020,
+    "MET_LOW": 2.8,
+    "MET_MODERATE": 3.8,
+    "MET_HIGH": 7.5,
+    "Description": "Low: light effort e.g., curl ups, abdominal crunches, plank; Moderate: moderate effort e.g., pushups, sit ups, pull-ups, lunges; High: vigorous effort e.g., pushups, sit ups, pull-ups, jumping jacks, burpees, battling ropes"
+  },
+  {
+    "Activity": "Circuit training",
+    "Code": 2032,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 7.5,
+    "Description": "Low: light effort; Moderate: moderate effort; High: including kettlebells, some aerobic movement with minimal rest, general, vigorous intensity"
+  },
+  {
+    "Activity": "Gym training",
+    "Code": 2050,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 6.0,
+    "Description": "Low: weight training, multiple exercises, 8-15 reps at varied resistance; Moderate: weight training, squats, deadlift, slow or explosive effort; High: weight lifting - free weight, nautilus or universal-type, power lifting or body building, vigorous effort"
+  },
+  {
+    "Activity": "Body weight exercises",
+    "Code": 2056,
+    "MET_LOW": 3.0,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 6.5,
+    "Description": "Low: e.g., squat, lunge, push-up, crunch, light; Moderate: e.g., squat, lunge, push-up, crunch, general; High: e.g., squat, lunge, push-up, crunch, high intensity"
+  },
+  {
+    "Activity": "Rowing",
+    "Code": 2070,
+    "MET_LOW": 5.0,
+    "MET_MODERATE": 7.5,
+    "MET_HIGH": 14.0,
+    "Description": "Low: general, <100 watts,  moderate effort; Moderate: 100 to 149 watts, vigorous effort; High: ≥ 200 watts, very vigorous effort"
+  },
+  {
+    "Activity": "Ski machine",
+    "Code": 2080,
+    "MET_LOW": 6.8,
+    "MET_MODERATE": 10.5,
+    "MET_HIGH": 18.0,
+    "Description": "Low: Ski machine, slow speed; Moderate: Ski ergometer, cross country, double poling, moderate speed; High: Ski ergometer, cross country, double poling, fast to maximum speed"    
+  },
+  {
+    "Activity": "Pilates",
+    "Code": 2103,
+    "MET_LOW": 1.8,
+    "MET_MODERATE": 2.8,
+    "MET_HIGH": 8.5,
+    "Description": "Low: traditional, mat; Moderate: general; High: pound, combination of Pilates and body movements with drumming"
+  },
+  {
+    "Activity": "Exercise Workout",
+    "Code": 2140,
+    "MET_LOW": 2.5,
+    "MET_MODERATE": 4.0,
+    "MET_HIGH": 6.0,
+    "Description": "Low: Video, exercise workouts, TV conditioning programs (e.g., yoga, stretching, seated), light effort; Moderate: Video, exercise workouts, TV conditioning programs (e.g., cardio-resistance training), moderate; High: Video, exercise workouts, TV conditioning programs (e.g., cardio-resistance training), vigorous"
+  },
+  {
+    "Activity": "Yoga",
+    "Code": 2150,
+    "MET_LOW": 2.3,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 8.0,
+    "Description": "Low: General; Moderate: Hot, Power, etc.; High: Hatha, high intensity"
+  },
+  {
+    "Activity": "Dancing",
+    "Code": 3010,
+    "MET_LOW": 5.0,
+    "MET_MODERATE": 8.5,
+    "MET_HIGH": 13.0,
+    "Description": "Low: Ballet, Tap, Ethnic dancing, Ballroom, Contemporary, Folk, Salsa, ; Moderate: Flamenco, Ballet vigorous, Nightclub, Musical Theater, Singing/dancing; High: Ballroom competitive, DanceSport competition"
+  },
+  {
+    "Activity": "Fishing & Hunting",
+    "Code": 4001,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 6.0,
+    "MET_HIGH": 9.5,
+    "Description": "Low: Fishing, general; Moderate: Hunting, deer, elk, large game; High: Hunting - hiking with hunting gear"
+  },
+  {
+    "Activity": "Home Activities",
+    "Code": 5010,
+    "MET_LOW": 2.3,
+    "MET_MODERATE": 3.8,
+    "MET_HIGH": 4.3,
+    "Description": "Low: Cleaning, sweeping, slow, light effort; Moderate: Cleaning, sweeping, fast, moderate effort; High: Multiple household tasks all at once, vigorous effort"
+  },
+  {
+    "Activity": "Sitting",
+    "Code": 7009,
+    "MET_LOW": 1.0,
+    "MET_MODERATE": 1.3,
+    "MET_HIGH": 1.5,
+    "Description": "Low: Lying quietly, doing nothing, lying in bed awake, listening to music (not talking or reading); Moderate: Sitting quietly, fidgeting, general, fidgeting hands; High: Reclining, writing, reading, talking, talking on phone"
+  },
+  {
+    "Activity": "Lawn & Garden",
+    "Code": 8009,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 6.0,
+    "Description": "Low: Digging, spading, filling garden, composting, light effort; Moderate: Chopping wood, Clearing land, haul brush, moderate effort; High: Yardwork, Gardening with heavy power tools, vigorous effort"
+  },
+  {
+    "Activity": "Music Playing",
+    "Code": 10010,
+    "MET_LOW": 2.0,
+    "MET_MODERATE": 4.0,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Accordion, Trumpet, Guitar, Violin, Piano, etc. sitting or standing ; Moderate: Drums, Guitar rock, Marching band, moderate walking; High: Drumming, Guitar at concert"
+  },
+  {
+    "Activity": "Running",
+    "Code": 12010,
+    "MET_LOW": 9.3,
+    "MET_MODERATE": 14.6,
+    "MET_HIGH": 21.4,
+    "Description": "Low: Running, 4 to 7.5 mph; Moderate: Running, 8 to 12 mph; High: Running, >12 mph"
+  },
+  {
+    "Activity": "Running uphill",
+    "Code": 12255,
+    "MET_LOW": 13.3,
+    "MET_MODERATE": 17.5,
+    "MET_HIGH": 23.5,
+    "Description": "Low: Running uphill, 4.5-7mph, 5% incline; Moderate: Running uphill, 5.0 to 5.9 mph, 15% incline; High: Running uphill, 1.2 to 1.39 mph, 30-40% incline"
+  },
+  {
+    "Activity": "Running downhill",
+    "Code": 12352,
+    "MET_LOW": 5.8,
+    "MET_MODERATE": 9.0,
+    "MET_HIGH": 13.8,
+    "Description": "Low: Running downhill, 5.0 to 5.9 mph, -10% to -15%; Moderate: Running downhill, 6.0 to 8.0 mph, -10% to -15%; High: Running downhill, 8.0 to 10.5 mph, -3% to -9%"
+  },
+  {
+    "Activity": "Badminton",
+    "Code": 15000,
+    "MET_LOW": 5.5,
+    "MET_MODERATE": 7.0,
+    "MET_HIGH": 9.0,
+    "Description": "Low: Badminton, social singles and doubles, general; Moderate: Badminton, competitive; High:Badminton, competitive, match play"
+  },
+  {
+    "Activity": "Basketball",
+    "Code": 15040,
+    "MET_LOW": 6.0,
+    "MET_MODERATE": 7.5,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Basketball, non-game, general; Moderate: Basketball, general; High: Basketball, game"
+  },
+  {
+    "Activity": "Billiards",
+    "Code": 15080,
+    "MET_LOW": 2.5,
+    "MET_MODERATE": 2.5,
+    "MET_HIGH": 2.5,
+    "Description": "No relevance in effort level"
+  },
+  {
+    "Activity": "Bowling",
+    "Code": 15090,
+    "MET_LOW": 3.0,
+    "MET_MODERATE": 3.3,
+    "MET_HIGH": 3.8,
+    "Description": "Low: Bowling general; Moderate: Lawn bowling, bocce ball, outdoor; High: Bowling, indoor, bowling alley"
+  },
+  {
+    "Activity": "Boxing",
+    "Code": 15100,
+    "MET_LOW": 7.0,
+    "MET_MODERATE": 10.8,
+    "MET_HIGH": 12.3,
+    "Description": "Low: Boxing, punching bag, 60 b/min; Moderate: Boxing, punching bag, 180 b/min; High: Boxing, in ring"
+  },
+  {
+    "Activity": "Football",
+    "Code": 15210,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 6.0,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Football, touch, flag, light effort; Moderate: Football, touch, flag, general; High: Football, competitive"
+  },
+  {
+    "Activity": "Frisbee",
+    "Code": 15240,
+    "MET_LOW": 3.0,
+    "MET_MODERATE": 3.8,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Frisbee playing, general; Moderate: Frisbee golf; High: Frisbee, ultimate"
+  },
+  {
+    "Activity": "Golf",
+    "Code": 15255,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 4.3,
+    "MET_HIGH": 4.5,
+    "Description": "Low: Golf, using power cart; Moderate: Golf, walking, carrying clubs; High: Golf, walking, pulling clubs"
+  },
+  {
+    "Activity": "Gymnastics",
+    "Code": 15300,
+    "MET_LOW": 3.8,
+    "MET_MODERATE": 3.8,
+    "MET_HIGH": 3.8,
+    "Description": "No relevance in effort level"
+  },
+  {
+    "Activity": "Handball",
+    "Code": 15310,
+    "MET_LOW": 6.0,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 12.0,
+    "Description": "Low: Handball, casual; Moderate: Handball, general, team; High: Handball, competitive"
+  },
+  {
+    "Activity": "Hockey",
+    "Code": 15350,
+    "MET_LOW": 7.8,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 10.0,
+    "Description": "Low: Hockey, field; Moderate: Hockey, ice, general; High: Hockey, ice, competitive"
+  },
+
+  {
+    "Activity": "Horseback riding",
+    "Code": 15370,
+    "MET_LOW": 3.8,
+    "MET_MODERATE": 6.0,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Horseback riding, walking; Moderate: Horseback riding, reining, trotting; High: Horseback riding, canter or gallop, jumping"
+  },
+  {
+    "Activity": "Martial Arts",
+    "Code": 15425,
+    "MET_LOW": 5.3,
+    "MET_MODERATE": 10.3,
+    "MET_HIGH": 14.3,
+    "Description": "Low: different types, slower pace, novice performers, practice; Moderate: different types, moderate pace (e.g., judo, jujitsu, karate, kick boxing, tae kwon do, tai-bo, Muay Thai boxing); High: competition, very high intensity"
+  },
+  {
+    "Activity": "Paddleball",
+    "Code": 15490,
+    "MET_LOW": 6.0,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 10.0,
+    "Description": "Low: Paddleball, casual; Moderate: Paddleball, general; High: Paddleball, competitive"
+  },
+  {
+    "Activity": "Race Walking",
+    "Code": 15525,
+    "MET_LOW": 10.3,
+    "MET_MODERATE": 13.8,
+    "MET_HIGH": 15.5,
+    "Description": "Low: Race Walking, 3.1 m/s (6.9 mph); Moderate: Race Walking, 3.7 m/s (8.3 mph); High: Race Walking, racing speed, 4.0 m/s (8.95 mph)"
+  },
+  {
+    "Activity": "Rock climbing",
+    "Code": 15533,
+    "MET_LOW": 5.0,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 10.5,
+    "Description": "Low: Rock climbing, rappelling; Moderate: Rock climbing, treadwall; High: Rock climbing, speed climbing, very difficult"
+  },
+  {
+    "Activity": "Rodeo",
+    "Code": 15542,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 5.5,
+    "MET_HIGH": 7.0,
+    "Description": "Low: Rodeo sports, general, light effort; Moderate: Rodeo sports, general, moderate effort; High: Rodeo sports, general, vigorous effort"
+  },
+  {
+    "Activity": "Sports",
+    "Code": 15551,
+    "MET_LOW": 8.3,
+    "MET_MODERATE": 11.8,
+    "MET_HIGH": 12.3,
+    "Description": "Low: Rope jumping, slow pace, < 100 skips/min, 2 foot skip, rhythm bounce; Moderate: Rope jumping, moderate pace, general, 100 to 120 skips/min, 2 foot skip, plain bounce; High: Rope jumping, fast pace, 120-160 skips/min"
+  },
+  {
+    "Activity": "Skateboarding",
+    "Code": 15580,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 6.0,
+    "Description": "Low: Skateboard, longboard, 13.3 km/h, slow speed; Moderate: Skateboarding, general, moderate effort; High: Skateboarding, competitive, vigorous effort"
+  },
+ {
+    "Activity": "Roller blading",
+    "Code": 15591,
+    "MET_LOW": 7.5,
+    "MET_MODERATE": 9.8,
+    "MET_HIGH": 12.3,
+    "Description": "Low: Roller blading, in-line skating, 14.4 km/h (9.0 mph), recreational pace; Moderate: Roller blading, in-line skating, 17.7 km/h (11.0 mph), moderate pace; High: Roller blading, in-line skating, 21.0 to 21.7 km/h (13.0 to 13.6 mph), fast pace"
+  },
+  {
+    "Activity": "Skydiving & bungee jumping",
+    "Code": 15600,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 3.5,
+    "MET_HIGH": 3.5,
+    "Description": "No relevance in effort level"
+  },
+  {
+    "Activity": "Soccer",
+    "Code": 15605,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 7.0,
+    "MET_HIGH": 9.5,
+    "Description": "Low: Walking football/soccer; Moderate: Soccer, casual, general; High: Soccer, competitive"
+  },
+  {
+    "Activity": "Table tennis, ping pong",
+    "Code": 15660,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 4.0,
+    "MET_HIGH": 4.0,
+    "Description": "No relevance in effort level"
+  },
+  {
+    "Activity": "Tennis",
+    "Code": 15675,
+    "MET_LOW": 5.0,
+    "MET_MODERATE": 6.8,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Tennis, hitting balls, non-game play; Moderate: Tennis, general, moderate effort; High: Tennis, general, competitive"
+  },
+  {
+    "Activity": "Volleyball",
+    "Code": 15710,
+    "MET_LOW": 3.0,
+    "MET_MODERATE": 4.0,
+    "MET_HIGH": 6.0,
+    "Description": "Low: Volleyball, casual, non-game play; Moderate: Volleyball, general, moderate; High: Volleyball, competitive, in gymnasium"
+  },
+  {
+    "Activity": "Track and field",
+    "Code": 15732,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 6.0,
+    "MET_HIGH": 10.0,
+    "Description": "Low: e.g., shot, discus, hammer throw; Moderate: e.g., high jump, long jump, triple jump, javelin, pole vault; High: e.g., steeplechase, hurdles"
+  },
+  {
+    "Activity": "Walking while carrying",
+    "Code": 17010,
+    "MET_LOW": 4.0,
+    "MET_MODERATE": 6.5,
+    "MET_HIGH": 8.3,
+    "Description": "Low: Carrying 5 to 50 lb, level ground, moderate pace; Moderate: Carrying 50 to 150 pound load, level ground, moderate pace; High: Carrying load upstairs, general, moderate pace"
+  },
+  {
+    "Activity": "Climbing hills",
+    "Code": 17032,
+    "MET_LOW": 5.0,
+    "MET_MODERATE": 10.0,
+    "MET_HIGH": 16.3,
+    "Description": "Low: Climbing hills, 5 to 20% grade, slow pace; Moderate: Climbing hills, 5 to 20% grade, moderate to brisk pace; High: Climbing hills, steep grade (10-40%)"
+  },
+  {
+    "Activity": "Hiking",
+    "Code": 17080,
+    "MET_LOW": 3.8,
+    "MET_MODERATE": 5.3,
+    "MET_HIGH": 6.0,
+    "Description": "Low: Hiking slowly or ambling through fields and hillside; Moderate: Hiking at a normal pace; High: Hiking, cross country"
+  },
+  {
+    "Activity": "Stair climbing",
+    "Code": 17130,
+    "MET_LOW": 4.5,
+    "MET_MODERATE": 6.8,
+    "MET_HIGH": 9.3,
+    "Description": "Low: Stair climbing, slow pace; Moderate: Stair climbing, general; High: Stair climbing, fast pace"
+  },
+  {
+    "Activity": "Walking",
+    "Code": 17151,
+    "MET_LOW": 3.5,
+    "MET_MODERATE": 4.8,
+    "MET_HIGH": 8.5,
+    "Description": "Low: Walking for pleasure; Moderate: Walking, 3.5 to 3.9 mph, level, brisk, firm surface, walking for exercise; High: Walking, 5.0 to 5.5 mph (8.8 to 8.9 km/h), level, firm surface"
+  },
+  {
+    "Activity": "Canoeing",
+    "Code": 18040,
+    "MET_LOW": 2.8,
+    "MET_MODERATE": 5.8,
+    "MET_HIGH": 12.5,
+    "Description": "Low: Canoeing, rowing, 2.0-3.9 mph, light effort; Moderate: Canoeing, rowing, 4.0-5.9 mph, moderate effort; High: Canoeing, rowing, kayaking, competition, > 6 mph, vigorous effort"
+  },
+  {
+    "Activity": "Kayaking",
+    "Code": 18100,
+    "MET_LOW": 5.0,
+    "MET_MODERATE": 9.0,
+    "MET_HIGH": 13.5,
+    "Description": "Low: Kayaking, moderate effort; Moderate: Kayaking, slalom, flat water; High: Kayaking, competition"
+  },
+  {
+    "Activity": "Sailing",
+    "Code": 18100,
+    "MET_LOW": 3.3,
+    "MET_MODERATE": 4.5,
+    "MET_HIGH": 9.3,
+    "Description": "Low: Sailing, leisure; Moderate: Sailing, in competition, general; High: Sailing, in competition, high effort"
+  },
+  {
+    "Activity": "Surfing",
+    "Code": 18120,
+    "MET_LOW": 3.0,
+    "MET_MODERATE": 5.0,
+    "MET_HIGH": 6.8,
+    "Description": "Low: Surfing, body or board, general; Moderate: Surfboard, paddling; High: Surfing, body or board, competitive"
+  },
+  {
+    "Activity": "Swimming",
+    "Code": 18230,
+    "MET_LOW": 5.8,
+    "MET_MODERATE": 8.0,
+    "MET_HIGH": 9.8,
+    "Description": "Low: Swimming, freestyle, slow, recreational; Moderate: Swimming, medium speed; High: Swimming, freestyle, fast, vigorous effort"
+  },
+  {
+    "Activity": "Water aerobics",
+    "Code": 18355,
+    "MET_LOW": 3.8,
+    "MET_MODERATE": 5.5,
+    "MET_HIGH": 7.5,
+    "Description": "Low: Water aerobics, resistance exercises; Moderate: Water aerobics, water calisthenics, general; High: Water aerobics, high intensity"
+  },
+  {
+    "Activity": "Skating",
+    "Code": 19018,
+    "MET_LOW": 5.5,
+    "MET_MODERATE": 9.0,
+    "MET_HIGH": 14.0,
+    "Description": "Low: Skating, ice, 9 mph or less; Moderate: Skating, ice, rapidly, more than 9 mph but not competitive; High: Skating, ice dancing"
+  },
+  {
+    "Activity": "Skiing & Snowboarding",
+    "Code": 19075,
+    "MET_LOW": 4.3,
+    "MET_MODERATE": 6.3,
+    "MET_HIGH": 8.0,
+    "Description": "Low: Skiing, downhill, alpine or snowboarding, light effort, active time only; Moderate: Skiing, downhill, alpine or snowboarding, moderate effort, general, active time only; High: Skiing, downhill, alpine or snowboarding, vigorous effort, active time only"
+  },
+  {
+    "Activity": "Standing",
+    "Code": 19150,
+    "MET_LOW": 3.3,
+    "MET_MODERATE": 3.5,
+    "MET_HIGH": 4.5,
+    "Description": "Low: Standing, light/moderate work (e.g., pack boxes, assemble/repair, set up chairs/furniture); Moderate: Standing, moderate (e.g., lifting 50 lbs., assembling at fast rate); High: Standing, moderate/heavy work"
+  }
+]

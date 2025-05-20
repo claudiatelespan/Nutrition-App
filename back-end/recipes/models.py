@@ -77,6 +77,7 @@ class PhysicalActivity(models.Model):
     met_low = models.FloatField()
     met_moderate = models.FloatField()
     met_high = models.FloatField()
+    information = models.TextField(blank=True, help_text="Describe what each intensity means, e.g. speed or effort.")
 
     def __str__(self):
         return self.name
