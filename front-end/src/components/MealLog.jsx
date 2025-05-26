@@ -129,10 +129,10 @@ export default function MealLog() {
                 />
             ))}
 
-                <div className="md:col-span-3 bg-white rounded-lg shadow flex flex-col">
-                    <ActivityLog />
-                </div>
+            <div className="md:col-span-3 flex flex-col">
+                <ActivityLog />
             </div>
+          </div>
 
          {/* ZONA SECUNDARĂ: Calendar + Snacks */}
             <div className="w-full lg:w-[20rem] flex flex-col gap-6">
