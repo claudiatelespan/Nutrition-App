@@ -21,30 +21,35 @@ export default function CalorieTrackerCard() {
   }, [formattedDate, fetchCaloriesForDay]);
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center mb-4">
-      <h3 className="text-lg font-bold text-mango mb-2">Calorie Tracker</h3>
-      <div className="text-center mb-2 text-gray-500">{format(selectedDate, "PPP")}</div>
+    <div className="bg-aqua rounded-lg shadow p-6 flex flex-col items-center mb-3 min-h-[180px]">
+      <h3 className="text-lg font-bold text-mango mb-2 w-full text-center">Calorie Tracker</h3>
+      <div className="text-center mb-3 text-gray-500 w-full">{format(selectedDate, "PPP")}</div>
       {loading ? (
         <span className="text-gray-400">Loading...</span>
       ) : data ? (
         <>
-          <div className="flex flex-col gap-2 items-center mb-2">
-            <span className="text-xl font-semibold text-mango">
-              {data.calories} kcal
-            </span>
-            <span className="text-sm text-gray-600">
-              Target: <span className="font-semibold text-green-700">{data.calorie_target} kcal</span>
-            </span>
+          <div className="flex flex-row justify-center items-center w-full gap-8 mb-2">
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-[16px] text-gray-600 mb-1">Calorii azi</span>
+              <span className="text-2xl font-bold text-mango">{data.calories} kcal</span>
+            </div>
+            <div className="h-12 w-0.5 bg-vintage mx-2 hidden sm:block" />
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-[16px] text-gray-600 mb-1">Target</span>
+              <span className="text-2xl font-bold text-green-700">{data.calorie_target} kcal</span>
+            </div>
           </div>
-          {data.status === "Target atins" && (
-            <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Ai atins targetul! 🎉</span>
-          )}
-          {data.status === "Peste target" && (
-            <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Ai depășit targetul!</span>
-          )}
-          {data.status === "Sub target" && (
-            <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">Ești sub target.</span>
-          )}
+          <div className="w-full flex justify-center mt-2">
+            {data.status === "Target atins" && (
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Ai atins targetul! 🎉</span>
+            )}
+            {data.status === "Peste target" && (
+              <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Ai depășit targetul!</span>
+            )}
+            {data.status === "Sub target" && (
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">Ești sub target.</span>
+            )}
+          </div>
         </>
       ) : (
         <span className="text-gray-500">Nicio activitate înregistrată pentru această zi.</span>

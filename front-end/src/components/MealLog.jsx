@@ -10,6 +10,7 @@ import MealCard from "./MealCard";
 import AddItemModal from "./AddItemModal";
 import CalorieTrackerCard from "./CalorieTrackerCard";
 import CaloriesEvolutionChart from "./CaloriesEvolutionChart";
+import CalorieInfoCard from "./CalorieInfoCard";
 import toast from "react-hot-toast";
 
 export default function MealLog() {
@@ -130,14 +131,17 @@ export default function MealLog() {
                     onDeleteClick={(index) => handleDeleteMeal(meal, index)}
                 />
             ))}
-<div className="md:col-span-3 flex flex-row gap-4">
-  <div className="flex-1 min-w-0">
+
+<div className="md:col-span-3 flex flex-row gap-4 items-stretch">
+  <div className="flex-1 min-w-0 flex flex-col h-full">
     <CalorieTrackerCard />
+    <CalorieInfoCard />
   </div>
-  <div className="flex-1 min-w-0">
+  <div className="flex-1 min-w-0 h-full flex flex-col">
     <CaloriesEvolutionChart />
   </div>
 </div>
+
           </div>
 
          {/* ZONA SECUNDARĂ: Calendar + Snacks */}

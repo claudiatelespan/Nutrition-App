@@ -23,7 +23,7 @@ export default function CaloriesEvolutionChart() {
   const calorieTarget = data.length > 0 ? data[0].calorie_target : null;
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow mb-4">
+    <div className="bg-white rounded-lg p-7 h-full shadow">
       <h3 className="font-semibold text-lg mb-2 text-mango">
         Evoluție calorii zilnice (ultimele 7 zile)
       </h3>
