@@ -400,6 +400,18 @@ export const ApiProvider = ({ children }) => {
     });
     setActivityLogs((prev) => prev.filter((log) => log.id !== logId));
   };
+
+  const fetchCaloriesForDay = async (date) => {
+    return await fetchWithAuth(
+    `http://localhost:8000/api/tracking/calories-log/?start=${date}&end=${date}`
+    );
+  }   
+
+  const fetchCaloriesLog = async (start, end) => {
+    return await fetchWithAuth(
+      `http://localhost:8000/api/tracking/calories-log/?start=${start}&end=${end}`
+    );
+  };
   
 
   useEffect(() => {
@@ -467,6 +479,8 @@ export const ApiProvider = ({ children }) => {
         deleteMealLog,
         deleteSnackLog,
         deleteActivityLog,
+        fetchCaloriesForDay,
+        fetchCaloriesLog,
       }}
     >
       {children}

@@ -8,6 +8,8 @@ import { DateContext } from "../context/DateContext";
 import  ActivityLog from "./ActivityLog";
 import MealCard from "./MealCard";
 import AddItemModal from "./AddItemModal";
+import CalorieTrackerCard from "./CalorieTrackerCard";
+import CaloriesEvolutionChart from "./CaloriesEvolutionChart";
 import toast from "react-hot-toast";
 
 export default function MealLog() {
@@ -128,10 +130,14 @@ export default function MealLog() {
                     onDeleteClick={(index) => handleDeleteMeal(meal, index)}
                 />
             ))}
-
-            <div className="md:col-span-3 flex flex-col">
-                <ActivityLog />
-            </div>
+<div className="md:col-span-3 flex flex-row gap-4">
+  <div className="flex-1 min-w-0">
+    <CalorieTrackerCard />
+  </div>
+  <div className="flex-1 min-w-0">
+    <CaloriesEvolutionChart />
+  </div>
+</div>
           </div>
 
          {/* ZONA SECUNDARĂ: Calendar + Snacks */}
@@ -178,6 +184,8 @@ export default function MealLog() {
                     }}
                     onDeleteClick={(index) => handleDeleteMeal("Snack", index)}
                 />
+
+                <ActivityLog />
             </div>
         </div>
 
