@@ -44,7 +44,7 @@ export default function ActivityLog({ selectedDate }) {
         title="Physical Activity"
         items={logsForDate.map(log => `${log.activity_name} – ${log.duration_minutes} min (${log.intensity})`)}
         onAddClick={() => setShowModal(true)}
-        onDeleteClick={(index) => deleteActivityLog(logsForDate[index].id)}
+        onDeleteClick={async (index) => await deleteActivityLog(logsForDate[index].id)}
       />
 
       {showModal && (

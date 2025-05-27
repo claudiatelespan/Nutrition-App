@@ -6,7 +6,7 @@ import AddItemModal from "../forms/AddItemModal";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 
-export default function SnackLog({ reloadChartsKey, setReloadChartsKey }) {
+export default function SnackLog({ setReloadChartsKey }) {
   const { snacks, snackLogs, logSnack, deleteSnackLog } = useContext(ApiContext);
   const { selectedDate } = useContext(DateContext);
   const [showSnackModal, setShowSnackModal] = useState(false);
@@ -23,10 +23,10 @@ export default function SnackLog({ reloadChartsKey, setReloadChartsKey }) {
 
   const handleAddSnack = () => setShowSnackModal(true);
 
-  const handleDeleteSnack = (index) => {
+  const handleDeleteSnack = async (index) => {
     const log = snackLogs.filter(log => log.date === formattedDate)[index];
     if (log) {
-      deleteSnackLog(log.id);
+      await deleteSnackLog(log.id);
       setReloadChartsKey(k => k + 1);
     }
   };

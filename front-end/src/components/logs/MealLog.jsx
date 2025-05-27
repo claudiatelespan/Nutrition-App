@@ -35,11 +35,11 @@ export default function MealLog({ setReloadChartsKey, selectedDate }) {
     )?.id;
   };
 
-  const handleDeleteMeal = (type, index) => {
+  const handleDeleteMeal = async (type, index) => {
     const item = getMealsFor(type)[index];
     const logId = findLogId(type, item);
     if (logId) {
-      deleteMealLog(logId);
+      await deleteMealLog(logId);
       setReloadChartsKey(k => k + 1);
     }
   };

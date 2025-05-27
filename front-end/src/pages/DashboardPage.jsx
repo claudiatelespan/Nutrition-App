@@ -19,7 +19,6 @@ export default function DashboardPage() {
         {/* MAIN CONTENT */}
         <div className="flex-1 space-y-6">
           <MealLog
-            reloadChartsKey={reloadChartsKey}
             setReloadChartsKey={setReloadChartsKey}
             selectedDate={selectedDate}
           />
@@ -45,7 +44,7 @@ export default function DashboardPage() {
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-          <SnackLog reloadChartsKey={reloadChartsKey} setReloadChartsKey={setReloadChartsKey} />
+          <SnackLog setReloadChartsKey={setReloadChartsKey} />
           <ActivityLog selectedDate={selectedDate} />
         </div>
       </div>
