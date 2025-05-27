@@ -120,3 +120,72 @@ def daily_calories_log_with_target(request):
         })
 
     return JsonResponse(json_result, safe=False)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def daily_macros_log(request):
+    user = request.user
+    start = request.GET.get("start")
+    end = request.GET.get("end")
+    if not start or not end:
+        return JsonResponse({"error": "Provide start and end date"}, status=400)
+
+    start_date = date.fromisoformat(start)
+    end_date = date.fromisoformat(end)
+    days = (end_date - start_date).days + 1
+    result = {
+        start_date + timedelta(days=i): {
+            "protein": 0,
+            "carbohydrates": 0,
+            "sugar": 0,
+            "fiber": 0,
+            "fat": 0
+        } for i in range(days)
+    }
+
+    meal_logs = (
+        MealLog.objects
+        .filter(user=user, date__range=[start_date, end_date])
+        .select_related("recipe")
+        .values("date", "recipe__protein", "recipe__carbohydrates", "recipe__sugars", "recipe__fiber", "recipe__fat")
+    )
+    for log in meal_logs:
+        d = log["date"]
+        result[d]["protein"] += log["recipe__protein"] or 0
+        result[d]["carbohydrates"] += log["recipe__carbohydrates"] or 0
+        result[d]["sugar"] += log["recipe__sugars"] or 0
+        result[d]["fiber"] += log["recipe__fiber"] or 0
+        result[d]["fat"] += log["recipe__fat"] or 0
+
+    snack_logs = (
+        SnackLog.objects
+        .filter(user=user, date__range=[start_date, end_date])
+        .values("date")
+        .annotate(
+            protein=Sum("protein"),
+            carbohydrates=Sum("carbohydrates"),
+            sugar=Sum("sugar"),
+            fiber=Sum("fiber"),
+            fat=Sum("fat"),
+        )
+    )
+    for log in snack_logs:
+        d = log["date"]
+        result[d]["protein"] += log["protein"] or 0
+        result[d]["carbohydrates"] += log["carbohydrates"] or 0
+        result[d]["sugar"] += log["sugar"] or 0
+        result[d]["fiber"] += log["fiber"] or 0
+        result[d]["fat"] += log["fat"] or 0
+
+    json_result = []
+    for d in sorted(result.keys()):
+        json_result.append({
+            "date": d.strftime("%Y-%m-%d"),
+            "protein": round(result[d]["protein"], 2),
+            "carbohydrates": round(result[d]["carbohydrates"], 2),
+            "sugar": round(result[d]["sugar"], 2),
+            "fiber": round(result[d]["fiber"], 2),
+            "fat": round(result[d]["fat"], 2),
+        })
+
+    return JsonResponse(json_result, safe=False)
