@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { DateContext } from "../context/DateContext";
 import { ApiContext } from "../context/ApiContext";
 import { format, subDays } from "date-fns";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Legend } from "recharts";
 
-export default function CaloriesEvolutionChart({reloadChartsKey}) {
-  const { selectedDate } = useContext(DateContext);
+export default function CaloriesEvolutionChart({reloadChartsKey, selectedDate}) {
   const { fetchCaloriesLog } = useContext(ApiContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +21,7 @@ export default function CaloriesEvolutionChart({reloadChartsKey}) {
   const calorieTarget = data.length > 0 ? data[0].calorie_target : null;
 
   return (
-    <div className="bg-white rounded-lg p-7 h-full shadow">
+    <div className="bg-white rounded-lg p-5 h-full shadow">
       <h3 className="font-semibold text-lg mb-2 text-mango">
         Evoluție calorii zilnice (ultimele 7 zile)
       </h3>

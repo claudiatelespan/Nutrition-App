@@ -27,7 +27,7 @@ export default function CalorieInfoCard() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12A9 9 0 1 1 3 12a9 9 0 0 1 18 0z" />
           </svg>
           <span>
-            Pentru un calcul precis, completează: <b>{missingFields.join(", ")}</b> în <a href="/profile" className="underline text-mango">profilul tău</a>.
+            Pentru un calcul precis, completează: <b>{missingFields.join(", ")}</b> în <a href="/details" className="underline text-vintage font-bold">profilul tău</a>.
           </span>
         </div>
       )}

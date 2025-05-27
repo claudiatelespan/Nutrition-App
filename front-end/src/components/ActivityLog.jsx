@@ -1,23 +1,18 @@
 import { useState, useContext, useMemo } from "react";
 import { ApiContext } from "../context/ApiContext";
-import { TrashIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { DateContext } from "../context/DateContext";
 import { format } from "date-fns";
 import MealCard from "./MealCard";
 import AddItemModal from "./AddItemModal";
 import toast from "react-hot-toast";
 
-export default function ActivityLog() {
+export default function ActivityLog({ selectedDate }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [intensity, setIntensity] = useState("moderate");
   const [duration, setDuration] = useState("");
 
-  const { selectedDate } = useContext(DateContext);
   const { activities, activityLogs, logActivity, deleteActivityLog } = useContext(ApiContext);
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
-  const infoText = selectedActivity?.information || "";
-  const infoPhrases = infoText.split(";").map(s => s.trim()).filter(Boolean);
 
   const logsForDate = useMemo(() => {
     return activityLogs.filter(log => log.date === formattedDate);

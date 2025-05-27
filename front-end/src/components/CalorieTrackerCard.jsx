@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { DateContext } from "../context/DateContext";
 import { ApiContext } from "../context/ApiContext";
 import { format } from "date-fns";
 
-export default function CalorieTrackerCard({reloadChartsKey}) {
-  const { selectedDate } = useContext(DateContext);
+export default function CalorieTrackerCard({reloadChartsKey, selectedDate}) {
   const { fetchCaloriesForDay } = useContext(ApiContext);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
