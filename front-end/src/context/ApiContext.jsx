@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback} from "react";
 import { AuthContext } from "./AuthContext";
 
 export const ApiContext = createContext();
@@ -21,7 +21,7 @@ export const ApiProvider = ({ children }) => {
   const [activityLogs, setActivityLogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchWithAuth = async (url, options = {}) => {
+  const fetchWithAuth = useCallback(async (url, options = {}) => {
     let token = accessToken;
     let headers = {
       ...options.headers,
@@ -73,7 +73,7 @@ export const ApiProvider = ({ children }) => {
     }
 
     return res.json();
-  };
+  },[accessToken, setAccessToken, logout]);
 
   const loadUserProfile = async () => {
     try {
@@ -401,17 +401,17 @@ export const ApiProvider = ({ children }) => {
     setActivityLogs((prev) => prev.filter((log) => log.id !== logId));
   };
 
-  const fetchCaloriesForDay = async (date) => {
+  const fetchCaloriesForDay = useCallback(async (date) => {
     return await fetchWithAuth(
-    `http://localhost:8000/api/tracking/calories-log/?start=${date}&end=${date}`
+      `http://localhost:8000/api/tracking/calories-log/?start=${date}&end=${date}`
     );
-  }   
+  },[fetchWithAuth]);
 
-  const fetchCaloriesLog = async (start, end) => {
+  const fetchCaloriesLog = useCallback(async (start, end) => {
     return await fetchWithAuth(
       `http://localhost:8000/api/tracking/calories-log/?start=${start}&end=${end}`
     );
-  };
+  },[fetchWithAuth]);
   
 
   useEffect(() => {

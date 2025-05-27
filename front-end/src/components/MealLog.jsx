@@ -132,15 +132,15 @@ export default function MealLog() {
                 />
             ))}
 
-<div className="md:col-span-3 flex flex-row gap-4 items-stretch">
-  <div className="flex-1 min-w-0 flex flex-col h-full">
-    <CalorieTrackerCard />
-    <CalorieInfoCard />
-  </div>
-  <div className="flex-1 min-w-0 h-full flex flex-col">
-    <CaloriesEvolutionChart />
-  </div>
-</div>
+            <div className="md:col-span-3 flex flex-row gap-4 items-stretch">
+              <div className="flex-1 min-w-0 flex flex-col h-full">
+                <CalorieTrackerCard />
+                <CalorieInfoCard />
+              </div>
+              <div className="flex-1 min-w-0 h-full flex flex-col">
+                <CaloriesEvolutionChart />
+              </div>
+            </div>
 
           </div>
 
