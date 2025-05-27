@@ -413,6 +413,12 @@ export const ApiProvider = ({ children }) => {
     );
   },[fetchWithAuth]);
   
+  const fetchNutrientsLog = useCallback(async (start, end) => {
+    return await fetchWithAuth(
+      `http://localhost:8000/api/tracking/macros-log/?start=${start}&end=${end}`
+    );
+  }, [fetchWithAuth]);
+
 
   useEffect(() => {
     const loadData = async () => {
@@ -481,6 +487,7 @@ export const ApiProvider = ({ children }) => {
         deleteActivityLog,
         fetchCaloriesForDay,
         fetchCaloriesLog,
+        fetchNutrientsLog,
       }}
     >
       {children}
