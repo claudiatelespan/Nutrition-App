@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { ApiContext } from "../context/ApiContext";
 import toast from "react-hot-toast";
-import RecipeCard from "../components/RecipeCard";
+import RecipeCard from "../components/cards/RecipeCard";
 import { UserMinusIcon } from "@heroicons/react/24/outline";
 
 export default function FriendsPage() {

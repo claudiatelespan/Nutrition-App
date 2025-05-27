@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext, useMemo, useRef } from "react";
 import { cuisineIcons } from "../assets/cuisineIcons";
-import RecipeCard from "../components/RecipeCard";
-import FilterPopup from "../components/FilterPopup";
-import Pagination from "../components/Pagination";
+import RecipeCard from "../components/cards/RecipeCard";
+import FilterPopup from "../components/forms/FilterPopup";
+import Pagination from "../components/general/Pagination";
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
 import { useSearchParams } from "react-router-dom";

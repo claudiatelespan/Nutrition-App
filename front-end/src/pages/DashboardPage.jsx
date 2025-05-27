@@ -1,12 +1,12 @@
 import { useState, useContext } from "react";
 import { DateContext } from "../context/DateContext";
-import MealLog from "../components/MealLog";
-import CalorieTrackerCard from "../components/CalorieTrackerCard";
-import CaloriesEvolutionChart from "../components/CaloriesEvolutionChart";
-import CalorieInfoCard from "../components/CalorieInfoCard";
-import ActivityLog from "../components/ActivityLog";
-import SnackLog from "../components/SnackLog";
-import DashboardCalendar from "../components/DashboardCalendar";
+import MealLog from "../components/logs/MealLog";
+import CalorieTrackerCard from "../components/charts/CalorieTrackerCard";
+import CaloriesEvolutionChart from "../components/charts/CaloriesEvolutionChart";
+import CalorieInfoCard from "../components/charts/CalorieInfoCard";
+import ActivityLog from "../components/logs/ActivityLog";
+import SnackLog from "../components/logs/SnackLog";
+import DashboardCalendar from "../components/logs/DashboardCalendar";
 
 export default function DashboardPage() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);

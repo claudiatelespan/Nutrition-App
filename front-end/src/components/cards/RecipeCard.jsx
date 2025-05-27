@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ApiContext } from "../context/ApiContext";
+import { ApiContext } from "../../context/ApiContext";
 
 export default function RecipeCard({ recipe }) {
   const navigate = useNavigate();

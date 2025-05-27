@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo } from "react";
 import { ApiContext } from "../context/ApiContext";
-import AddItemModal from "../components/AddItemModal";
+import AddItemModal from "../components/forms/AddItemModal";
 import { TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { exportShoppingListToExcel } from "../utils/exportToExcel";
 

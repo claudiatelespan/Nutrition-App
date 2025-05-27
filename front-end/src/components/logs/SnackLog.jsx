@@ -1,8 +1,8 @@
 import { useContext, useMemo, useState } from "react";
-import { ApiContext } from "../context/ApiContext";
-import { DateContext } from "../context/DateContext";
-import MealCard from "./MealCard";
-import AddItemModal from "./AddItemModal";
+import { ApiContext } from "../../context/ApiContext";
+import { DateContext } from "../../context/DateContext";
+import MealCard from "../cards/MealCard";
+import AddItemModal from "../forms/AddItemModal";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 
@@ -27,7 +27,7 @@ export default function SnackLog({ reloadChartsKey, setReloadChartsKey }) {
     const log = snackLogs.filter(log => log.date === formattedDate)[index];
     if (log) {
       deleteSnackLog(log.id);
-      if (setReloadChartsKey) setReloadChartsKey(k => k + 1);
+      setReloadChartsKey(k => k + 1);
     }
   };
 

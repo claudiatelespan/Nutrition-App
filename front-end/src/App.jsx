@@ -10,9 +10,9 @@ import MyFavoritesPage from "./pages/MyFavoritesPage";
 import DashboardPage from "./pages/DashboardPage";
 import PersonalDetailsPage from "./pages/PersonalDetailsPage";
 import ShoppingListPage from './pages/ShoppingListPage';
-import PrivateRoute from "./components/PrivateRoute";
-import Sidebar from './components/Sidebar';
-import Header from "./components/Header";
+import PrivateRoute from "./components/general/PrivateRoute";
+import Sidebar from './components/general/Sidebar';
+import Header from "./components/general/Header";
 
 function Layout() {
   const [isOpen, setIsOpen] = useState(false);

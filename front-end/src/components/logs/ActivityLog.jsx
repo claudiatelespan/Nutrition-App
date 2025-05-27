@@ -1,8 +1,8 @@
 import { useState, useContext, useMemo } from "react";
-import { ApiContext } from "../context/ApiContext";
+import { ApiContext } from "../../context/ApiContext";
 import { format } from "date-fns";
-import MealCard from "./MealCard";
-import AddItemModal from "./AddItemModal";
+import MealCard from "../cards/MealCard";
+import AddItemModal from "../forms/AddItemModal";
 import toast from "react-hot-toast";
 
 export default function ActivityLog({ selectedDate }) {

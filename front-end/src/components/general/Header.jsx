@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ApiContext } from "../context/ApiContext";
-import { AuthContext } from "../context/AuthContext";
+import { ApiContext } from "../../context/ApiContext";
+import { AuthContext } from "../../context/AuthContext";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 

@@ -1,8 +1,8 @@
 import { useMemo, useState, useContext } from "react";
 import { format } from "date-fns";
-import { ApiContext } from "../context/ApiContext";
-import MealCard from "./MealCard";
-import AddItemModal from "./AddItemModal";
+import { ApiContext } from "../../context/ApiContext";
+import MealCard from "../cards/MealCard";
+import AddItemModal from "../forms/AddItemModal";
 
 export default function MealLog({ setReloadChartsKey, selectedDate }) {
   const [showRecipeModal, setShowRecipeModal] = useState(false);

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ApiContext } from "../context/ApiContext";
-import RecipeCard from "../components/RecipeCard";
+import RecipeCard from "../components/cards/RecipeCard";
 
 export default function MyFavoritesPage() {
   const { favorites, recipes, userProfile, updateShareFavorites } = useContext(ApiContext);
