@@ -4,7 +4,7 @@ import { ApiContext } from "../context/ApiContext";
 import { format, subDays } from "date-fns";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer, Legend } from "recharts";
 
-export default function CaloriesEvolutionChart() {
+export default function CaloriesEvolutionChart({reloadChartsKey}) {
   const { selectedDate } = useContext(DateContext);
   const { fetchCaloriesLog } = useContext(ApiContext);
   const [data, setData] = useState([]);
@@ -18,7 +18,7 @@ export default function CaloriesEvolutionChart() {
     fetchCaloriesLog(startDate, endDate)
       .then((res) => setData(res || []))
       .finally(() => setLoading(false));
-  }, [startDate, endDate, fetchCaloriesLog]);
+  }, [startDate, endDate, fetchCaloriesLog, reloadChartsKey]);
 
   const calorieTarget = data.length > 0 ? data[0].calorie_target : null;
 

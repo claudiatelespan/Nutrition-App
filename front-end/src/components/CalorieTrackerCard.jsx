@@ -3,7 +3,7 @@ import { DateContext } from "../context/DateContext";
 import { ApiContext } from "../context/ApiContext";
 import { format } from "date-fns";
 
-export default function CalorieTrackerCard() {
+export default function CalorieTrackerCard({reloadChartsKey}) {
   const { selectedDate } = useContext(DateContext);
   const { fetchCaloriesForDay } = useContext(ApiContext);
   const [data, setData] = useState(null);
@@ -18,7 +18,7 @@ export default function CalorieTrackerCard() {
         setData(res && res.length > 0 ? res[0] : null);
       })
       .finally(() => setLoading(false));
-  }, [formattedDate, fetchCaloriesForDay]);
+  }, [formattedDate, fetchCaloriesForDay, reloadChartsKey]);
 
   return (
     <div className="bg-aqua rounded-lg shadow p-6 flex flex-col items-center mb-3 min-h-[180px]">

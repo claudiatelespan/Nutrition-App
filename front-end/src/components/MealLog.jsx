@@ -22,6 +22,7 @@ export default function MealLog() {
   const [selectedItem, setSelectedItem] = useState("");
   const [snackQuantity, setSnackQuantity] = useState("");
   const { recipes, snacks, logMeal, logSnack, deleteMealLog, deleteSnackLog, mealLogs, snackLogs } = useContext(ApiContext);
+  const [reloadChartsKey, setReloadChartsKey] = useState(0);
 
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
 
@@ -40,8 +41,10 @@ export default function MealLog() {
     try {
       if (mealType === "Snack") {
         await logSnack(selectedItem.name, snackQuantity || 1, formattedDate);
+        setReloadChartsKey(k => k + 1);
       } else {
         await logMeal(selectedItem.name, formattedDate, mealType);
+        setReloadChartsKey(k => k + 1);
       }
       setSelectedItem("");
       setSnackQuantity("");
@@ -64,8 +67,10 @@ export default function MealLog() {
     if (logId) {
       if (type === "Snack") {
         deleteSnackLog(logId);
+        setReloadChartsKey(k => k + 1);
       } else {
         deleteMealLog(logId);
+        setReloadChartsKey(k => k + 1);
       }
     }
   };
@@ -134,11 +139,11 @@ export default function MealLog() {
 
             <div className="md:col-span-3 flex flex-row gap-4 items-stretch">
               <div className="flex-1 min-w-0 flex flex-col h-full">
-                <CalorieTrackerCard />
+                <CalorieTrackerCard reloadChartsKey={reloadChartsKey}/>
                 <CalorieInfoCard />
               </div>
               <div className="flex-1 min-w-0 h-full flex flex-col">
-                <CaloriesEvolutionChart />
+                <CaloriesEvolutionChart reloadChartsKey={reloadChartsKey}/>
               </div>
             </div>
 
