@@ -22,9 +22,9 @@ export default function MealCard({
             {items.map((item, index) => (
               <li
                 key={index}
-                className="flex justify-between items-center bg-gray-100 p-2 rounded"
+                className="flex justify-between items-start gap-2 bg-gray-100 p-2 rounded"
               >
-                {item}
+                <span className="flex-1 min-w-0">{item}</span>
                 <TrashIcon
                   className="h-4 w-4 text-orange-500 transform transition-transform duration-200 hover:scale-110 cursor-pointer"
                   onClick={() => onDeleteClick(index)}
