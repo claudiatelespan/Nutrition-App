@@ -8,6 +8,7 @@ import ActivityLog from "../components/logs/ActivityLog";
 import SnackLog from "../components/logs/SnackLog";
 import DashboardCalendar from "../components/logs/DashboardCalendar";
 import NutrientsEvolutionChart from "../components/charts/NutrientsEvolutionChart";
+import CaloriesIntakeVsBurnedChart from "../components/charts/CaloriesIntakeVsBurnedChart";
 
 export default function DashboardPage() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -44,8 +45,12 @@ export default function DashboardPage() {
 
           <div>
             <div className="flex flex-row gap-4">
-              <NutrientsEvolutionChart reloadChartsKey={reloadChartsKey} />
-              <NutrientsEvolutionChart reloadChartsKey={reloadChartsKey} />
+              <div className="flex-1 min-w-0">
+                <NutrientsEvolutionChart reloadChartsKey={reloadChartsKey} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <CaloriesIntakeVsBurnedChart reloadChartsKey={reloadChartsKey} />
+              </div>
             </div>
           </div>
 
@@ -57,7 +62,7 @@ export default function DashboardPage() {
             setSelectedDate={setSelectedDate}
           />
           <SnackLog setReloadChartsKey={setReloadChartsKey} />
-          <ActivityLog selectedDate={selectedDate} />
+          <ActivityLog selectedDate={selectedDate} setReloadChartsKey={setReloadChartsKey} />
         </div>
       </div>
     </div>

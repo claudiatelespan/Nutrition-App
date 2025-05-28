@@ -419,6 +419,11 @@ export const ApiProvider = ({ children }) => {
     );
   }, [fetchWithAuth]);
 
+  const fetchCaloriesIntakeVsBurned = useCallback(async (start, end) => {
+      return await fetchWithAuth(
+        `http://localhost:8000/api/tracking/calories-intake-vs-burned/?start=${start}&end=${end}`
+      );
+  }, [fetchWithAuth]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -488,6 +493,7 @@ export const ApiProvider = ({ children }) => {
         fetchCaloriesForDay,
         fetchCaloriesLog,
         fetchNutrientsLog,
+        fetchCaloriesIntakeVsBurned,
       }}
     >
       {children}

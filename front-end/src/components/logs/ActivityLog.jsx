@@ -5,7 +5,7 @@ import MealCard from "../cards/MealCard";
 import AddItemModal from "../forms/AddItemModal";
 import toast from "react-hot-toast";
 
-export default function ActivityLog({ selectedDate }) {
+export default function ActivityLog({ selectedDate, setReloadChartsKey }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [intensity, setIntensity] = useState("moderate");
@@ -25,6 +25,7 @@ export default function ActivityLog({ selectedDate }) {
       return;
     }
     await logActivity(selectedActivity.name, formattedDate, intensity, parseInt(duration));
+    setReloadChartsKey(k => k + 1);
     setSelectedActivity("");
     setIntensity("moderate");
     setDuration("");
@@ -44,7 +45,10 @@ export default function ActivityLog({ selectedDate }) {
         title="Physical Activity"
         items={logsForDate.map(log => `${log.activity_name} – ${log.duration_minutes} min (${log.intensity})`)}
         onAddClick={() => setShowModal(true)}
-        onDeleteClick={async (index) => await deleteActivityLog(logsForDate[index].id)}
+        onDeleteClick={async (index) => {
+          await deleteActivityLog(logsForDate[index].id);
+          setReloadChartsKey(k => k + 1);
+        }}
       />
 
       {showModal && (
