@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from .models import MealLog, SnackLog, PhysicalActivityLog
 from .serializers import MealLogSerializer, SnackLogSerializer, PhysicalActivityLogSerializer
-from datetime import timedelta, date, datetime
+from datetime import timedelta, date
 from django.http import JsonResponse
 from django.db.models import Sum
 from users.models import UserProfile
@@ -189,3 +189,56 @@ def daily_macros_log(request):
         })
 
     return JsonResponse(json_result, safe=False)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def calories_intake_vs_burned_log(request):
+    user = request.user
+    start = request.GET.get("start")
+    end = request.GET.get("end")
+
+    if not start or not end:
+        return JsonResponse({"error": "Provide start and end date"}, status=400)
+
+    start_date = date.fromisoformat(start)
+    end_date = date.fromisoformat(end)
+    days = (end_date - start_date).days + 1
+    result = {start_date + timedelta(days=i): {"intake": 0, "burned": 0} for i in range(days)}
+
+    meal_logs = (
+        MealLog.objects.filter(user=user, date__range=[start_date, end_date])
+        .values("date")
+        .annotate(total_calories=Sum("calories"))
+    )
+    for log in meal_logs:
+        result[log["date"]]["intake"] += log["total_calories"] or 0
+
+    snack_logs = (
+        SnackLog.objects.filter(user=user, date__range=[start_date, end_date])
+        .values("date")
+        .annotate(total_calories=Sum("calories"))
+    )
+    for log in snack_logs:
+        result[log["date"]]["intake"] += log["total_calories"] or 0
+
+    activity_logs = (
+        PhysicalActivityLog.objects.filter(user=user, date__range=[start_date, end_date])
+        .values("date")
+        .annotate(total_burned=Sum("calories_burned"))
+    )
+    for log in activity_logs:
+        result[log["date"]]["burned"] += log["total_burned"] or 0
+
+    response = []
+    for d in sorted(result.keys()):
+        intake = round(result[d]["intake"], 2)
+        burned = round(result[d]["burned"], 2)
+        total_net = round(intake - burned, 2)
+        response.append({
+            "date": d.strftime("%Y-%m-%d"),
+            "intake": intake,
+            "burned": burned,
+            "total_net": total_net,
+        })
+
+    return JsonResponse(response, safe=False)
