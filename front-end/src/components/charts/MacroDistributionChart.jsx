@@ -61,23 +61,22 @@ export default function MacroDistributionChart({ selectedDate, reloadChartsKey }
     <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center min-h-[340px] w-full">
       <h3 className="text-lg font-bold text-mango mb-2">Macronutrient Calorie Distribution</h3>
         <PieChart width={320} height={250}>
-        <Pie
-            data={chartData}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            innerRadius={30}
-            outerRadius={90}
-            labelLine={false}
-            label={({ name, value }) => `${value}%`}
-            style={{fontWeight:600}}
-        >
-            {chartData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
-        </Pie>
-        <Tooltip content={<CustomTooltip />}  />
+          <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              cx="47%"
+              cy="50%"
+              innerRadius={30}
+              outerRadius={90}
+              label={({ value }) => `${value}%`}
+              style={{fontWeight:600}}
+          >
+              {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+          </Pie>
+          <Tooltip content={<CustomTooltip />}  />
         </PieChart>
       
       <div className="flex flex-col gap-1 text-sm">

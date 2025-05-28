@@ -30,7 +30,7 @@ export default function CaloriesIntakeVsBurnedChart({ reloadChartsKey }) {
 
   return (
     <div className="bg-white rounded-lg shadow p-4 flex flex-col h-[340px]">
-      <h3 className="text-lg font-semibold text-mango mb-2">Calories Intake vs Burned</h3>
+      <h3 className="text-lg font-bold text-mango mb-2">Calories Intake vs Burned</h3>
       {loading ? (
         <span className="text-gray-400">Loading...</span>
       ) : (

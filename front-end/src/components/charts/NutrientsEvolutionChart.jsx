@@ -30,7 +30,7 @@ export default function NutrientsEvolutionChart({ reloadChartsKey }) {
 
   return (
     <div className="bg-white rounded-lg shadow p-4 flex-1 min-w-0 flex flex-col" style={{ height: 340 }}>
-      <h3 className="text-lg font-semibold text-mango mb-2">Daily Macronutrients</h3>
+      <h3 className="text-lg font-bold text-mango mb-2">Daily Macronutrients</h3>
       {loading ? (
         <div className="flex-1 flex items-center justify-center text-gray-400">Loading...</div>
       ) : (

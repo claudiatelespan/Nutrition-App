@@ -14,7 +14,7 @@ export default function CalorieInfoCard() {
 
   return (
     <div className="bg-lightBeige rounded-lg p-4 text-mango shadow-sm flex flex-col gap-2">
-      <div className="font-semibold mb-1">
+      <div className="text-lg font-semibold mb-1">
         How did we calculate your calorie target?
       </div>
       <div className="text-gray-700 text-sm text-justify indent-5">

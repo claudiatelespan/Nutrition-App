@@ -18,7 +18,7 @@ export default function DashboardPage() {
   return (
     <div className="p-6 bg-beige min-h-screen mt-16 mx-auto">
       <h1 className="text-3xl font-bold">Your Dashboard</h1>
-      <div className="flex flex-col lg:flex-row gap-8 p-5 pl-10 pr-10">
+      <div className="flex flex-col lg:flex-row gap-6 p-5 pl-8">
         {/* MAIN CONTENT */}
         <div className="flex-[3] space-y-6 min-w-0">
           <MealLog

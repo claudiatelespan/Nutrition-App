@@ -22,7 +22,7 @@ export default function CaloriesEvolutionChart({reloadChartsKey, selectedDate}) 
 
   return (
     <div className="bg-white rounded-lg p-5 h-full shadow">
-      <h3 className="font-semibold text-lg mb-2 text-mango">
+      <h3 className="text-lg font-bold mb-2 text-mango">
         Daily Calorie Evolution (last 7 days)
       </h3>
       {loading ? (
