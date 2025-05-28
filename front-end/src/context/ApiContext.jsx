@@ -420,9 +420,15 @@ export const ApiProvider = ({ children }) => {
   }, [fetchWithAuth]);
 
   const fetchCaloriesIntakeVsBurned = useCallback(async (start, end) => {
-      return await fetchWithAuth(
-        `http://localhost:8000/api/tracking/calories-intake-vs-burned/?start=${start}&end=${end}`
-      );
+    return await fetchWithAuth(
+      `http://localhost:8000/api/tracking/calories-intake-vs-burned/?start=${start}&end=${end}`
+    );
+  }, [fetchWithAuth]);
+
+  const fetchMacroDistribution = useCallback(async (date) => {
+    return await fetchWithAuth(
+      `http://localhost:8000/api/tracking/macro_distribution/?date=${date}`)
+    ;
   }, [fetchWithAuth]);
 
   useEffect(() => {
@@ -494,6 +500,7 @@ export const ApiProvider = ({ children }) => {
         fetchCaloriesLog,
         fetchNutrientsLog,
         fetchCaloriesIntakeVsBurned,
+        fetchMacroDistribution
       }}
     >
       {children}

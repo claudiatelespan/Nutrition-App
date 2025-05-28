@@ -9,6 +9,7 @@ import SnackLog from "../components/logs/SnackLog";
 import DashboardCalendar from "../components/logs/DashboardCalendar";
 import NutrientsEvolutionChart from "../components/charts/NutrientsEvolutionChart";
 import CaloriesIntakeVsBurnedChart from "../components/charts/CaloriesIntakeVsBurnedChart";
+import MacroDistributionChart from "../components/charts/MacroDistributionChart";
 
 export default function DashboardPage() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -63,6 +64,7 @@ export default function DashboardPage() {
           />
           <SnackLog setReloadChartsKey={setReloadChartsKey} />
           <ActivityLog selectedDate={selectedDate} setReloadChartsKey={setReloadChartsKey} />
+          <MacroDistributionChart selectedDate={selectedDate} reloadChartsKey={reloadChartsKey} />
         </div>
       </div>
     </div>
