@@ -242,3 +242,40 @@ def calories_intake_vs_burned_log(request):
         })
 
     return JsonResponse(response, safe=False)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def macro_distribution(request):
+    user = request.user
+    day = request.GET.get("date", date.today().isoformat())
+
+    meal_logs = MealLog.objects.filter(user=user, date=day)
+    snack_logs = SnackLog.objects.filter(user=user, date=day)
+
+    protein = sum((ml.recipe.protein or 0) for ml in meal_logs) + sum((s.protein or 0) for s in snack_logs)
+    carbs = sum((ml.recipe.carbohydrates or 0) for ml in meal_logs) + sum((s.carbohydrates or 0) for s in snack_logs)
+    fat = sum((ml.recipe.fat or 0) for ml in meal_logs) + sum((s.fat or 0) for s in snack_logs)
+    sugar = sum((ml.recipe.sugars or 0) for ml in meal_logs) + sum((s.sugar or 0) for s in snack_logs)
+    fiber = sum((ml.recipe.fiber or 0) for ml in meal_logs) + sum((s.fiber or 0) for s in snack_logs)
+
+    protein_cal = protein * 4
+    carbs_cal = carbs * 4
+    fat_cal = fat * 9
+    sugar_cal = sugar * 4
+    fiber_cal = fiber * 2
+   
+
+    total = protein_cal + carbs_cal + fat_cal + sugar_cal + fiber_cal or 1  
+
+    return JsonResponse({
+        "protein_g": round(protein, 2),
+        "carbs_g": round(carbs, 2),
+        "fat_g": round(fat, 2),
+        "sugar_g": round(sugar, 2),
+        "fiber_g": round(fiber, 2),
+        "protein_percent": round(100 * protein_cal / total, 2),
+        "carbs_percent": round(100 * carbs_cal / total, 2),
+        "fat_percent": round(100 * fat_cal / total, 2),
+        "sugar_percent": round(100 * sugar_cal / total, 2),
+        "fiber_percent": round(100 * fiber_cal / total, 2),
+    })
