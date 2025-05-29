@@ -288,6 +288,65 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const fetchMyRating = useCallback(async (recipeId) => {
+    try {
+      return await fetchWithAuth(
+      `http://localhost:8000/api/recipe_ratings/my_rating/${recipeId}/`
+      );
+    } catch(err) {
+      console.error("Failed to fetch my rating:", err);
+    }
+  },[accessToken]);
+
+  const createRating = async (recipeId, rating) => {
+     try {
+      return await fetchWithAuth(
+        `http://localhost:8000/api/recipe_ratings/`,
+        {
+          method: "POST",
+          body: JSON.stringify({ recipe: recipeId, rating }),
+        }
+      );
+    } catch(err) {
+      console.error("Failed to create rating:", err);
+    }
+  };
+
+  const updateRating = async (ratingId, rating) => {
+      try {
+        return await fetchWithAuth(
+        `http://localhost:8000/api/recipe_ratings/${ratingId}/`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({ rating }),
+        }
+      );
+    } catch(err) {
+      console.error("Failed to update rating:", err);
+    }
+  };
+
+  const deleteRating = async (ratingId) => {
+      try {
+        return await fetchWithAuth(
+        `http://localhost:8000/api/recipe_ratings/${ratingId}/`,
+        {
+          method: "DELETE",
+        }
+      );
+    } catch(err) {
+      console.error("Failed to delete rating:", err);
+    }
+  };
+
+  const reloadRecipe = async (recipeId) => {
+    const recipe = await fetchWithAuth(`http://localhost:8000/api/recipes/${recipeId}/`);
+    setRecipes((prev) => {
+      const other = prev.filter(r => r.id !== recipeId);
+      return [...other, recipe];
+    });
+  };
+
   const generateShoppingList = async (recipeIds) => {
     try {
       const res = await fetchWithAuth("http://localhost:8000/api/shopping-list/generate/", {
@@ -487,6 +546,11 @@ export const ApiProvider = ({ children }) => {
         removeFavorite,
         updateShareFavorites,
         getFriendFavorites,
+        fetchMyRating,
+        createRating,
+        updateRating,
+        deleteRating,
+        reloadRecipe,
         generateShoppingList,
         toggleShoppingListItem,
         deleteShoppingListItem,

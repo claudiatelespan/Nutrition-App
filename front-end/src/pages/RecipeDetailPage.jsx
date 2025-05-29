@@ -1,10 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
+import RatingModal from "../components/forms/RatingModal";
+import StarRating from "../components/general/StarRating";
+import toast from "react-hot-toast";
 
 export default function RecipeDetailPage() {
-  const { recipes, favorites, addFavorite, removeFavorite } = useContext(ApiContext);
+  const { recipes, favorites, addFavorite, removeFavorite, fetchMyRating, createRating, updateRating, deleteRating, reloadRecipe } = useContext(ApiContext);
   const { id } = useParams();
   const location = useLocation();
   const recipe = recipes.find((r) => r.id === parseInt(id));
@@ -12,7 +15,11 @@ export default function RecipeDetailPage() {
 
   const isFavorite = favorites.some((f) => f.recipe === recipe?.id);
 
-  const handleFavoriteToggle = () => {
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [myRating, setMyRating] = useState(null);
+  const [loadingRating, setLoadingRating] = useState(false);
+
+  const handleFavoriteToggle = () => {  
     if (!recipe) return;
     if (isFavorite) removeFavorite(recipe.id);
     else addFavorite(recipe.id);
@@ -25,7 +32,59 @@ export default function RecipeDetailPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (recipe) {
+      setLoadingRating(true);
+      fetchMyRating(recipe.id)
+        .then(res => {
+          setMyRating(res);
+        })
+        .catch(() => setMyRating(null))
+        .finally(() => setLoadingRating(false));
+    }
+  }, [recipe, fetchMyRating]);
+
+  const handleRateClick = () => setShowRatingModal(true);
+
+  const handleSaveRating = async (rating) => {
+    setLoadingRating(true);
+    try {
+      if (myRating && myRating.id) {
+        await updateRating(myRating.id, rating);
+        toast.success("Your rating has been updated!");
+        setMyRating({ ...myRating, rating });
+      } else {
+        const res = await createRating(recipe.id, rating);
+        toast.success("Thank you for your rating!");
+        setMyRating(res);
+      }
+      await reloadRecipe(recipe.id);
+    } catch (e) {
+      toast.error("Something went wrong!");
+    } finally {
+      setShowRatingModal(false);
+      setLoadingRating(false);
+    }
+  };
+
+  const handleDeleteRating = async () => {
+    if (!myRating) return;
+    setLoadingRating(true);
+    try {
+      await deleteRating(myRating.id);
+      toast.success("Your rating was removed.");
+      setMyRating(null);
+      await reloadRecipe(recipe.id);
+    } catch (e) {
+      toast.error("Could not remove rating.");
+    } finally {
+      setShowRatingModal(false);
+      setLoadingRating(false);
+    }
+  };
+
+  const handleCancelRating = () => {
+    setShowRatingModal(false);
+  };
 
   if (!recipe) return <p className="p-6 text-center text-gray-500">Recipe not found.</p>;
 
@@ -69,7 +128,19 @@ export default function RecipeDetailPage() {
             <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>
           </div>
 
-          <div className="text-yellow-500 font-semibold text-lg">{recipe.rating} ★</div>
+          <div className="flex items-center gap-2 text-yellow-500 font-semibold text-lg">
+            {recipe.rating} ★
+            <button
+              className="ml-2 px-2 py-1 bg-mango rounded text-white text-sm font-semibold hover:bg-orange-500"
+              onClick={handleRateClick}
+            >
+            {loadingRating
+              ? "Loading..."
+              : myRating
+              ? "Update your rating"
+              : "Rate your experience"}
+            </button>
+          </div>
 
           <div>
             <h2 className="font-semibold text-lg mb-1 text-mango">Ingredients:</h2>
@@ -105,6 +176,16 @@ export default function RecipeDetailPage() {
           </div>
         </div>
       </div>
+
+      {showRatingModal && (
+        <RatingModal
+          initialRating={myRating?.rating || 0}
+          onSave={handleSaveRating}
+          onCancel={handleCancelRating}
+          onDelete={myRating ? handleDeleteRating : undefined}
+          isUpdate={!!myRating}
+        />
+      )}
     </div>
   );
 }
