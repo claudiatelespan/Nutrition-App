@@ -2,8 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack, PhysicalActivity, ShoppingListItem, ShoppingList
-from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer, PhysicalActivitySerializer, ShoppingListSerializer, ShoppingListItemSerializer
+from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack, PhysicalActivity, ShoppingListItem, ShoppingList, RecipeRating
+from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer, PhysicalActivitySerializer, ShoppingListSerializer, ShoppingListItemSerializer, RecipeRatingSerializer
 
 UNIT_IS_GRAMS = ["Grains", "Vegetables", "Meat", "Seafood", "Nuts", "Baking", "Legumes", "Fruits"]
 DAIRY_NOT_GRAMS = ["Half And Half", "Heavy Cream", "Heavy Whipping Cream", "Whipping Cream"]
@@ -27,6 +27,29 @@ class FavoriteRecipeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class RecipeRatingViewSet(viewsets.ModelViewSet):
+    serializer_class = RecipeRatingSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return RecipeRating.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    @action(detail=False, methods=['get'], url_path='my_rating/(?P<recipe_id>[^/.]+)')
+    def my_rating(self, request, recipe_id=None):
+        """
+        GET /api/recipe_ratings/my_rating/<recipe_id>/
+        Returnează ratingul userului pentru rețeta dată, dacă există
+        """
+        try:
+            rating = RecipeRating.objects.get(recipe_id=recipe_id, user=request.user)
+            serializer = self.get_serializer(rating)
+            return Response(serializer.data)
+        except RecipeRating.DoesNotExist:
+            return Response({"detail": "No rating found."}, status=status.HTTP_404_NOT_FOUND)
 
 class SnackViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Snack.objects.all()

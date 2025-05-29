@@ -32,11 +32,21 @@ class Recipe(models.Model):
     )
     category = models.CharField(max_length=256, blank=True, null=True)
     rating = models.FloatField(default=0, blank=True, null=True)
+    rating_count = models.IntegerField(default=0)
     image = models.ImageField(upload_to='recipe_images/', null=True, blank=True)
+
+    def update_rating(self):
+        ratings = self.ratings.all()
+        if ratings.exists():
+            self.rating = sum([r.rating for r in ratings]) / ratings.count()
+            self.rating_count = ratings.count()
+        else:
+            self.rating = 0
+            self.rating_count = 0
+        self.save(update_fields=["rating", "rating_count"])
 
     def __str__(self):
         return self.name
-
 
 class RecipeIngredient(models.Model):
     reteta = models.ForeignKey(Recipe, on_delete=models.CASCADE)
@@ -58,6 +68,24 @@ class FavoriteRecipe(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ❤️ {self.recipe.name}"
+    
+class RecipeRating(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('recipe', 'user')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.recipe.update_rating()
+
+    def delete(self, *args, **kwargs):
+        recipe = self.recipe
+        super().delete(*args, **kwargs)
+        recipe.update_rating()
 
 class Snack(models.Model):
     name = models.CharField(max_length=100)
