@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack, PhysicalActivity, ShoppingListItem, ShoppingList, RecipeRating
@@ -120,3 +120,30 @@ class ShoppingListItemViewSet(viewsets.ModelViewSet):
         item.is_checked = not item.is_checked
         item.save()
         return Response({"is_checked": item.is_checked})
+
+@api_view(['POST'])
+def recommend_recipes_by_ingredients(request):
+    input_ingredients = request.data.get('ingredients', [])
+    if not input_ingredients:
+        return Response({'error': 'No ingredients provided'}, status=400)
+
+    input_ingredients = [ing.lower() for ing in input_ingredients]
+
+    scored_recipes = []
+
+    for recipe in Recipe.objects.all():
+        ingredient_text = recipe.ingredients.lower()
+        match_count = sum(1 for ing in input_ingredients if ing in ingredient_text)
+
+        if match_count > 0:
+            scored_recipes.append({
+                'id': recipe.id,
+                'name': recipe.name,
+                'match_score': match_count,
+                'matched_ingredients': [ing for ing in input_ingredients if ing in ingredient_text]
+            })
+
+    scored_recipes.sort(key=lambda r: r['match_score'], reverse=True)
+    scored_recipes = scored_recipes[:10]
+
+    return Response(scored_recipes)

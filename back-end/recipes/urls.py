@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import RecipeViewSet, IngredientViewSet, FavoriteRecipeViewSet, SnackViewSet, PhysicalActivityViewSet, ShoppingListItemViewSet, ShoppingListViewSet, RecipeRatingViewSet
+from .views import RecipeViewSet, IngredientViewSet, FavoriteRecipeViewSet, SnackViewSet, PhysicalActivityViewSet, ShoppingListItemViewSet, ShoppingListViewSet, RecipeRatingViewSet, recommend_recipes_by_ingredients
 
 router = DefaultRouter()
 router.register(r'recipes', RecipeViewSet, basename='recipe')
@@ -14,4 +14,5 @@ router.register(r'recipe_ratings', RecipeRatingViewSet, basename='recipe-rating'
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('recommend_by_ingredients/', recommend_recipes_by_ingredients, name='recommend-by-ingredients')
 ]
