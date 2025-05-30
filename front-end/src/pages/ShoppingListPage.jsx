@@ -13,10 +13,25 @@ export default function ShoppingListPage() {
     deleteShoppingListItem,
   } = useContext(ApiContext);
 
-  const ingredientCategoryNoUnit = ["Condiments", "Herbs & Spices"]
   const [showModal, setShowModal] = useState(false);
   const [selectedRecipeNames, setSelectedRecipeNames] = useState([]);
   const recipeNames = useMemo(() => recipes.map((r) => r.name), [recipes]);
+
+  const shouldDisplayQuantity = (item) => {
+    const unit = item.unit.toLowerCase();
+    const quantity = item.quantity;
+    const category = item.ingredient.category;
+  
+    const isSmallGramsOrMl = (unit === 'grams' || unit === 'ml' || unit === '') && quantity <= 20;
+  
+    return !isSmallGramsOrMl;
+  };
+
+  const pluralizeUnit = (unit, quantity) => {
+    if (quantity === 1 || unit == "grams") return unit;
+  
+    return unit + 's';
+  };
 
   const handleSaveRecipes = async () => {
     const selectedIds = recipes
@@ -93,7 +108,7 @@ export default function ShoppingListPage() {
                   item.is_checked ? "line-through text-gray-500" : "text-gray-900"
                 }`}
               >
-                {item.ingredient.name} {!ingredientCategoryNoUnit.includes(item.ingredient.category) ? ( <> – {item.quantity} {item.unit} </> ) : (<div></div>)}
+                {item.ingredient.name} {(shouldDisplayQuantity(item)) ? ( <> – {item.quantity} {pluralizeUnit(item.unit, item.quantity)} </> ) : (<div></div>)}
               </span>
               <div className="absolute top-2 right-2 flex gap-2">
                 <button

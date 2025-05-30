@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack, PhysicalActivity, ShoppingListItem, ShoppingList, RecipeRating
 from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer, PhysicalActivitySerializer, ShoppingListSerializer, ShoppingListItemSerializer, RecipeRatingSerializer
+from .utils import CATEGORY_UNIT_CONVERSIONS, get_quantity_and_unit, smart_round
 
 UNIT_IS_GRAMS = ["Grains", "Vegetables", "Meat", "Seafood", "Nuts", "Baking", "Legumes", "Fruits"]
 DAIRY_NOT_GRAMS = ["Half And Half", "Heavy Cream", "Heavy Whipping Cream", "Whipping Cream"]
@@ -83,33 +84,22 @@ class ShoppingListViewSet(viewsets.ViewSet):
 
         for ri in ingredients:
             ing = ri.ingredient
-            category = ing.category
-            if category == "Dairy":
-                if ing.name in DAIRY_NOT_GRAMS or "Milk" in ing.name or "Soup" in ing.name:
-                    unit = "ml"
-                else:
-                    unit = "g"
-            elif category in UNIT_IS_GRAMS:
-                unit = "g"
-            else:
-                unit = "ml"
+            quantity, unit = get_quantity_and_unit(ri)
 
             if ing.id in item_map:
                 item_map[ing.id]["quantity"] += ri.quantity
             else:
                 item_map[ing.id] = {
                     "ingredient": ing,
-                    "quantity": ri.quantity,
+                    "quantity": quantity,
                     "unit": unit,
                 }
-            
-            print(item_map)
 
-        for ing_data in item_map.values():
+        for ing_data in sorted(item_map.values(), key=lambda x: x["ingredient"].name):
             ShoppingListItem.objects.create(
                 shopping_list=shopping_list,
                 ingredient=ing_data["ingredient"],
-                quantity=round(ing_data["quantity"], 2),
+                quantity=smart_round(ing_data["quantity"]),
                 unit=ing_data["unit"]
             )
 
