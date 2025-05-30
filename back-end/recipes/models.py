@@ -21,6 +21,7 @@ class Recipe(models.Model):
     sugars = models.FloatField(null=True, blank=True)
     fat = models.FloatField(null=True, blank=True)
     fiber = models.FloatField(null=True, blank=True)
+    servings = models.IntegerField(null=True, blank=True)
 
     cuisine_type = models.CharField(max_length=256, blank=True, null=True)
     prep_time = models.IntegerField(help_text="Time in minutes", null=True, blank=True)

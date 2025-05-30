@@ -37,7 +37,8 @@
         "cuisine_type": "British",
         "prep_time": 20,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Tomato Pancakes",
@@ -102,7 +103,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Whole Wheat Coconut Oil Waffles",
@@ -162,7 +164,8 @@
         "cuisine_type": "Indian",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Date Nut Bread",
@@ -232,7 +235,8 @@
         "cuisine_type": "French",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 24
     },
     {
         "name": "Raised Griddle Cakes",
@@ -297,7 +301,8 @@
         "cuisine_type": "British",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Pumpkin Bread II",
@@ -377,7 +382,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 24
     },
     {
         "name": "Spinach Mushroom Quiche",
@@ -442,7 +448,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Sweet Coconut Bread",
@@ -537,7 +544,8 @@
         "cuisine_type": "Indian",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 40
     },
     {
         "name": "Healthier Good Old Fashioned Pancakes",
@@ -592,7 +600,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Best Buckwheat Pancakes",
@@ -652,7 +661,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Zucchini Pie with Bacon",
@@ -727,7 +737,8 @@
         "cuisine_type": "British",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Crab and Mushroom Omelet",
@@ -772,7 +783,8 @@
         "cuisine_type": "Greek",
         "prep_time": 20,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Zucchini Plum Bread",
@@ -862,7 +874,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 24
     },
     {
         "name": "Easy Breakfast Egg Muffins",
@@ -932,7 +945,8 @@
         "cuisine_type": "British",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Yummy Veggie Omelet",
@@ -992,7 +1006,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Vanilla Crepes",
@@ -1047,7 +1062,8 @@
         "cuisine_type": "French",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Chef John's French Toast",
@@ -1107,7 +1123,8 @@
         "cuisine_type": "French",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Ginger Banana Bread",
@@ -1192,7 +1209,8 @@
         "cuisine_type": "Asian",
         "prep_time": 45,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Porridge",
@@ -1247,7 +1265,8 @@
         "cuisine_type": "American",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Slow Cooker Egg Casserole",
@@ -1317,7 +1336,8 @@
         "cuisine_type": "British",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Spinach Muenster Quiche",
@@ -1362,7 +1382,8 @@
         "cuisine_type": "Italian",
         "prep_time": 45,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Chicken Cacciatore with Rice",
@@ -1437,7 +1458,8 @@
         "cuisine_type": "Italian",
         "prep_time": 35,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Oven-Steamed Salmon",
@@ -1492,7 +1514,8 @@
         "cuisine_type": "Asian",
         "prep_time": 90,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Lee's Salmon Baste",
@@ -1557,7 +1580,8 @@
         "cuisine_type": "Greek",
         "prep_time": 35,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Mississippi Beef Short Ribs",
@@ -1672,7 +1696,8 @@
         "cuisine_type": "Asian",
         "prep_time": 90,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Syrian Rice with Meat",
@@ -1742,7 +1767,8 @@
         "cuisine_type": "Indian",
         "prep_time": 35,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Quinoa with Salmon and Swiss Chard",
@@ -1822,7 +1848,8 @@
         "cuisine_type": "Greek",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Stuffed Zucchini with Chicken Sausage",
@@ -1902,7 +1929,8 @@
         "cuisine_type": "Italian",
         "prep_time": 90,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Pasta Hot! Hot! Hot!",
@@ -1947,7 +1975,8 @@
         "cuisine_type": "Italian",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Tonya's Rich and Creamy Beef Stroganoff",
@@ -2032,7 +2061,8 @@
         "cuisine_type": "American",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Shrimp and Mushroom Linguini with Creamy Cheese Herb Sauce",
@@ -2102,7 +2132,8 @@
         "cuisine_type": "Italian",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Maple-Soy Glazed Salmon",
@@ -2167,7 +2198,8 @@
         "cuisine_type": "Asian",
         "prep_time": 35,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Grilled Baja Fish Tacos",
@@ -2272,7 +2304,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 35,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Big Game Grape Jelly Barbeque Ham Sandwiches",
@@ -2337,7 +2370,8 @@
         "cuisine_type": "American",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Pork Chop and Cabbage Casserole",
@@ -2392,7 +2426,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 90,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Parmesan Fish Sticks with Malt Vinegar Dipping Sauce",
@@ -2472,7 +2507,8 @@
         "cuisine_type": "British",
         "prep_time": 35,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Broiled Pork Chops",
@@ -2537,7 +2573,8 @@
         "cuisine_type": "Indian",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Chicken Alfredo Pizza",
@@ -2637,7 +2674,8 @@
         "cuisine_type": "Italian",
         "prep_time": 90,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Grandma's Sloppy Joes",
@@ -2707,7 +2745,8 @@
         "cuisine_type": "American",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Whole-Family Pasta with Broccoli and Cauliflower",
@@ -2782,7 +2821,8 @@
         "cuisine_type": "Greek",
         "prep_time": 35,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Macaroni and Cheese Pizza Bake",
@@ -2842,7 +2882,8 @@
         "cuisine_type": "French",
         "prep_time": 90,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Coconut Oatmeal Cookies I",
@@ -2917,7 +2958,8 @@
         "cuisine_type": "American",
         "prep_time": 40,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 24
     },
     {
         "name": "Oatmeal Scotchies Cookies",
@@ -3002,7 +3044,8 @@
         "cuisine_type": "American",
         "prep_time": 40,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 48
     },
     {
         "name": "Caramel Pecan Pie",
@@ -3067,7 +3110,8 @@
         "cuisine_type": "French",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Strawberry Cream Cheese Cobbler",
@@ -3127,7 +3171,8 @@
         "cuisine_type": "Italian",
         "prep_time": 40,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "The Perfect Chocolate Chip Cookie",
@@ -3197,7 +3242,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 40,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 24
     },
     {
         "name": "Orange Sunshine Cake",
@@ -3257,7 +3303,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 36
     },
     {
         "name": "Strawberry Pie Filling",
@@ -3307,7 +3354,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 20,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Florentines",
@@ -3362,7 +3410,8 @@
         "cuisine_type": "French",
         "prep_time": 40,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 30
     },
     {
         "name": "Fudgy Chocolate Cream Pie",
@@ -3432,7 +3481,8 @@
         "cuisine_type": "Italian",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Quick Lemon Cheesecake",
@@ -3487,7 +3537,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 60,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Adventure Cookies",
@@ -3557,7 +3608,8 @@
         "cuisine_type": "Indian",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 48
     },
     {
         "name": "Fresh Strawberry Pie I",
@@ -3607,7 +3659,8 @@
         "cuisine_type": "French",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 16
     },
     {
         "name": "Chocolate Chip Coffee Cake",
@@ -3682,7 +3735,8 @@
         "cuisine_type": "French",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Chewy Sugar Cookies",
@@ -3737,7 +3791,8 @@
         "cuisine_type": "Greek",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 30
     },
     {
         "name": "Orange Cake with Semolina and Almonds",
@@ -3802,7 +3857,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 60,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Mixed-Nut Brittle in the Microwave (Nutcracker)",
@@ -3857,7 +3913,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 30,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Key Lime Poke Cake",
@@ -3942,7 +3999,8 @@
         "cuisine_type": "Indian",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Best Chocolate-Cream Cheese Pound Cake",
@@ -4017,7 +4075,8 @@
         "cuisine_type": "British",
         "prep_time": 90,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 14
     },
     {
         "name": "GA Peach Pound Cake",
@@ -4077,7 +4136,8 @@
         "cuisine_type": "American",
         "prep_time": 90,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 16
     },
     {
         "name": "Whipped Coconut Cream (Vegan Whipped Cream)",
@@ -4112,7 +4172,8 @@
         "cuisine_type": "Asian",
         "prep_time": 60,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Eggless Orange Cake",
@@ -4187,7 +4248,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Little Traveler's Salad",
@@ -4252,7 +4314,8 @@
         "cuisine_type": "American",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Zesty Coleslaw",
@@ -4307,7 +4370,8 @@
         "cuisine_type": "American",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Buffalo Chicken Pasta Salad",
@@ -4372,7 +4436,8 @@
         "cuisine_type": "American",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Shrimp Pasta Salad With a Creamy Lemon Dressing",
@@ -4457,7 +4522,8 @@
         "cuisine_type": "Greek",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 5
     },
     {
         "name": "Tandoori Chicken Salad",
@@ -4547,7 +4613,8 @@
         "cuisine_type": "Indian",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Oia Greek Salad",
@@ -4602,7 +4669,8 @@
         "cuisine_type": "Greek",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Blackberry Almond Crunch Salad",
@@ -4662,7 +4730,8 @@
         "cuisine_type": "Greek",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Spicy Egg Salad",
@@ -4742,7 +4811,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Marinated Tofu Salad with Capers",
@@ -4817,7 +4887,8 @@
         "cuisine_type": "Asian",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Mediterranean Seafood Salad",
@@ -4887,7 +4958,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Random Tuna Salad",
@@ -4947,7 +5019,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Light and Easy Greek Potato Salad",
@@ -5032,7 +5105,8 @@
         "cuisine_type": "Greek",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Italian Tomato Cucumber Salad",
@@ -5087,7 +5161,8 @@
         "cuisine_type": "Italian",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Peach and Berry Salad",
@@ -5132,7 +5207,8 @@
         "cuisine_type": "Asian",
         "prep_time": 10,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Arugula Salad with Pomegranate Molasses",
@@ -5197,7 +5273,8 @@
         "cuisine_type": "British",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Light Avocado Egg Salad",
@@ -5252,7 +5329,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Chicken Salad with Cranberries and Almonds",
@@ -5322,7 +5400,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Emily's Strawberry Balsamic Salad",
@@ -5407,7 +5486,8 @@
         "cuisine_type": "Greek",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Cornbread Salad I",
@@ -5482,7 +5562,8 @@
         "cuisine_type": "British",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Lemon-Basil Quinoa Salad",
@@ -5537,7 +5618,8 @@
         "cuisine_type": "Italian",
         "prep_time": 20,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Lentil and Bulgur Salad",
@@ -5662,7 +5744,8 @@
         "cuisine_type": "Indian",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Jamaican Style Curry Chicken",
@@ -5732,7 +5815,8 @@
         "cuisine_type": "Indian",
         "prep_time": 40,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Bacon-Wrapped Chicken Thighs Smothered and Stuffed with Awesome",
@@ -5802,7 +5886,8 @@
         "cuisine_type": "Indian",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Sweet Bacon Wrapped Pork Loin",
@@ -5872,7 +5957,8 @@
         "cuisine_type": "American",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Oven Fried Parmesan Chicken",
@@ -5932,7 +6018,8 @@
         "cuisine_type": "Italian",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Texas Ground Turkey Burrito",
@@ -5992,7 +6079,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 40,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "My Favorite Pork Turkey Meatloaf",
@@ -6087,7 +6175,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Orange Marinated Pork Tenderloin",
@@ -6132,7 +6221,8 @@
         "cuisine_type": "Asian",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Buttermilk Barbecue Chicken",
@@ -6207,7 +6297,8 @@
         "cuisine_type": "American",
         "prep_time": 50,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Double-Dipped Ranch-Baked Chicken Thighs",
@@ -6257,7 +6348,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Easy Chicken with Mushrooms and Zucchini in Cream Sauce",
@@ -6332,7 +6424,8 @@
         "cuisine_type": "Greek",
         "prep_time": 40,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Sour Cream Mushroom Chicken",
@@ -6407,7 +6500,8 @@
         "cuisine_type": "French",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Jalapeno Popper Dip with Bacon",
@@ -6457,7 +6551,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Balsamic Chicken Breasts",
@@ -6507,7 +6602,8 @@
         "cuisine_type": "Greek",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Garlic Chicken with Orzo Noodles",
@@ -6572,7 +6668,8 @@
         "cuisine_type": "Italian",
         "prep_time": 40,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Orange Soya Sauce Marinated Chicken",
@@ -6612,7 +6709,8 @@
         "cuisine_type": "Asian",
         "prep_time": 40,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 2
     },
     {
         "name": "Instant Pot Pulled Chicken",
@@ -6677,7 +6775,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 40,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Yogurt-Marinated Chicken Shawarma",
@@ -6752,7 +6851,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 50,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Air Fryer Chicken Thighs",
@@ -6802,7 +6902,8 @@
         "cuisine_type": "Greek",
         "prep_time": 40,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Chicken Fritters",
@@ -6872,7 +6973,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 40,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Shish Kabob a la Holly",
@@ -6952,7 +7054,8 @@
         "cuisine_type": "Greek",
         "prep_time": 50,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Baked Orange-Glazed Chicken",
@@ -7007,7 +7110,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 60,
         "difficulty": "hard",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Spicy-Sweet Buffalo Popcorn",
@@ -7062,7 +7166,8 @@
         "cuisine_type": "American",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Light Avocado Mango Salsa",
@@ -7117,7 +7222,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 15,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Grandma's Crispy Pork Wontons",
@@ -7192,7 +7298,8 @@
         "cuisine_type": "Asian",
         "prep_time": 25,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Keto-Friendly \"Candied\" Nuts",
@@ -7237,7 +7344,8 @@
         "cuisine_type": "French",
         "prep_time": 30,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Pico Spinach Artichoke Dip",
@@ -7297,7 +7405,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Old-Fashioned Roasted Pecans",
@@ -7347,7 +7456,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Flamin' Hot Cheetos Cheese Ball",
@@ -7417,7 +7527,8 @@
         "cuisine_type": "British",
         "prep_time": 25,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Ali's Amazing Bruschetta",
@@ -7477,7 +7588,8 @@
         "cuisine_type": "Italian",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Potato Salad Deviled Eggs",
@@ -7537,7 +7649,8 @@
         "cuisine_type": "Mexican",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 16
     },
     {
         "name": "Bayou Crostini",
@@ -7592,7 +7705,8 @@
         "cuisine_type": "Greek",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Crunchy Air-Fried Deviled Eggs",
@@ -7662,7 +7776,8 @@
         "cuisine_type": "American",
         "prep_time": 25,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 6
     },
     {
         "name": "Fireball Mushrooms",
@@ -7762,7 +7877,8 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     },
     {
         "name": "Energy Oatmeal Bars",
@@ -7812,7 +7928,8 @@
         "cuisine_type": "American",
         "prep_time": 15,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 18
     },
     {
         "name": "Air Fryer Ravioli",
@@ -7867,7 +7984,8 @@
         "cuisine_type": "Italian",
         "prep_time": 15,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 3
     },
     {
         "name": "Sun-Dried Tomato Hummus",
@@ -7932,7 +8050,8 @@
         "cuisine_type": "Middle Eastern",
         "prep_time": 25,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 16
     },
     {
         "name": "Moroccan Meat Cigars",
@@ -7992,7 +8111,8 @@
         "cuisine_type": "Greek",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "Make-Ahead Garlic Toast",
@@ -8037,7 +8157,8 @@
         "cuisine_type": "Italian",
         "prep_time": 30,
         "difficulty": "easy",
-        "image": ""
+        "image": "",
+        "servings": 18
     },
     {
         "name": "Salmon 'Tartare' Spread",
@@ -8087,7 +8208,8 @@
         "cuisine_type": "Greek",
         "prep_time": 15,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 10
     },
     {
         "name": "Instant Pot Egg Roll in a Bowl",
@@ -8177,7 +8299,8 @@
         "cuisine_type": "Asian",
         "prep_time": 25,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 4
     },
     {
         "name": "The Most Incredible Garlic Bread",
@@ -8247,7 +8370,8 @@
         "cuisine_type": "Italian",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 12
     },
     {
         "name": "Marinated Roasted Red Peppers",
@@ -8302,6 +8426,7 @@
         "cuisine_type": "Mediterranean",
         "prep_time": 30,
         "difficulty": "medium",
-        "image": ""
+        "image": "",
+        "servings": 8
     }
 ]

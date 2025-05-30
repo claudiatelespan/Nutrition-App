@@ -33,6 +33,7 @@ class Command(BaseCommand):
                 difficulty=recipe["difficulty"],
                 category=recipe["category"],
                 rating=recipe["rating"],
+                servings=recipe["servings"],
             )
             try:
                 with open(image_path, "rb") as img_file:
