@@ -1,3 +1,5 @@
+import math
+
 CATEGORY_UNIT_CONVERSIONS = {
     'Baking': {
         'cup': 120,
@@ -122,15 +124,17 @@ CATEGORY_UNIT_CONVERSIONS = {
 LIQUID_CATEGORIES = ["Beverages", "Condiments", "Oils"]
 DISTINCT_UNITS = ["can", "package", "piece"]
 
-def smart_round(quantity):
+def smart_round(quantity, unit=None):
+    if unit in DISTINCT_UNITS:
+        return math.ceil(quantity)
     if quantity < 10:
-        return round(quantity)
+        return round(quantity)             # 8.6 -> 9
     elif quantity < 100:
-        return round(quantity / 5) * 5
-    elif quantity < 1000:
-        return round(quantity / 10) * 10
+        return round(quantity / 5) * 5     # 72 -> 70
+    elif quantity < 2000:
+        return round(quantity / 10) * 10   # 1020.6 -> 1020
     else:
-        return round(quantity / 50) * 50
+        return round(quantity / 100) * 100 # 2260 -> 2300
 
 def get_quantity_and_unit(ingredient):
     ing = ingredient.ingredient

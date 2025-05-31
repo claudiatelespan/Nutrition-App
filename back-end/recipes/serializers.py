@@ -19,10 +19,6 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = "__all__"
 
-    # def get_ingredients(self, obj):
-    #     ingredients_rel = RecipeIngredient.objects.filter(reteta=obj)
-    #     return RecipeIngredientSerializer(ingredients_rel, many=True).data
-
 class FavoriteRecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteRecipe

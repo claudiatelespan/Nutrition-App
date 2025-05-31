@@ -87,7 +87,7 @@ class ShoppingListViewSet(viewsets.ViewSet):
             quantity, unit = get_quantity_and_unit(ri)
 
             if ing.id in item_map:
-                item_map[ing.id]["quantity"] += ri.quantity
+                item_map[ing.id]["quantity"] += quantity
             else:
                 item_map[ing.id] = {
                     "ingredient": ing,
@@ -99,7 +99,7 @@ class ShoppingListViewSet(viewsets.ViewSet):
             ShoppingListItem.objects.create(
                 shopping_list=shopping_list,
                 ingredient=ing_data["ingredient"],
-                quantity=smart_round(ing_data["quantity"]),
+                quantity=smart_round(ing_data["quantity"], ing_data["unit"]),
                 unit=ing_data["unit"]
             )
 

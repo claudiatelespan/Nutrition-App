@@ -770,7 +770,7 @@
                 "quantity": 6
             },
             {
-                "ingredient": "Crabmeat",
+                "ingredient": "Crab Meat",
                 "unit": "ounce",
                 "quantity": 6
             },
@@ -1962,7 +1962,7 @@
                 "quantity": 3.0
             },
             {
-                "ingredient": "Red Pepper",
+                "ingredient": "Red Pepper Flakes",
                 "unit": "teaspoon",
                 "quantity": 0.5
             },
@@ -3636,7 +3636,7 @@
                 "quantity": 2.5
             },
             {
-                "ingredient": "Sugar",
+                "ingredient": "White Sugar",
                 "unit": "cup",
                 "quantity": 1.0
             },
@@ -3722,7 +3722,7 @@
                 "quantity": 1
             },
             {
-                "ingredient": "Sugar",
+                "ingredient": "WhiteSugar",
                 "unit": "cup",
                 "quantity": 0.5
             },
@@ -5097,7 +5097,7 @@
                 "quantity": 0.25
             },
             {
-                "ingredient": "Red Pepper",
+                "ingredient": "Red Pepper Flakes",
                 "unit": "pinch",
                 "quantity": 1.0
             }
@@ -5128,7 +5128,7 @@
                 "quantity": 4.0
             },
             {
-                "ingredient": "Onion",
+                "ingredient": "Red Onion",
                 "unit": "piece",
                 "quantity": 0.5
             },
@@ -6518,7 +6518,7 @@
         "rating": 4.79,
         "simplified_ingredients": [
             {
-                "ingredient": "Cheddar",
+                "ingredient": "Cheddar Cheese",
                 "unit": "cup",
                 "quantity": 1.0
             },
@@ -6635,14 +6635,14 @@
                 "quantity": 2.0
             },
             {
-                "ingredient": "Red Pepper",
+                "ingredient": "Red Pepper Flakes",
                 "unit": "teaspoon",
                 "quantity": 0.25
             },
             {
-                "ingredient": "Chicken Beast",
-                "unit": "piece",
-                "quantity": 1.0
+                "ingredient": "Chicken Breast",
+                "unit": "ounce",
+                "quantity": 12.0
             },
             {
                 "ingredient": "Salt",
@@ -7849,7 +7849,7 @@
                 "quantity": 0.25
             },
             {
-                "ingredient": "Crabmeat",
+                "ingredient": "Crab Meat",
                 "unit": "pound",
                 "quantity": 0.5
             },
@@ -8232,8 +8232,8 @@
             },
             {
                 "ingredient": "Sweet Onion",
-                "unit": "cup",
-                "quantity": 0.5
+                "unit": "piece",
+                "quantity": 1
             },
             {
                 "ingredient": "Carrot",

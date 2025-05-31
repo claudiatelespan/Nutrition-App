@@ -16,7 +16,7 @@ class Command(BaseCommand):
             recipes_data = json.load(f)
         for recipe in recipes_data:
             image_file_name = recipe["name"].replace('"','').replace(' ', '_')
-            image_path = f"./recipes/management/data/recipes/images/{image_file_name}.jpg"
+            image_path = f"./recipes/management/data/images/{image_file_name}.jpg"
             reteta = Recipe.objects.create(
                 name=recipe["name"],
                 description=recipe["summary"],

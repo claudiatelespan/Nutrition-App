@@ -133,7 +133,7 @@
   },
   {
     "name": "Buckwheat Flour",
-    "category": "Grains"
+    "category": "Baking"
   },
   {
     "name": "Buffalo Wing Sauce",
@@ -180,7 +180,7 @@
     "category": "Oils"
   },
   {
-    "name": "Caper",
+    "name": "Capers",
     "category": "Herbs & Spices"
   },
   {
@@ -216,10 +216,6 @@
     "category": "Herbs & Spices"
   },
   {
-    "name": "Cheddar",
-    "category": "Dairy"
-  },
-  {
     "name": "Cheddar Cheese",
     "category": "Dairy"
   },
@@ -236,12 +232,8 @@
     "category": "Meat"
   },
   {
-    "name": "Chicken Beast",
-    "category": "Meat"
-  },
-  {
     "name": "Chicken Bouillon Granules",
-    "category": "Meat"
+    "category": "Herbs & Spices"
   },
   {
     "name": "Chicken Breast",
@@ -249,7 +241,7 @@
   },
   {
     "name": "Chicken Broth",
-    "category": "Meat"
+    "category": "Beverages"
   },
   {
     "name": "Chicken Sausage",
@@ -317,7 +309,7 @@
   },
   {
     "name": "Coconut Milk",
-    "category": "Dairy"
+    "category": "Beverages"
   },
   {
     "name": "Coffee",
@@ -369,10 +361,6 @@
   },
   {
     "name": "Crab Meat",
-    "category": "Seafood"
-  },
-  {
-    "name": "Crabmeat",
     "category": "Seafood"
   },
   {
@@ -465,7 +453,7 @@
   },
   {
     "name": "Flour",
-    "category": "Grains"
+    "category": "Baking"
   },
   {
     "name": "Flour Tortilla",
@@ -537,7 +525,7 @@
   },
   {
     "name": "Greek Olive",
-    "category": "Herbs & Spices"
+    "category": "Fruits"
   },
   {
     "name": "Greek Salad Dressing",
@@ -553,7 +541,7 @@
   },
   {
     "name": "Green Onion",
-    "category": "Herbs & Spices"
+    "category": "Vegetables"
   },
   {
     "name": "Ground Beef",
@@ -613,7 +601,7 @@
   },
   {
     "name": "Honey",
-    "category": "Beverages"
+    "category": "Condiments"
   },
   {
     "name": "Honey Mustard Dressing",
@@ -653,7 +641,7 @@
   },
   {
     "name": "Jell-O",
-    "category": "Beverages"
+    "category": "Baking"
   },
   {
     "name": "Ketchup",
@@ -781,7 +769,7 @@
   },
   {
     "name": "Olive",
-    "category": "Oils"
+    "category": "Vegetables"
   },
   {
     "name": "Olive Oil",
@@ -1165,7 +1153,7 @@
   },
   {
     "name": "Sweetener",
-    "category": "Beverages"
+    "category": "Condiments"
   },
   {
     "name": "Swiss Chard",
@@ -1217,7 +1205,7 @@
   },
   {
     "name": "Vanilla Extract",
-    "category": "Herbs & Spices"
+    "category": "Baking"
   },
   {
     "name": "Vegetable Bouillon",
@@ -1225,7 +1213,7 @@
   },
   {
     "name": "Vegetable Broth",
-    "category": "Vegetables"
+    "category": "Beverages"
   },
   {
     "name": "Vegetable Oil",
@@ -1281,11 +1269,11 @@
   },
   {
     "name": "Whole Wheat Flour",
-    "category": "Grains"
+    "category": "Baking"
   },
   {
     "name": "Whole Wheat Pastry Flour",
-    "category": "Grains"
+    "category": "Baking"
   },
   {
     "name": "Wonton Wrappers",

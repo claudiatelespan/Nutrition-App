@@ -3,7 +3,6 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { ApiContext } from "../context/ApiContext";
 import RatingModal from "../components/forms/RatingModal";
-import StarRating from "../components/general/StarRating";
 import toast from "react-hot-toast";
 
 export default function RecipeDetailPage() {
@@ -105,12 +104,12 @@ export default function RecipeDetailPage() {
           className="w-full md:w-1/2 h-48 md:h-auto object-cover"
         />
 
-        <div className="p-10 flex flex-col gap-4 overflow-y-auto w-full">
+        <div className="p-8 flex flex-col gap-6 overflow-y-auto w-full">
           <div className="flex justify-between items-start">
             <h1 className="text-2xl font-bold">{recipe.name}</h1>
             <button
               onClick={handleFavoriteToggle}
-              className={`text-sm px-3 py-1 rounded-full transition ${
+              className={`text-sm font-semibold px-3 py-1 rounded-full transition ${
                 isFavorite
                   ? "bg-mint text-gray-800 hover:bg-gray-400"
                   : "bg-mango text-white hover:bg-orange-500"
@@ -128,18 +127,25 @@ export default function RecipeDetailPage() {
             <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full">{recipe.calories} kcal</span>
           </div>
 
-          <div className="flex items-center gap-2 text-yellow-500 font-semibold text-lg">
-            {recipe.rating} ★
-            <button
-              className="ml-2 px-2 py-1 bg-mango rounded text-white text-sm font-semibold hover:bg-orange-500"
-              onClick={handleRateClick}
-            >
-            {loadingRating
-              ? "Loading..."
-              : myRating
-              ? "Update your rating"
-              : "Rate your experience"}
-            </button>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-2 mb-1">
+            <div className="text-base text-gray-600 font-semibold flex items-center">
+              <h2 className="text-lg mr-1 text-mango">Servings:</h2>
+              <span>{recipe.servings || "-"}</span>
+            </div>
+            {/* Rating info și buton */}
+            <div className="flex items-center gap-2 text-yellow-500 font-semibold text-lg">
+              {recipe.rating} ★
+              <button
+                className="ml-2 px-2 py-1 bg-mango rounded text-white text-sm font-semibold hover:bg-orange-500"
+                onClick={handleRateClick}
+              >
+                {loadingRating
+                  ? "Loading..."
+                  : myRating
+                  ? "Update your rating"
+                  : "Rate your experience"}
+              </button>
+            </div>
           </div>
 
           <div>

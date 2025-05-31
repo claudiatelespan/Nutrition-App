@@ -14,7 +14,6 @@ class Recipe(models.Model):
     description = models.TextField(blank=True, null=True)
     directions = models.TextField(blank=True, null=True)
     ingredients = models.TextField(blank=True, null=True)
-
     calories = models.FloatField(null=True, blank=True)
     protein = models.FloatField(null=True, blank=True)
     carbohydrates = models.FloatField(null=True, blank=True)
@@ -22,7 +21,6 @@ class Recipe(models.Model):
     fat = models.FloatField(null=True, blank=True)
     fiber = models.FloatField(null=True, blank=True)
     servings = models.IntegerField(null=True, blank=True)
-
     cuisine_type = models.CharField(max_length=256, blank=True, null=True)
     prep_time = models.IntegerField(help_text="Time in minutes", null=True, blank=True)
     difficulty = models.CharField(
