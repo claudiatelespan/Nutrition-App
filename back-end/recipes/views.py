@@ -6,9 +6,6 @@ from .models import Recipe, Ingredient, RecipeIngredient, FavoriteRecipe, Snack,
 from .serializers import RecipeSerializer, IngredientSerializer, FavoriteRecipeSerializer, SnackSerializer, PhysicalActivitySerializer, ShoppingListSerializer, ShoppingListItemSerializer, RecipeRatingSerializer
 from .utils import CATEGORY_UNIT_CONVERSIONS, get_quantity_and_unit, smart_round
 
-UNIT_IS_GRAMS = ["Grains", "Vegetables", "Meat", "Seafood", "Nuts", "Baking", "Legumes", "Fruits"]
-DAIRY_NOT_GRAMS = ["Half And Half", "Heavy Cream", "Heavy Whipping Cream", "Whipping Cream"]
-
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
@@ -128,7 +125,6 @@ def recommend_recipes_by_ingredients(request):
         return Response({'error': 'No ingredients provided'}, status=400)
 
     input_ingredients = [ing.lower() for ing in input_ingredients]
-
     scored_recipes = []
 
     for recipe in Recipe.objects.all():
@@ -137,7 +133,7 @@ def recommend_recipes_by_ingredients(request):
 
         if match_count > 0:
             scored_recipes.append({
-                'recipe': RecipeSerializer(recipe).data,
+                'recipe': RecipeSerializer(recipe, context={'request': request}).data,
                 'match_score': match_count,
                 'matched_ingredients': [ing for ing in input_ingredients if ing in ingredient_text]
             })

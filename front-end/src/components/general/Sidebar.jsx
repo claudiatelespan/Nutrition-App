@@ -32,12 +32,16 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     location.pathname === "/friends" ||
     (matchRecipeDetail && fromPath?.startsWith("/friends"));
 
+  const isActiveRecommender =
+    location.pathname === "/recommender" ||
+    (matchRecipeDetail && fromPath?.startsWith("/recommender"));
+
 
   const isActiveDashboard = location.pathname === "/dashboard";
   const isActiveDetails = location.pathname === "/details";
 
   const navItems = [
-    { name: "Chef’s Helper", icon: <SparklesIcon className="h-6 w-6" />, path: "/recommender" },
+    { name: "Chef’s Helper", icon: <SparklesIcon className="h-6 w-6" />, path: "/recommender", active: isActiveRecommender },
     { name: "Friends", icon: <UsersIcon className="h-6 w-6" />, path: "/friends", active: isActiveFriends },
     { name: "Shopping List", icon: <ShoppingCartIcon className="h-6 w-6"/>, path:"/shopping-list"},
   ];

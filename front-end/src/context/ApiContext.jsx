@@ -11,6 +11,7 @@ export const ApiProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [recipes, setRecipes] = useState([]);
+  const [recommendedRecipes, setRecommendedRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
@@ -547,6 +548,8 @@ export const ApiProvider = ({ children }) => {
         friends,
         pendingRequests,
         recipes,
+        recommendedRecipes,
+        setRecommendedRecipes,
         ingredients,
         favorites,
         snacks,
