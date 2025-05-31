@@ -11,6 +11,7 @@ export const ApiProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
   const [recipes, setRecipes] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [snacks, setSnacks] = useState([]);
   const [shoppingList, setShoppingList] = useState(null);
@@ -111,6 +112,15 @@ export const ApiProvider = ({ children }) => {
       console.error("Failed to load recipes:", err);
     }
   };
+
+  const loadIngredients = async() => {
+    try {
+      const ingredientsRes = await fetchWithAuth("http://localhost:8000/api/ingredients/");
+      setIngredients(ingredientsRes);
+    } catch(err) {
+      console.error("Failed to load ingredients:", err);
+    }
+  }
 
   const loadSnacks = async () => {
     try {
@@ -490,6 +500,14 @@ export const ApiProvider = ({ children }) => {
     ;
   }, [fetchWithAuth]);
 
+  const recommendRecipesByIngredients = useCallback(async (ingredients) => {
+    const res = await fetchWithAuth("http://localhost:8000/api/recommend_by_ingredients/", {
+      method: "POST",
+      body: JSON.stringify({ ingredients }),
+    });
+    return res;
+  }, [fetchWithAuth]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -497,6 +515,7 @@ export const ApiProvider = ({ children }) => {
         await loadFriends();
         await loadPendingRequests();
         await loadRecipes();
+        await loadIngredients();
         await loadFavorites();
         await loadSnacks();
         await loadShoppingList();
@@ -528,6 +547,7 @@ export const ApiProvider = ({ children }) => {
         friends,
         pendingRequests,
         recipes,
+        ingredients,
         favorites,
         snacks,
         shoppingList,
@@ -564,7 +584,8 @@ export const ApiProvider = ({ children }) => {
         fetchCaloriesLog,
         fetchNutrientsLog,
         fetchCaloriesIntakeVsBurned,
-        fetchMacroDistribution
+        fetchMacroDistribution,
+        recommendRecipesByIngredients
       }}
     >
       {children}

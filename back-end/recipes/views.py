@@ -137,8 +137,7 @@ def recommend_recipes_by_ingredients(request):
 
         if match_count > 0:
             scored_recipes.append({
-                'id': recipe.id,
-                'name': recipe.name,
+                'recipe': RecipeSerializer(recipe).data,
                 'match_score': match_count,
                 'matched_ingredients': [ing for ing in input_ingredients if ing in ingredient_text]
             })
