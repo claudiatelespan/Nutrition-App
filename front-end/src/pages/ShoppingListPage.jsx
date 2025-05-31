@@ -20,7 +20,6 @@ export default function ShoppingListPage() {
   const shouldDisplayQuantity = (item) => {
     const unit = item.unit.toLowerCase();
     const quantity = item.quantity;
-    const category = item.ingredient.category;
   
     const isSmallGramsOrMl = (unit === 'grams' || unit === 'ml' || unit === '') && quantity <= 20;
   
@@ -64,10 +63,10 @@ export default function ShoppingListPage() {
   };
 
     const sortedItems = useMemo(() => {
-    const unchecked = shoppingListItems.filter((item) => !item.is_checked);
-    const checked = shoppingListItems.filter((item) => item.is_checked);
-    return [...unchecked, ...checked];
-  }, [shoppingListItems]);
+      const unchecked = shoppingListItems.filter((item) => !item.is_checked);
+      const checked = shoppingListItems.filter((item) => item.is_checked);
+      return [...unchecked, ...checked];
+    }, [shoppingListItems]);
 
   return (
     <div className="p-6 bg-grid-paper mt-20">

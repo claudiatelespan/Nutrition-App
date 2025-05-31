@@ -1,13 +1,18 @@
-// utils/exportToExcel.js
 import * as XLSX from "xlsx";
 
 export function exportShoppingListToExcel(shoppingListItems) {
   const sorted = [...shoppingListItems].sort((a, b) => a.is_checked - b.is_checked);
 
+  const pluralizeUnit = (unit, quantity) => {
+    if (quantity === 1 || unit == "grams") return unit;
+  
+    return unit + 's';
+  };
+
   const data = sorted.map(item => ({
     Ingredient: item.ingredient.name,
-    Cantitate: item.quantity,
-    Unitate: item.ingredient.unit,
+    Cantitate: item.quantity===0 ? "1 Item" : item.quantity,
+    Unitate: item.unit ? pluralizeUnit(item.unit) : "Standard Size",
     "Cumparat": item.is_checked ? true : false,
   }));
 

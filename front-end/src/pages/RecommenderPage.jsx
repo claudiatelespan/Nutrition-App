@@ -34,13 +34,16 @@ export default function RecommendationsPage() {
       <h1 className="text-3xl font-bold mb-6">Recipe Recommendations</h1>
       
       <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-2">Ingredient-based Recommendation</h2>
-        <button
-          onClick={handleOpenModal}
-          className="bg-mango text-white font-bold px-4 py-2 rounded shadow hover:bg-orange-500"
-        >
-          Select Ingredients
-        </button>
+        <div className="flex flex-row items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold">Ingredient-based Recommendation</h2>
+          <button
+            onClick={handleOpenModal}
+            className="bg-mango text-white font-bold px-4 py-2 rounded shadow hover:bg-orange-500"
+          >
+            Select Ingredients
+          </button>
+        </div>
+
         {/* list recommended recipes */}
         <div className="mt-6 pl-15 pr-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading
@@ -53,7 +56,7 @@ export default function RecommendationsPage() {
                   {r.matched_ingredients && r.matched_ingredients.length > 0 && (
                     <div className="mt-2 bg-mango bg-opacity-90 text-white text-xs px-3 py-1 rounded shadow w-fit">
                       <span className="font-semibold">Matching ingredients:</span>
-                      <span className="ml-1">
+                      <span className="ml-1 capitalize">
                         {r.matched_ingredients.join(", ")}
                       </span>
                     </div>
