@@ -42,17 +42,24 @@ export default function RecommendationsPage() {
           Select Ingredients
         </button>
         {/* list recommended recipes */}
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-6 pl-15 pr-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading
             ? <span className="text-gray-400">Loading recommendations...</span>
             : recommendedRecipes.length === 0
               ? <span className="text-gray-500">No recommendations yet.</span>
-              : recommendedRecipes.map(recipe => (
-                  <RecipeCard
-                    key={recipe.recipe.id}
-                    recipe={recipe.recipe}
-                  />
-                ))
+              : recommendedRecipes.map(r => (
+                <div key={r.recipe.id} className="flex flex-col justify-between">
+                  <RecipeCard recipe={r.recipe} />
+                  {r.matched_ingredients && r.matched_ingredients.length > 0 && (
+                    <div className="mt-2 bg-mango bg-opacity-90 text-white text-xs px-3 py-1 rounded shadow w-fit">
+                      <span className="font-semibold">Matching ingredients:</span>
+                      <span className="ml-1">
+                        {r.matched_ingredients.join(", ")}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))
           }
         </div>
       </section>

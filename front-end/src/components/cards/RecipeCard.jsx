@@ -17,14 +17,14 @@ export default function RecipeCard({ recipe }) {
 
   return (
     <div
-      className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01]"
+      className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01] h-[340px] flex flex-col"
       onClick={() => navigate(`/recipes/${recipe.id}`, {
         state: { from: location.pathname + location.search },
       })}
     >
       <img src={recipe.image} alt={recipe.name} className="w-full h-48 object-cover" />
 
-      <div className="p-4">
+      <div className="p-4 flex-1 flex flex-col justify-between">
         <h3 className="text-lg font-semibold">{recipe.name}</h3>
 
         <div className="flex flex-wrap gap-2 mt-2 text-xs">
