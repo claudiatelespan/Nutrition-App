@@ -525,6 +525,14 @@ export const ApiProvider = ({ children }) => {
     return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/average-activity-duration/");
   }, [fetchWithAuth]);
 
+  const fetchActivityStreak = useCallback(async () => {
+    return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/activity-days/");
+  }, [fetchWithAuth]);
+
+  const fetchTopActivityTypes = useCallback(async () => {
+    return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/top-activities/");
+  }, [fetchWithAuth]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -609,7 +617,8 @@ export const ApiProvider = ({ children }) => {
         fetchTopCuisines,
         fetchAverageSnacksPerDay,
         fetchAverageActivityDuration,
-        
+        fetchActivityStreak, 
+        fetchTopActivityTypes,
       }}
     >
       {children}

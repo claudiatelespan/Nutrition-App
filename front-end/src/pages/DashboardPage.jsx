@@ -11,6 +11,8 @@ import NutrientsEvolutionChart from "../components/charts/NutrientsEvolutionChar
 import CaloriesIntakeVsBurnedChart from "../components/charts/CaloriesIntakeVsBurnedChart";
 import MacroDistributionChart from "../components/charts/MacroDistributionChart";
 import UserDashboardStats from "../components/charts/UserDashboardStats";
+import ActivityStreakCard from "../components/charts/ActivityStreakCard";
+import TopActivitiesChart from "../components/charts/TopActivitiesChart";
 
 export default function DashboardPage() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -70,6 +72,8 @@ export default function DashboardPage() {
           <SnackLog setReloadChartsKey={setReloadChartsKey} />
           <ActivityLog selectedDate={selectedDate} setReloadChartsKey={setReloadChartsKey} />
           <MacroDistributionChart selectedDate={selectedDate} reloadChartsKey={reloadChartsKey} />
+          <ActivityStreakCard reloadChartsKey={reloadChartsKey}/>
+          <TopActivitiesChart reloadChartsKey={reloadChartsKey}/>
         </div>
       </div>
     </div>
