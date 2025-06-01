@@ -35,21 +35,63 @@ function TopList({ title, items }) {
   );
 }
 
+function StatBlock({ title, value, unit, description, emoji }) {
+  return (
+    <div className="flex-1 bg-white p-5 rounded-xl shadow text-center flex flex-col justify-center gap-2">
+      <div className="text-lg font-bold text-vintage flex justify-center items-center gap-2">
+        {emoji} {title}
+      </div>
+      <div className="text-3xl font-bold text-mango">
+        {value}
+        <span className="text-base text-gray-500"> {unit}</span>
+      </div>
+      <div className="text-sm text-gray-500">{description}</div>
+    </div>
+  );
+}
+
 
 export default function UserDashboardStats({ reloadChartsKey }) {
   const { fetchTopMealCategories, fetchTopCuisines } = useContext(ApiContext);
+  const { fetchAverageSnacksPerDay, fetchAverageActivityDuration } = useContext(ApiContext);
   const [mealCategories, setMealCategories] = useState([]);
   const [cuisines, setCuisines] = useState([]);
+  const [avgSnacks, setAvgSnacks] = useState(null);
+  const [avgActivity, setAvgActivity] = useState(null);
 
   useEffect(() => {
     fetchTopMealCategories().then(setMealCategories);
     fetchTopCuisines().then(setCuisines);
-  }, [fetchTopMealCategories, fetchTopCuisines, reloadChartsKey]);
+    fetchAverageSnacksPerDay().then(data =>
+    setAvgSnacks(data.average_snacks_per_day)
+    );
+    fetchAverageActivityDuration().then(data =>
+    setAvgActivity(data.average_activity_minutes_per_day)
+    );
 
+  }, [fetchTopMealCategories, fetchTopCuisines, fetchAverageActivityDuration, fetchAverageSnacksPerDay, reloadChartsKey]);
+
+  console.log(avgActivity);
   return (
     <div className="grid md:grid-cols-3 gap-6">
       <TopList title="Most Frequent Meal Categories" items={mealCategories} />
       <TopList title="Top Cuisine Preferences (based on your ratings)" items={cuisines} />
+      <div className="flex flex-col gap-4">
+        <StatBlock
+        title="Average Snacks per Day"
+        value={avgSnacks !== null ? avgSnacks : "—"}
+        unit="snacks"
+        description={`You have on average ${avgSnacks ?? "—"} snacks per day.`}
+        emoji="🍪"
+        />
+        <StatBlock
+        title="Average Physical Activity per Day"
+        value={avgActivity !== null ? avgActivity.toFixed(1) : "—"}
+        unit="min"
+        description={`You exercise around ${avgActivity ?? "—"} minutes daily.`}
+        emoji="🏃‍♂️"
+        />
+      </div>
     </div>
   );
 }

@@ -517,6 +517,14 @@ export const ApiProvider = ({ children }) => {
     return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/favorite-cuisines/");
   }, [fetchWithAuth]);
 
+  const fetchAverageSnacksPerDay = useCallback(async () => {
+    return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/average-snacks/");
+  }, [fetchWithAuth]);
+
+  const fetchAverageActivityDuration = useCallback(async () => {
+    return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/average-activity-duration/");
+  }, [fetchWithAuth]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -599,6 +607,9 @@ export const ApiProvider = ({ children }) => {
         recommendRecipesByIngredients,
         fetchTopMealCategories,
         fetchTopCuisines,
+        fetchAverageSnacksPerDay,
+        fetchAverageActivityDuration,
+        
       }}
     >
       {children}
