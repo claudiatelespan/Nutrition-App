@@ -10,6 +10,7 @@ import DashboardCalendar from "../components/logs/DashboardCalendar";
 import NutrientsEvolutionChart from "../components/charts/NutrientsEvolutionChart";
 import CaloriesIntakeVsBurnedChart from "../components/charts/CaloriesIntakeVsBurnedChart";
 import MacroDistributionChart from "../components/charts/MacroDistributionChart";
+import UserDashboardStats from "../components/charts/UserDashboardStats";
 
 export default function DashboardPage() {
   const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -19,8 +20,10 @@ export default function DashboardPage() {
     <div className="p-6 bg-beige min-h-screen mt-16 mx-auto">
       <h1 className="text-3xl font-bold">Your Dashboard</h1>
       <div className="flex flex-col lg:flex-row gap-6 p-5 pl-8">
+
         {/* MAIN CONTENT */}
         <div className="flex-[3] space-y-6 min-w-0">
+
           <MealLog
             setReloadChartsKey={setReloadChartsKey}
             selectedDate={selectedDate}
@@ -55,7 +58,9 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          <UserDashboardStats reloadChartsKey={reloadChartsKey}/>
         </div>
+
         {/* SIDEBAR */}
         <div className="flex-[1] min-w-0 flex flex-col gap-6">
           <DashboardCalendar

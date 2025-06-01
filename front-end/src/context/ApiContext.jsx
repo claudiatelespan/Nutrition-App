@@ -509,6 +509,14 @@ export const ApiProvider = ({ children }) => {
     return res;
   }, [fetchWithAuth]);
 
+  const fetchTopMealCategories = useCallback(async () => {
+    return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/meal-categories/");
+  }, [fetchWithAuth]);
+
+  const fetchTopCuisines = useCallback(async () => {
+    return await fetchWithAuth("http://localhost:8000/api/tracking/statistics/favorite-cuisines/");
+  }, [fetchWithAuth]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -588,7 +596,9 @@ export const ApiProvider = ({ children }) => {
         fetchNutrientsLog,
         fetchCaloriesIntakeVsBurned,
         fetchMacroDistribution,
-        recommendRecipesByIngredients
+        recommendRecipesByIngredients,
+        fetchTopMealCategories,
+        fetchTopCuisines,
       }}
     >
       {children}
