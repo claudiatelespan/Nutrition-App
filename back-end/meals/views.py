@@ -1,12 +1,16 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
 from .models import MealLog, SnackLog, PhysicalActivityLog
+from recipes.models import RecipeRating
+from users.models import UserProfile
 from .serializers import MealLogSerializer, SnackLogSerializer, PhysicalActivityLogSerializer
 from datetime import timedelta, date
 from django.http import JsonResponse
-from django.db.models import Sum
-from users.models import UserProfile
+from django.db.models import Sum, Count
+from django.db.models.functions import TruncDate
+from collections import Counter
 
 ACTIVITY_FACTORS = {
     "sedentary": 1.2,
@@ -278,4 +282,114 @@ def macro_distribution(request):
         "fat_percent": round(100 * fat_cal / total, 2),
         "sugar_percent": round(100 * sugar_cal / total, 2),
         "fiber_percent": round(100 * fiber_cal / total, 2),
+    })
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def top_meal_categories(request):
+    logs = MealLog.objects.filter(user=request.user).select_related('recipe')
+    categories = [log.recipe.category for log in logs if log.recipe.category]
+    counter = Counter(categories)
+    top = counter.most_common(5)
+    return Response([{'category': cat, 'count': count} for cat, count in top])
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def top_cuisine_ratings(request):
+    ratings = RecipeRating.objects.filter(user=request.user).select_related('recipe')
+    cuisine_ratings = {}
+
+    for r in ratings:
+        cuisine = r.recipe.cuisine_type
+        if not cuisine:
+            continue
+        if cuisine not in cuisine_ratings:
+            cuisine_ratings[cuisine] = []
+        cuisine_ratings[cuisine].append(r.rating)
+
+    averaged = [
+        {'cuisine': c, 'avg_rating': sum(ratings)/len(ratings), 'count': len(ratings)}
+        for c, ratings in cuisine_ratings.items()
+    ]
+    top = sorted(averaged, key=lambda x: (-x['avg_rating'], -x['count']))[:5]
+    return Response(top)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def average_snacks_per_day(request):
+    snacks_per_day = (
+        SnackLog.objects.filter(user=request.user)
+        .annotate(day=TruncDate('date'))
+        .values('day')
+        .annotate(count=Count('id'))
+    )
+
+    if not snacks_per_day:
+        return Response({'average_snacks_per_day': 0})
+
+    total_snacks = sum(entry['count'] for entry in snacks_per_day)
+    total_days = len(snacks_per_day)
+    average = round(total_snacks / total_days)
+
+    return Response({'average_snacks_per_day': average})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def average_activity_duration(request):
+    durations_per_day = (
+        PhysicalActivityLog.objects.filter(user=request.user)
+        .annotate(day=TruncDate('date'))
+        .values('day')
+        .annotate(total_minutes=Sum('duration_minutes'))
+    )
+
+    if not durations_per_day:
+        return Response({'average_activity_minutes_per_day': 0})
+
+    total_minutes = sum(entry['total_minutes'] for entry in durations_per_day)
+    total_days = len(durations_per_day)
+    average = round(total_minutes / total_days, 1)
+
+    return Response({'average_activity_minutes_per_day': average})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def activity_days_streak(request):
+    active_dates = (
+        PhysicalActivityLog.objects
+        .filter(user=request.user)
+        .annotate(day=TruncDate('date'))
+        .values_list('day', flat=True)
+        .distinct()
+        .order_by('-day')
+    )
+
+    today = date.today()
+    streak = 0
+
+    for i, activity_day in enumerate(active_dates):
+        expected_day = today - timedelta(days=i)
+        if activity_day == expected_day:
+            streak += 1
+        else:
+            break
+
+    return Response({'current_streak_days': streak})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def top_activity_types(request):
+    activity_counts = (
+        PhysicalActivityLog.objects
+        .filter(user=request.user)
+        .values('activity__name')
+        .annotate(count=Count('id'))
+        .order_by('-count')[:5]
+    )
+
+    return Response({
+        'top_activity_types': [
+            {'name': item['activity__name'], 'count': item['count']}
+            for item in activity_counts
+        ]
     })
