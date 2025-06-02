@@ -84,7 +84,7 @@ export default function FriendsPage() {
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6 mt-20">
       {/* Sidebar */}
-      <div className="md:w-1/4 w-full space-y-6">
+      <div className="md:w-1/5   w-full space-y-6">
         <div className="bg-beige p-4 rounded-xl shadow flex justify-center">
           <button
             onClick={() => setModalOpen(true)}
@@ -164,7 +164,7 @@ export default function FriendsPage() {
             ) : friendFavorites.length === 0 ? (
               <p className="text-gray-500">No favorite recipes yet.</p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-h-[500px] overflow-y-auto pr-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 min-h-[350px] max-h-[500px] overflow-y-auto py-5 px-2">
                 {friendFavorites.map((recipe) => (
                   <RecipeCard key={recipe.id} recipe={recipe} />
                 ))}

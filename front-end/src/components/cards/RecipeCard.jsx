@@ -17,7 +17,7 @@ export default function RecipeCard({ recipe }) {
 
   return (
     <div
-      className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01] h-[340px] flex flex-col"
+      className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.01] min-h-[340px] flex flex-col"
       onClick={() => navigate(`/recipes/${recipe.id}`, {
         state: { from: location.pathname + location.search },
       })}

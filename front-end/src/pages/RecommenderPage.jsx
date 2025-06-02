@@ -6,7 +6,8 @@ import { ApiContext } from "../context/ApiContext";
 export default function RecommendationsPage() {
   const [showIngredientsModal, setShowIngredientsModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { recommendedRecipes, setRecommendedRecipes, recommendRecipesByIngredients } = useContext(ApiContext);
+  const { userData, recommendedRecipes, setRecommendedRecipes, recommendRecipesByIngredients } = useContext(ApiContext);
+  const key = `recommendedRecipes_${userData?.username}`;
 
   const handleOpenModal = () => setShowIngredientsModal(true);
 
@@ -14,7 +15,7 @@ export default function RecommendationsPage() {
     setLoading(true);
     try {
       const res = await recommendRecipesByIngredients(selectedIngredients);
-      sessionStorage.setItem("recommendedRecipes", JSON.stringify(res));
+      sessionStorage.setItem(key, JSON.stringify(res));
       setRecommendedRecipes(res);
     } finally {
       setLoading(false);
@@ -23,11 +24,12 @@ export default function RecommendationsPage() {
   };
 
   useEffect(() => {
-    const stored = sessionStorage.getItem("recommendedRecipes");
+    if (!userData?.username) return;
+    const stored = sessionStorage.getItem(key);
     if (stored) {
       setRecommendedRecipes(JSON.parse(stored));
     }
-  }, []);
+  }, [userData]);
 
   return (
     <div className="p-6 bg-beige min-h-screen mt-16">
