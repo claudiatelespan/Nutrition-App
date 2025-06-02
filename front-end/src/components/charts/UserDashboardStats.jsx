@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { ApiContext } from "../../context/ApiContext";
+import EmptyChartPlaceholder from "./EmptyChartPlaceholder";
 
 function TopList({ title, items }) {
   return (
@@ -68,14 +69,28 @@ export default function UserDashboardStats({ reloadChartsKey }) {
     fetchAverageActivityDuration().then(data =>
     setAvgActivity(data.average_activity_minutes_per_day)
     );
-
   }, [fetchTopMealCategories, fetchTopCuisines, fetchAverageActivityDuration, fetchAverageSnacksPerDay, reloadChartsKey]);
 
-  console.log(avgActivity);
   return (
     <div className="grid md:grid-cols-3 gap-6">
+      {mealCategories.length===0 ? (
+        <div className="bg-white p-6 rounded-xl shadow-md h-fit">
+          <h3 className="text-lg font-bold text-mango mb-4">Most Frequent Meal Categories</h3>
+          <EmptyChartPlaceholder emoji="🍽️📊" comp="meals" chart="Most Frequent Meal Categories"/>
+        </div>
+      ) : (
       <TopList title="Most Frequent Meal Categories" items={mealCategories} />
+      )}
+
+      {cuisines.length===0 ? (
+        <div className="bg-white p-6 rounded-xl shadow-md h-fit">
+          <h3 className="text-lg font-bold text-mango">Top Cuisine Preferences (based on your ratings)</h3>
+          <EmptyChartPlaceholder emoji="🍽️⭐📊" act="rating" comp="meals" chart="Top Cuisine Preferences"/>
+        </div>
+      ) : (
       <TopList title="Top Cuisine Preferences (based on your ratings)" items={cuisines} />
+      )}
+
       <div className="flex flex-col gap-4">
         <StatBlock
         title="Average Snacks per Day"

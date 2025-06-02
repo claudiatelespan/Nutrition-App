@@ -3,6 +3,7 @@ import { DateContext } from "../../context/DateContext";
 import { ApiContext } from "../../context/ApiContext";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { format, subDays } from "date-fns";
+import EmptyChartPlaceholder from "./EmptyChartPlaceholder";
 
 export default function NutrientsEvolutionChart({ reloadChartsKey }) {
   const { selectedDate } = useContext(DateContext);
@@ -28,12 +29,23 @@ export default function NutrientsEvolutionChart({ reloadChartsKey }) {
     loadData();
   }, [loadData]);
 
+  const allValuesZero = data.every(entry =>
+    entry.protein === 0 &&
+    entry.carbohydrates === 0 &&
+    entry.fat === 0 &&
+    entry.sugar === 0 &&
+    entry.fiber === 0
+  );
+
+
   return (
-    <div className="bg-white rounded-lg shadow p-4 flex-1 min-w-0 flex flex-col" style={{ height: 340 }}>
+    <div className={`bg-white rounded-lg shadow p-4 flex-1 min-w-0 flex flex-col ${allValuesZero? ' h-[250px]' : 'h-[340px]'}`}>
       <h3 className="text-lg font-bold text-mango mb-2">Daily Macronutrients</h3>
       {loading ? (
         <div className="flex-1 flex items-center justify-center text-gray-400">Loading...</div>
-      ) : (
+      ) : allValuesZero ? (
+        <EmptyChartPlaceholder emoji="🍽️🍪📊" comp="meals and snacks" chart="Daily Macronutrients Evolution"/>
+    ) : (
         <ResponsiveContainer width="100%" height="90%">
           <AreaChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />

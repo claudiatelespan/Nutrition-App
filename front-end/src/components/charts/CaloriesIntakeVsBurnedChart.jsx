@@ -3,6 +3,7 @@ import { ApiContext } from "../../context/ApiContext";
 import { DateContext } from "../../context/DateContext";
 import { format, subDays } from "date-fns";
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer } from "recharts";
+import EmptyChartPlaceholder from "./EmptyChartPlaceholder";
 
 export default function CaloriesIntakeVsBurnedChart({ reloadChartsKey }) {
   const { fetchCaloriesIntakeVsBurned } = useContext(ApiContext);
@@ -28,11 +29,19 @@ export default function CaloriesIntakeVsBurnedChart({ reloadChartsKey }) {
     };
   }, [fetchCaloriesIntakeVsBurned, startDate, endDate, reloadChartsKey]);
 
+  const allValuesZero = data.every(entry =>
+    entry.intake === 0 &&
+    entry.burned === 0 &&
+    entry.total_net === 0
+  );
+
   return (
-    <div className="bg-white rounded-lg shadow p-4 flex flex-col h-[340px]">
+    <div className={`bg-white rounded-lg shadow p-4 flex flex-col  ${allValuesZero? ' h-[250px]' : 'h-[340px]'}`}>
       <h3 className="text-lg font-bold text-mango mb-2">Calories Intake vs Burned</h3>
       {loading ? (
         <span className="text-gray-400">Loading...</span>
+      ) : allValuesZero ? (
+        <EmptyChartPlaceholder emoji="🍽️🍪🏃‍♂️📊" chart="Calories Intake vs Burned"/>
       ) : (
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 20, left: -10, bottom: 10 }}>
