@@ -77,14 +77,18 @@ def get_combined_recommendations(user_id, top_n=10, rating_threshold=3, alpha=0.
         return Recipe.objects.none()
     
     vectors = []
+    weights = []
     for ur in user_ratings:
         if not ur.recipe.content_vector:
             continue
-        vectors.append(np.array(ur.recipe.content_vector))
+        vec = np.array(ur.recipe.content_vector)
+        weight = ur.rating
+        vectors.append(vec * weight)
+        weights.append(weight)
     if not vectors:
         return Recipe.objects.none()
     
-    user_profile = np.mean(vectors, axis=0)
+    user_profile = np.sum(vectors, axis=0) / sum(weights)
     
     rated_recipe_ids = user_ratings.values_list('recipe_id', flat=True)
     candidates = Recipe.objects.exclude(id__in=rated_recipe_ids).exclude(content_vector__isnull=True)
