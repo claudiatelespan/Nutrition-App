@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
@@ -33,6 +34,7 @@ class Recipe(models.Model):
     rating = models.FloatField(default=0, blank=True, null=True)
     rating_count = models.IntegerField(default=0)
     image = models.ImageField(upload_to='recipe_images/', null=True, blank=True)
+    content_vector = ArrayField(models.FloatField(), null=True, blank=True)
 
     def update_rating(self):
         ratings = self.ratings.all()
